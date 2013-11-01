@@ -90,9 +90,7 @@ public final class MarkdownTextArea extends JTextArea {
     private void listenForChangesToDocument() {
         getDocument().addDocumentListener(new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
-
             @Override public void removeUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
-
             @Override public void changedUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
         });
     }

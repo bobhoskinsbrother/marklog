@@ -5,7 +5,6 @@ import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogPanel;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
-import uk.co.itstherules.marklog.editor.model.PostModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,10 +55,7 @@ public final class AddNewPostDialog extends JDialog {
                     String message = "Please fill in post name";
                     JOptionPane.showMessageDialog(null, message, "No post name supplied", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    PostModel post = new PostModel(file, postName);
-                    post.save();
-                    marklogController.refresh();
-                    marklogController.newMarkdownTab(post);
+                    marklogController.addNewPost(file, postName);
                     dispose();
                 }
             }

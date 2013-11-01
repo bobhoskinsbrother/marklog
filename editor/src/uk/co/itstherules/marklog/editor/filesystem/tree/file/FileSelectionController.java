@@ -1,4 +1,4 @@
-package uk.co.itstherules.marklog.editor.filesystem.tree;
+package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
 import java.io.File;
 

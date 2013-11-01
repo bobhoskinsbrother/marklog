@@ -1,7 +1,7 @@
 package uk.co.itstherules.marklog.editor;
 
 import uk.co.itstherules.marklog.editor.markdown.TabbedMarkdownEditors;
-import uk.co.itstherules.marklog.editor.filesystem.tree.FileSelectionController;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.FileSelectionController;
 
 import java.io.File;
 

@@ -1,25 +1,25 @@
-package uk.co.itstherules.marklog.editor.filesystem.tree;
+package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
 import uk.co.itstherules.marklog.editor.IconLoader;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-class FileTreeCellRenderer extends DefaultTreeCellRenderer {
+class FileSystemTreeCellRenderer extends DefaultTreeCellRenderer {
 
     private Map<String, Icon> iconCache = new HashMap<String, Icon>();
     private Map<File, String> rootNameCache = new HashMap<File, String>();
     private Icon defaultDirectory;
     private Icon defaultFile;
 
-    FileTreeCellRenderer() {
+    FileSystemTreeCellRenderer() {
         defaultDirectory = IconLoader.fromResource("/folder.png");
         defaultFile = IconLoader.fromResource("/file.png");
-
         iconCache.put("", defaultDirectory);
         iconCache.put("md", IconLoader.fromResource("/md_file.png"));
         iconCache.put("marklog", IconLoader.fromResource("/marklog_file.png"));
@@ -27,11 +27,11 @@ class FileTreeCellRenderer extends DefaultTreeCellRenderer {
 
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
-        FileTreeNode fileTreeNode = FileTreeNode.class.cast(value);
-        File file = fileTreeNode.getFile();
+        FileModel fileModel = FileModel.class.cast(value);
+        File file = fileModel.getFile();
         String filename = "";
         if (file != null) {
-            if (fileTreeNode.isRoot()) {
+            if (fileModel.isRoot()) {
                 filename = getRootFilename(file);
             } else {
                 filename = file.getName();
@@ -48,7 +48,9 @@ class FileTreeCellRenderer extends DefaultTreeCellRenderer {
     private Icon getIconFor(File file) {
         final String extension = getExtensionFor(file);
         final Icon icon = this.iconCache.get(extension);
-        if(icon == null) { return defaultFile; }
+        if (icon == null) {
+            return defaultFile;
+        }
         return icon;
     }
 
@@ -58,7 +60,7 @@ class FileTreeCellRenderer extends DefaultTreeCellRenderer {
         int dotIndex = fileName.lastIndexOf('.');
         int slashIndex = Math.max(fileName.lastIndexOf('/'), fileName.lastIndexOf('\\'));
         if (dotIndex > slashIndex) {
-            extension = fileName.substring(dotIndex+1);
+            extension = fileName.substring(dotIndex + 1);
         }
         return extension;
     }
@@ -67,7 +69,7 @@ class FileTreeCellRenderer extends DefaultTreeCellRenderer {
         String filename;
         filename = this.rootNameCache.get(file);
         if (filename == null) {
-            filename = TreeBrowser.fileSystemView.getSystemDisplayName(file);
+            filename = FileSystemView.getFileSystemView().getSystemDisplayName(file);
             this.rootNameCache.put(file, filename);
         }
         return filename;

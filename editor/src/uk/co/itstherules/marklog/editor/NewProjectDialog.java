@@ -54,7 +54,7 @@ public final class NewProjectDialog extends JDialog {
                     String message = "Please fill in both the project name\nand select a directory";
                     JOptionPane.showMessageDialog(null, message, "No name or directory supplied", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    ProjectConfigurationModel configuration = new ProjectConfigurationModel(projectName, projectDirectory);
+                    ProjectConfigurationModel configuration = new ProjectConfigurationModel(new File(projectDirectory), projectName);
                     configuration.save();
                     marklogController.newMarklogEditor(configuration);
                     dispose();

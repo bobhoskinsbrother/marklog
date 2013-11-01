@@ -16,7 +16,6 @@ public class ButtonActionBuilder {
         button.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent actionEvent) {
                 applyChanged.apply();
-
             }
         });
         return this;

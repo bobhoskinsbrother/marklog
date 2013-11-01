@@ -10,8 +10,8 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
 
     private final String projectRoot;
 
-    public TabbedMarkdownEditors(String projectRoot) {
-        this.projectRoot = projectRoot;
+    public TabbedMarkdownEditors(File projectRoot) {
+        this.projectRoot = projectRoot.getAbsolutePath();
         setPreferredSize(new Dimension(1024, 720));
     }
 
@@ -23,6 +23,7 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
         panelForTab.setOpaque(false);
         JLabel tabTitleLabel = new JLabel(path);
         JButton closeButton = new JButton("x");
+        closeButton.setSize(20,20);
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;

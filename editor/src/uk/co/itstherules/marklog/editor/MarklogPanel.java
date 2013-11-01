@@ -18,20 +18,16 @@ public final class MarklogPanel extends JPanel {
     private MarklogController marklogController;
 
     public MarklogPanel(MarklogApp app) {
+        setName("marklogPanel");
         this.app = app;
         this.marklogController = new MarklogController();
         setLayout(new BorderLayout());
         addMenu();
     }
 
-    public void refresh(){
-        if(projectEditor != null) {
-            projectEditor.repaint();
-        }
-        repaint();
-        projectEditor.updateTree();
-        app.repaint();
-        app.pack();
+    public MarklogPanel(MarklogApp app, ProjectConfigurationModel configuration) {
+        this(app);
+        marklogController.newMarklogEditor(configuration);
     }
 
     private void addEditorFor(File file) {
@@ -53,10 +49,13 @@ public final class MarklogPanel extends JPanel {
         }
     }
 
-    private void addMenu() {add(menu(), BorderLayout.NORTH);}
+    private void addMenu() {
+        add(menu(), BorderLayout.NORTH);
+    }
 
     private JMenuBar menu() {
         final JMenuBar menuBar = new JMenuBar();
+        menuBar.setName("menuBar");
         final JMenu menu = new JMenu("File");
         final JMenuItem newProjectMenuItem = new JMenuItem("New Project...");
         final JMenuItem openProjectMenuItem = new JMenuItem("Open Project...");
@@ -75,20 +74,26 @@ public final class MarklogPanel extends JPanel {
 
     private MenuItemActionBuilder.ApplyChanged closeCurrentProject() {
         return new MenuItemActionBuilder.ApplyChanged() {
-            @Override public void apply() { removeProjectEditor(); }
+            @Override
+            public void apply() {
+                removeProjectEditor();
+            }
         };
     }
 
     private MenuItemActionBuilder.ApplyChanged openOpenProjectDialog() {
         return new MenuItemActionBuilder.ApplyChanged() {
-            @Override public void apply() {
+            @Override
+            public void apply() {
                 final JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setFileFilter(new FileFilter() {
-                    @Override public boolean accept(File file) {
+                    @Override
+                    public boolean accept(File file) {
                         return file.isDirectory() || file.getName().endsWith(".marklog");
                     }
 
-                    @Override public String getDescription() {
+                    @Override
+                    public String getDescription() {
                         return "Marklog Blog Project";
                     }
                 });
@@ -104,24 +109,24 @@ public final class MarklogPanel extends JPanel {
 
     private MenuItemActionBuilder.ApplyChanged openNewProjectDialog() {
         return new MenuItemActionBuilder.ApplyChanged() {
-            @Override public void apply() {
+            @Override
+            public void apply() {
                 new NewProjectDialog(app, marklogController);
             }
         };
     }
 
+    public MarklogController getController() {
+        return marklogController;
+    }
+
     public class MarklogController {
-
-
-        public void refresh() {
-            MarklogPanel.this.refresh();
-        }
 
         public void newMarklogEditor(ProjectConfigurationModel configuration) {
             newEditorFor(configuration);
         }
 
-        public void newMarkdownTab(PostModel post) {
+        public void newMarkdownTabFor(PostModel post) {
             addEditorFor(post.getFile());
         }
 
@@ -135,9 +140,13 @@ public final class MarklogPanel extends JPanel {
                     }
                 }
             }
-            refresh();
             return file.delete();
         }
 
+        public void addNewPost(File file, String postName) {
+            PostModel post = new PostModel(file, postName);
+            post.save();
+            newMarkdownTabFor(post);
+        }
     }
 }

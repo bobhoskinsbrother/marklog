@@ -1,4 +1,4 @@
-package uk.co.itstherules.marklog.editor.filesystem.tree;
+package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogPanel;
@@ -13,23 +13,23 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public final class RightClickTreeMenu extends JPopupMenu {
 
-    private final FileTreeNode node;
+    private final FileModel fileModel;
     private final MarklogApp app;
     private final MarklogPanel.MarklogController controller;
 
-    public RightClickTreeMenu(MarklogApp app, MarklogPanel.MarklogController controller, JTree tree, FileTreeNode node, int x, int y) {
+    public RightClickTreeMenu(MarklogApp app, MarklogPanel.MarklogController controller, JTree tree, FileModel fileModel, int x, int y) {
         this.app = app;
         this.controller = controller;
-        this.node = node;
+        this.fileModel = fileModel;
         final JMenuItem addNewPostMenuItem = new JMenuItem("Add New Post");
         final JMenuItem addNewDirectoryMenuItem = new JMenuItem("Add New Directory");
         when(addNewPostMenuItem).hasBeenClicked(openAddNewPostDialog());
         when(addNewDirectoryMenuItem).hasBeenClicked(openAddNewDirectoryDialog());
         add(addNewPostMenuItem);
         add(addNewDirectoryMenuItem);
-        if (node.isBranch()) {
+        if (fileModel.isDirectory()) {
             final JMenuItem deleteDirectoryMenuItem = new JMenuItem("Delete Directory");
-            if (node.hasChildren()) {
+            if (fileModel.hasChildren()) {
                 when(deleteDirectoryMenuItem).hasBeenClicked(openDeleteDirectoryDialog());
             } else {
                 when(deleteDirectoryMenuItem).hasBeenClicked(deleteDirectory());
@@ -42,8 +42,7 @@ public final class RightClickTreeMenu extends JPopupMenu {
     private MenuItemActionBuilder.ApplyChanged deleteDirectory() {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                node.getDirectory().delete();
-                controller.refresh();
+                fileModel.getDirectory().delete();
             }
         };
     }
@@ -51,7 +50,7 @@ public final class RightClickTreeMenu extends JPopupMenu {
     private MenuItemActionBuilder.ApplyChanged openDeleteDirectoryDialog() {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                new DeleteDirectoryDialog(app, controller, node.getDirectory());
+                new DeleteDirectoryDialog(app, controller, fileModel.getDirectory());
             }
         };
     }
@@ -59,7 +58,7 @@ public final class RightClickTreeMenu extends JPopupMenu {
     private MenuItemActionBuilder.ApplyChanged openAddNewDirectoryDialog() {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                new AddNewDirectoryDialog(app, controller, node.getDirectory());
+                new AddNewDirectoryDialog(app, controller, fileModel.getDirectory());
             }
         };
     }
@@ -67,7 +66,7 @@ public final class RightClickTreeMenu extends JPopupMenu {
     private MenuItemActionBuilder.ApplyChanged openAddNewPostDialog() {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                new AddNewPostDialog(app, controller, node.getDirectory());
+                new AddNewPostDialog(app, controller, fileModel.getDirectory());
             }
         };
     }

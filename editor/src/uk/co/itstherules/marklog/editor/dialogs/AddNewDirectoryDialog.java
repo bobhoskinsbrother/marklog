@@ -54,7 +54,6 @@ public final class AddNewDirectoryDialog extends JDialog {
                 } else {
                     File directory = new File(AddNewDirectoryDialog.this.directory, directoryName);
                     directory.mkdirs();
-                    controller.refresh();
                     dispose();
                 }
             }
