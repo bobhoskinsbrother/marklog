@@ -29,6 +29,7 @@ public final class NewProjectDialog extends JDialog {
         projectNameTextField.setPreferredSize(new Dimension(300, 30));
         DirectoryChooserComponent directoryChooser = new DirectoryChooserComponent();
         JButton createButton = new JButton("Create");
+        createButton.setName("createButton");
 
         when(projectNameTextField).textHasChanged(applyToProjectName());
         when(directoryChooser).fileHasBeenChosen(applyToProjectDirectory());

@@ -3,27 +3,24 @@ package uk.co.itstherules.marklog.editor;
 import org.fest.swing.edt.FailOnThreadViolationRepaintManager;
 import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
+import org.fest.swing.fixture.DialogFixture;
 import org.fest.swing.fixture.FrameFixture;
-import org.fest.swing.fixture.JTextComponentFixture;
 import org.junit.*;
-import uk.co.itstherules.marklog.editor.markdown.HtmlPanel;
-import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
 import uk.co.itstherules.marklog.string.MakeString;
 
-import java.awt.*;
 import java.io.File;
 
-import static java.awt.event.KeyEvent.VK_Z;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
-import static uk.co.itstherules.marklog.editor.StrictXHtmlMatcher.isValidStrictXHtml;
 
 @Ignore
 public class MakingANewProjectWithTheMarkdownAppFunctionalTest {
 
     private FrameFixture window;
-    private final File tempDir = new File(System.getProperty("java.io.tmpdir"),"test_project");
+    private final File tempDir = new File(System.getProperty("java.io.tmpdir"));
+    private final File projectDir = new File(tempDir, "test_project");
+    private final File projectFile = new File(projectDir, "MyNewTestProject.marklog");
 
     @BeforeClass
     public static void setUpOnce() {
@@ -32,7 +29,8 @@ public class MakingANewProjectWithTheMarkdownAppFunctionalTest {
 
     @Before
     public void setUp() {
-        tempDir.delete();
+        assertThat(projectFile.delete(), is(true));
+        assertThat(projectDir.delete(), is(true));
         MarklogApp marklogApp = GuiActionRunner.execute(new GuiQuery<MarklogApp>() {
             protected MarklogApp executeInEDT() {
                 MarklogApp app = new MarklogApp(null);
@@ -51,9 +49,17 @@ public class MakingANewProjectWithTheMarkdownAppFunctionalTest {
     @Test
     public void canStartANewProject() throws Exception {
         window.menuItemWithPath("File", "New Project...").click();
-        window.dialog().textBox().enterText("My New Test Project");
-        assertThat("", containsString(""));
+        final DialogFixture dialog = window.dialog();
+        final String projectName = "My New Test Project";
+        dialog.textBox().enterText(projectName);
+        dialog.panel("directoryChooser").button("chooseDirectoryButton").click();
+        dialog.fileChooser().fileNameTextBox().enterText(projectDir.getAbsolutePath());
+        dialog.fileChooser().approve();
+        dialog.button("createButton").click();
+        assertThat(projectFile.exists(), is(true));
+        final String projectFileString = MakeString.from(projectFile);
+        assertThat(projectFileString, containsString("project.name="+projectName));
+        assertThat(projectFileString, containsString("project.directory="+projectDir.getAbsolutePath()));
     }
-
 
 }

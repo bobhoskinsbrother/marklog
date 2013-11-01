@@ -15,9 +15,11 @@ public final class DirectoryChooserComponent extends JPanel {
 
 
     public DirectoryChooserComponent() {
+        setName("directoryChooser");
         listeners = new ArrayList<FileChosenListener>();
         setLayout(new MigLayout());
         button = new JButton("Choose Directory");
+        button.setName("chooseDirectoryButton");
         label = new JLabel("No directory chosen");
         add(button);
         add(label, "gapleft 10");
