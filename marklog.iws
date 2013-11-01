@@ -92,14 +92,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MakingANewProjectWithTheMarkdownAppFunctionalTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MakingANewProjectWithTheMarkdownAppFunctionalTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/MakingANewProjectWithTheMarkdownAppFunctionalTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="38" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.28460687">
+            <state line="32" column="38" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#1180#1365#0" expanded="true" />
                 <element signature="e#1354#1355#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DynamicTree.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/code_examples/src/spike/components/DynamicTree.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="95" column="49" selection-start="3318" selection-end="3318" vertical-scroll-proportion="0.69878185">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -848,13 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code_examples/src/spike/components/DynamicTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="95" column="49" selection-start="3318" selection-end="3318" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/code_examples/src/spike/components/DynamicTreeDemo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="277" selection-end="277" vertical-scroll-proportion="0.0">
@@ -925,11 +927,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/MakingANewProjectWithTheMarkdownAppFunctionalTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="38" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.28460687">
+        <state line="32" column="38" selection-start="1111" selection-end="1111" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#1180#1365#0" expanded="true" />
             <element signature="e#1354#1355#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code_examples/src/spike/components/DynamicTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="49" selection-start="3318" selection-end="3318" vertical-scroll-proportion="0.69878185">
+          <folding />
         </state>
       </provider>
     </entry>
