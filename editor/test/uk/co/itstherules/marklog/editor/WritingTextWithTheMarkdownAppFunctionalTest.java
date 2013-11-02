@@ -5,24 +5,18 @@ import org.fest.swing.edt.GuiActionRunner;
 import org.fest.swing.edt.GuiQuery;
 import org.fest.swing.fixture.FrameFixture;
 import org.fest.swing.fixture.JTextComponentFixture;
-import org.hamcrest.Description;
-import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.internal.matchers.TypeSafeMatcher;
 import uk.co.itstherules.marklog.editor.markdown.HtmlPanel;
 import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
 import uk.co.itstherules.marklog.string.MakeString;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
 
 import static java.awt.event.KeyEvent.VK_Z;
-import static org.fest.swing.core.KeyPressInfo.*;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
@@ -31,8 +25,8 @@ import static uk.co.itstherules.marklog.editor.StrictXHtmlMatcher.isValidStrictX
 public class WritingTextWithTheMarkdownAppFunctionalTest {
 
     private FrameFixture window;
-    private final File tempDir = new File(System.getProperty("java.io.tmpdir"),"test_project");
-    private final File file = new File(tempDir + "/OutputFromTest.md");
+    private final File projectDirectory = new File(System.getProperty("java.io.tmpdir"),"test_project");
+    private final File file = new File(projectDirectory, "OutputFromTest.md");
 
     @BeforeClass
     public static void setUpOnce() {
@@ -41,16 +35,16 @@ public class WritingTextWithTheMarkdownAppFunctionalTest {
 
     @Before
     public void setUp() {
-        tempDir.delete();
+        projectDirectory.delete();
         file.delete();
 
-        final ProjectConfigurationModel configuration = new ProjectConfigurationModel(tempDir, "Test Project");
+        final ProjectConfigurationModel configuration = new ProjectConfigurationModel(projectDirectory, "Test Project");
         configuration.save();
 
         MarklogApp marklogApp = GuiActionRunner.execute(new GuiQuery<MarklogApp>() {
             protected MarklogApp executeInEDT() {
                 MarklogApp app = new MarklogApp(configuration);
-                app.getController().addNewPost(tempDir, "Output from Test");
+                app.getController().addNewPost(projectDirectory, "Output from Test");
                 return app;
             }
         });
@@ -61,6 +55,8 @@ public class WritingTextWithTheMarkdownAppFunctionalTest {
     @After
     public void tearDown() {
         window.cleanUp();
+        file.delete();
+        projectDirectory.delete();
     }
 
     @Test

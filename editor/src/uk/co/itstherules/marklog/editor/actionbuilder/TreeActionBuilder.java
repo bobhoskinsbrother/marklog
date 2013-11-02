@@ -1,6 +1,6 @@
 package uk.co.itstherules.marklog.editor.actionbuilder;
 
-import uk.co.itstherules.marklog.editor.filesystem.tree.file.FileModel;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
 
 import javax.swing.*;
 import javax.swing.tree.TreePath;

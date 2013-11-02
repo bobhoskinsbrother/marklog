@@ -16,48 +16,61 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
     }
 
 
-    public void addEditorFor(File file){
-        final String path = identifier(file);
-        addTab(path, new MarkdownEditorPanel(file));
-        JPanel panelForTab = new JPanel(new GridBagLayout());
-        panelForTab.setOpaque(false);
-        JLabel tabTitleLabel = new JLabel(path);
-        JButton closeButton = new JButton("x");
-        closeButton.setSize(20,20);
-
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.weightx = 1;
-
-        panelForTab.add(tabTitleLabel, constraints);
-
-        constraints.gridx++;
-        constraints.weightx = 0;
-        panelForTab.add(closeButton, constraints);
-
-        int index = indexOfTab(path);
-        setTabComponentAt(index, panelForTab);
-
-        closeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                Component selected = getSelectedComponent();
-                if (selected != null) {
-                    remove(selected);
-                }
-            }
-        });
+    public void removeMarkdownTabFor(File file) {
+        if(tabExists(file)) {
+            final int index = indexOfTab(identifier(file));
+            removeTabAt(index);
+        }
     }
 
-    private String identifier(File file) { return file.getAbsolutePath().substring(projectRoot.length()); }
+    public void addMarkdownEditorFor(File file){
+        if(tabExists(file)) {
+            focusOn(file);
+        } else {
+            final String path = identifier(file);
+            addTab(path, new MarkdownEditorPanel(file));
+            JPanel panelForTab = new JPanel(new GridBagLayout());
+            panelForTab.setOpaque(false);
+            JLabel tabTitleLabel = new JLabel(path);
+            JButton closeButton = new JButton("x");
+            closeButton.setSize(20,20);
+            closeButton.setPreferredSize(new Dimension(20, 20));
 
-    public boolean exists(File file) {
+            GridBagConstraints constraints = new GridBagConstraints();
+            constraints.gridx = 0;
+            constraints.gridy = 0;
+            constraints.weightx = 1;
+
+            panelForTab.add(tabTitleLabel, constraints);
+
+            constraints.gridx++;
+            constraints.weightx = 0;
+            panelForTab.add(closeButton, constraints);
+
+            int index = indexOfTab(path);
+            setTabComponentAt(index, panelForTab);
+
+            closeButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    Component selected = getSelectedComponent();
+                    if (selected != null) {
+                        remove(selected);
+                    }
+                }
+            });
+        }
+    }
+
+    private String identifier(File file) {
+        return file.getAbsolutePath().substring(projectRoot.length()+1);
+    }
+
+    private boolean tabExists(File file) {
         return indexOfTab(identifier(file)) > -1;
     }
 
     public void focusOn(File file) {
         final int index = indexOfTab(identifier(file));
-        getTabComponentAt(index).requestFocus();
+        getTabComponentAt(index).transferFocus();
     }
-
 }

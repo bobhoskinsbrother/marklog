@@ -1,9 +1,9 @@
 package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
 import uk.co.itstherules.marklog.editor.IconLoader;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileSystemView;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
 import java.io.File;
@@ -13,7 +13,6 @@ import java.util.Map;
 class FileSystemTreeCellRenderer extends DefaultTreeCellRenderer {
 
     private Map<String, Icon> iconCache = new HashMap<String, Icon>();
-    private Map<File, String> rootNameCache = new HashMap<File, String>();
     private Icon defaultDirectory;
     private Icon defaultFile;
 
@@ -29,14 +28,7 @@ class FileSystemTreeCellRenderer extends DefaultTreeCellRenderer {
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
         FileModel fileModel = FileModel.class.cast(value);
         File file = fileModel.getFile();
-        String filename = "";
-        if (file != null) {
-            if (fileModel.isRoot()) {
-                filename = getRootFilename(file);
-            } else {
-                filename = file.getName();
-            }
-        }
+        String filename = file.getName();
         JLabel label = JLabel.class.cast(super.getTreeCellRendererComponent(tree, filename, sel, expanded, leaf, row, hasFocus));
         if (file != null) {
             Icon icon = getIconFor(file);
@@ -63,15 +55,5 @@ class FileSystemTreeCellRenderer extends DefaultTreeCellRenderer {
             extension = fileName.substring(dotIndex + 1);
         }
         return extension;
-    }
-
-    private String getRootFilename(File file) {
-        String filename;
-        filename = this.rootNameCache.get(file);
-        if (filename == null) {
-            filename = FileSystemView.getFileSystemView().getSystemDisplayName(file);
-            this.rootNameCache.put(file, filename);
-        }
-        return filename;
     }
 }

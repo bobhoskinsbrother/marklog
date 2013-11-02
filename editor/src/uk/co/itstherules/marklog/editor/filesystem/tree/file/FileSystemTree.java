@@ -3,50 +3,52 @@ package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogPanel;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.DefaultFileModel;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileSystemModel;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileWorker;
 
 import javax.swing.*;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public class FileSystemTree extends JPanel {
 
     private final JScrollPane scrollPane;
-    private JTree tree;
     private final MarklogApp app;
-    private final FileSelectionController fileSelectionController;
-    private final MarklogPanel.MarklogController marklogController;
+    private final MarklogPanel.MarklogController controller;
+    private final FileSystemModel fileSystemModel;
+    private JTree tree;
 
-    public FileSystemTree(MarklogApp app, final FileSelectionController fileSelectionController, MarklogPanel.MarklogController marklogController, final File baseDirectory) {
+    public FileSystemTree(MarklogApp app, MarklogPanel.MarklogController controller, final File baseDirectory) {
+        setName("fileSystemTree");
         this.app = app;
-        this.fileSelectionController = fileSelectionController;
-        this.marklogController = marklogController;
-
-        tree = makeTree(baseDirectory);
+        this.controller = controller;
+        fileSystemModel = new FileSystemModel(baseDirectory);
+        tree = makeTree(fileSystemModel);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         scrollPane = makeScrollPaneWithTree(tree);
-
-
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(200, 400));
         setPreferredSize(new Dimension(200, 400));
         add(BorderLayout.CENTER, scrollPane);
         setVisible(true);
-
-        try {
-            final FileWorker worker = new FileWorker(baseDirectory);
-            worker.addPropertyChangeListener(new RefreshTreeOnPropertyChange(baseDirectory));
-            worker.execute();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        setupWorker(baseDirectory);
     }
 
-    private JTree makeTree(File baseDirectory) {
-        JTree tree = new JTree(new FileSystemModel(baseDirectory));
+    private void setupWorker(File baseDirectory) {
+        final FileWorker worker = new FileWorker(baseDirectory);
+        worker.addPropertyChangeListener(new RefreshTreeOnPropertyChange());
+        worker.execute();
+    }
+
+    private JTree makeTree(FileSystemModel model) {
+        JTree tree = new JTree(model);
         tree.setCellRenderer(new FileSystemTreeCellRenderer());
         when(tree).hasBeenDoubleClicked(openFile()).hasBeenRightClicked(showPopupMenu());
         return tree;
@@ -63,11 +65,25 @@ public class FileSystemTree extends JPanel {
             @Override public void apply(FileModel node) {
                 if (node == null)
                     return;
-                if (node.isFile()) {
-                    fileSelectionController.onFile(node.getFile());
+                if (node.isLeaf()) {
+                    controller.openFile(node.getFile());
                 }
             }
         };
+    }
+
+    private void addNode(File file) {
+        FileModel parent = fileSystemModel.findFileModelFor(file.getParentFile());
+        FileModel child = new DefaultFileModel(file);
+        fileSystemModel.insertNodeInto(parent, child, parent.getChildCount());
+    }
+
+    private void removeNode(File file) {
+        FileModel child = fileSystemModel.findFileModelFor(file);
+        if(child != null) {
+            fileSystemModel.removeNodeFromParent(child);
+            controller.removeMarkdownTabFor(child.getFile());
+        }
     }
 
     private TreeActionBuilder.ApplyChanged showPopupMenu() {
@@ -77,24 +93,25 @@ public class FileSystemTree extends JPanel {
                 final Point locationOnScreen = tree.getLocationOnScreen();
                 final int x = location.x - locationOnScreen.x;
                 final int y = location.y - locationOnScreen.y;
-                new RightClickTreeMenu(app, marklogController, tree, node, x, y);
+                new RightClickTreeMenu(app, controller, tree, node, x, y);
             }
         };
     }
 
     private class RefreshTreeOnPropertyChange implements PropertyChangeListener {
 
-        private final File baseDirectory;
-
-        public RefreshTreeOnPropertyChange(File baseDirectory) {
-            this.baseDirectory = baseDirectory;
-        }
-
-        @Override public void propertyChange(PropertyChangeEvent propertyChangeEvent) {
-            scrollPane.remove(tree);
-            tree = makeTree(baseDirectory);
-            scrollPane.add(tree);
-            FileSystemTree.this.repaint();
+        @Override public void propertyChange(PropertyChangeEvent event) {
+            final Object newValue = event.getNewValue();
+            if (File.class.isInstance(newValue)) {
+                File file = File.class.cast(newValue);
+                final String propertyName = event.getPropertyName();
+                if ("ENTRY_DELETE".equals(propertyName)) {
+                    removeNode(file);
+                }
+                if ("ENTRY_CREATE".equals(propertyName)) {
+                    addNode(file);
+                }
+            }
         }
     }
 }

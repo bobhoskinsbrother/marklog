@@ -1,6 +1,8 @@
-package uk.co.itstherules.marklog.editor;
+package uk.co.itstherules.marklog.editor.dialogs;
 
 import net.miginfocom.swing.MigLayout;
+import uk.co.itstherules.marklog.editor.MarklogApp;
+import uk.co.itstherules.marklog.editor.MarklogPanel;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.DirectoryChooserActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
@@ -57,7 +59,7 @@ public final class NewProjectDialog extends JDialog {
                 } else {
                     ProjectConfigurationModel configuration = new ProjectConfigurationModel(new File(projectDirectory), projectName);
                     configuration.save();
-                    marklogController.newMarklogEditor(configuration);
+                    marklogController.newMarklogProject(configuration);
                     dispose();
                 }
             }

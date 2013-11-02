@@ -1,6 +1,7 @@
 package uk.co.itstherules.marklog.editor;
 
 import uk.co.itstherules.marklog.editor.actionbuilder.MenuItemActionBuilder;
+import uk.co.itstherules.marklog.editor.dialogs.NewProjectDialog;
 import uk.co.itstherules.marklog.editor.model.PostModel;
 import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
 
@@ -15,38 +16,19 @@ public final class MarklogPanel extends JPanel {
 
     private final MarklogApp app;
     private MarklogProjectEditor projectEditor;
-    private MarklogController marklogController;
+    private MarklogController controller;
 
     public MarklogPanel(MarklogApp app) {
         setName("marklogPanel");
         this.app = app;
-        this.marklogController = new MarklogController();
+        this.controller = new MarklogController();
         setLayout(new BorderLayout());
         addMenu();
     }
 
     public MarklogPanel(MarklogApp app, ProjectConfigurationModel configuration) {
         this(app);
-        marklogController.newMarklogEditor(configuration);
-    }
-
-    private void addEditorFor(File file) {
-        projectEditor.addEditorFor(file);
-        app.pack();
-    }
-
-    private void newEditorFor(ProjectConfigurationModel projectConfiguration) {
-        removeProjectEditor();
-        projectEditor = new MarklogProjectEditor(app, projectConfiguration, marklogController);
-        add(projectEditor, BorderLayout.CENTER);
-        app.pack();
-    }
-
-    private void removeProjectEditor() {
-        if (projectEditor != null) {
-            remove(projectEditor);
-            app.pack();
-        }
+        controller.newMarklogProject(configuration);
     }
 
     private void addMenu() {
@@ -60,11 +42,9 @@ public final class MarklogPanel extends JPanel {
         final JMenuItem newProjectMenuItem = new JMenuItem("New Project...");
         final JMenuItem openProjectMenuItem = new JMenuItem("Open Project...");
         final JMenuItem closeProjectMenuItem = new JMenuItem("Close Project");
-
         when(newProjectMenuItem).hasBeenClicked(openNewProjectDialog());
         when(openProjectMenuItem).hasBeenClicked(openOpenProjectDialog());
         when(closeProjectMenuItem).hasBeenClicked(closeCurrentProject());
-
         menu.add(newProjectMenuItem);
         menu.add(openProjectMenuItem);
         menu.add(closeProjectMenuItem);
@@ -76,7 +56,7 @@ public final class MarklogPanel extends JPanel {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override
             public void apply() {
-                removeProjectEditor();
+                controller.removeMarklogProject();
             }
         };
     }
@@ -85,7 +65,7 @@ public final class MarklogPanel extends JPanel {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override
             public void apply() {
-                final JFileChooser fileChooser = new JFileChooser();
+                final JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
                 fileChooser.setFileFilter(new FileFilter() {
                     @Override
                     public boolean accept(File file) {
@@ -94,14 +74,14 @@ public final class MarklogPanel extends JPanel {
 
                     @Override
                     public String getDescription() {
-                        return "Marklog Blog Project";
+                        return "Marklog Project";
                     }
                 });
                 int returnVal = fileChooser.showOpenDialog(app);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
                     final ProjectConfigurationModel configuration = new ProjectConfigurationModel(file);
-                    newEditorFor(configuration);
+                    controller.newMarklogProject(configuration);
                 }
             }
         };
@@ -111,30 +91,41 @@ public final class MarklogPanel extends JPanel {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override
             public void apply() {
-                new NewProjectDialog(app, marklogController);
+                new NewProjectDialog(app, controller);
             }
         };
     }
 
     public MarklogController getController() {
-        return marklogController;
+        return controller;
     }
 
     public class MarklogController {
 
-        public void newMarklogEditor(ProjectConfigurationModel configuration) {
-            newEditorFor(configuration);
+        private void removeMarklogProject() {
+            if (projectEditor != null) {
+                remove(projectEditor);
+                app.pack();
+            }
         }
 
-        public void newMarkdownTabFor(PostModel post) {
-            addEditorFor(post.getFile());
+        public void newMarklogProject(ProjectConfigurationModel configuration) {
+            removeMarklogProject();
+            projectEditor = new MarklogProjectEditor(app, configuration, controller);
+            add(projectEditor, BorderLayout.CENTER);
+            app.pack();
         }
 
-        public boolean delete(File file) {
+        public void newMarkdownTabFor(File file) {
+            projectEditor.addMarkdownEditorFor(file);
+            app.pack();
+        }
+
+        public boolean deleteFile(File file) {
             if (file.isDirectory()) {
                 String[] children = file.list();
                 for (int i = 0; i < children.length; i++) {
-                    boolean success = delete(new File(file, children[i]));
+                    boolean success = deleteFile(new File(file, children[i]));
                     if (!success) {
                         return false;
                     }
@@ -143,10 +134,22 @@ public final class MarklogPanel extends JPanel {
             return file.delete();
         }
 
+        public void removeMarkdownTabFor(File file) {
+            projectEditor.removeMarkdownTabFor(file);
+            app.pack();
+        }
+
         public void addNewPost(File file, String postName) {
             PostModel post = new PostModel(file, postName);
             post.save();
-            newMarkdownTabFor(post);
+            newMarkdownTabFor(post.getFile());
+        }
+
+        public void openFile(File file) {
+            if (file.getName().endsWith(".md")) {
+                newMarkdownTabFor(file);
+            }
+
         }
     }
 }

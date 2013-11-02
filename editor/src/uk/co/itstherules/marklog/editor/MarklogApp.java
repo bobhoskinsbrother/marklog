@@ -20,6 +20,7 @@ public final class MarklogApp extends JFrame {
         setSize(width, height);
         setPreferredSize(new Dimension(width, height));
         setLocationRelativeTo(null);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
         if(configuration != null) {
             marklogPanel = new MarklogPanel(this, configuration);

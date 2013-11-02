@@ -45,7 +45,7 @@ public final class DeleteDirectoryDialog extends JDialog {
     private ButtonActionBuilder.ApplyChanged deleteDirectory() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                controller.delete(directory);
+                controller.deleteFile(directory);
                 dispose();
             }
         };

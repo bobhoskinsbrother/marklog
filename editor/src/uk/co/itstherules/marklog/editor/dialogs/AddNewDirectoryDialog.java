@@ -2,7 +2,6 @@ package uk.co.itstherules.marklog.editor.dialogs;
 
 import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.MarklogApp;
-import uk.co.itstherules.marklog.editor.MarklogPanel;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
 
@@ -17,12 +16,10 @@ public final class AddNewDirectoryDialog extends JDialog {
     private final MarklogApp app;
     private final File directory;
     private String directoryName = "";
-    private final MarklogPanel.MarklogController controller;
 
-    public AddNewDirectoryDialog(MarklogApp app, MarklogPanel.MarklogController controller, File directory) {
+    public AddNewDirectoryDialog(MarklogApp app, File directory) {
         super(app, true);
         this.app = app;
-        this.controller = controller;
         this.directory = directory;
         setLayout(new MigLayout("insets 10"));
         JTextField directoryNameTextField = new JTextField();
@@ -48,7 +45,7 @@ public final class AddNewDirectoryDialog extends JDialog {
     private ButtonActionBuilder.ApplyChanged verifyAndCreateDirectory() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                if ("".equals(directoryName) && isLegalDirectoryName()) {
+                if ("".equals(directoryName) && isIllegalDirectoryName()) {
                     String message = "Please fill in a legal directory name\nNo weird characters please";
                     JOptionPane.showMessageDialog(null, message, "No directory name supplied", JOptionPane.ERROR_MESSAGE);
                 } else {
@@ -58,7 +55,7 @@ public final class AddNewDirectoryDialog extends JDialog {
                 }
             }
 
-            private boolean isLegalDirectoryName() {
+            private boolean isIllegalDirectoryName() {
                 char[] illegal = {'/', '\n', '\r', '\t', '\0', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':'};
                 for (int i = 0; i < illegal.length; i++) {
                     char illegalChar = illegal[i];

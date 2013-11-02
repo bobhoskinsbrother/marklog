@@ -12,19 +12,21 @@ public final class MarklogProjectEditor extends JSplitPane {
     private final TabbedMarkdownEditors markdownEditors;
     private final FileSystemTree fileSystemTree;
 
-    public MarklogProjectEditor(MarklogApp app, ProjectConfigurationModel projectConfiguration, MarklogPanel.MarklogController marklogController) {
+    public MarklogProjectEditor(MarklogApp app, ProjectConfigurationModel configuration, MarklogPanel.MarklogController controller) {
         setName("MarklogProjectEditor");
-        final File directory = projectConfiguration.getDirectory();
+        final File directory = configuration.getDirectory();
         markdownEditors = new TabbedMarkdownEditors(directory);
-        final OpenMarkdownEditorOnFileSelectionController fileSelectionController = new OpenMarkdownEditorOnFileSelectionController(markdownEditors);
-        fileSystemTree = new FileSystemTree(app, fileSelectionController, marklogController, directory);
+        fileSystemTree = new FileSystemTree(app, controller, directory);
         setLeftComponent(fileSystemTree);
         setRightComponent(markdownEditors);
         setResizeWeight(0.25);
     }
 
-    public void addEditorFor(File file) {
-        markdownEditors.addEditorFor(file);
+    public void addMarkdownEditorFor(File file) {
+        markdownEditors.addMarkdownEditorFor(file);
     }
 
+    public void removeMarkdownTabFor(File file) {
+        markdownEditors.removeMarkdownTabFor(file);
+    }
 }
