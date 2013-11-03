@@ -16,6 +16,7 @@ public final class DeleteDirectoryDialog extends JDialog {
     private final MarklogApp app;
     private final File directory;
     private final MarklogPanel.MarklogController controller;
+    private final JRadioButton moveUp;
 
     public DeleteDirectoryDialog(MarklogApp app, MarklogPanel.MarklogController controller, File directory) {
         super(app, true);
@@ -24,11 +25,14 @@ public final class DeleteDirectoryDialog extends JDialog {
         this.directory = directory;
         setLayout(new MigLayout("insets 10"));
         ButtonGroup group = new ButtonGroup();
-        JRadioButton deleteUnderneath = new JRadioButton("Delete any file underneath this directory", true);
-        JRadioButton moveUp = new JRadioButton("Move up any file underneath this directory");
+        JRadioButton deleteUnderneath = new JRadioButton("Delete any files underneath this directory", true);
+        deleteUnderneath.setName("deleteFilesUnderneath");
+        moveUp = new JRadioButton("Move up any files underneath this directory");
+        moveUp.setName("moveUpFiles");
         group.add(deleteUnderneath);
         group.add(moveUp);
         JButton deleteButton = new JButton("Delete");
+        deleteButton.setName("deleteDirectory");
         when(deleteButton).hasBeenClicked(deleteDirectory());
         setPreferredSize(new Dimension(475, 250));
         setLocationRelativeTo(this.app);
@@ -45,7 +49,7 @@ public final class DeleteDirectoryDialog extends JDialog {
     private ButtonActionBuilder.ApplyChanged deleteDirectory() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                controller.deleteFile(directory);
+                controller.deleteDirectory(directory, moveUp.isSelected());
                 dispose();
             }
         };

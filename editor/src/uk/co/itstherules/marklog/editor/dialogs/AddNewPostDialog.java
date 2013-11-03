@@ -15,17 +15,19 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 public final class AddNewPostDialog extends JDialog {
 
     private final File file;
+    private final MarklogPanel.MarklogController controller;
     private String postName = "";
-    private final MarklogPanel.MarklogController marklogController;
 
-    public AddNewPostDialog(MarklogApp app, MarklogPanel.MarklogController marklogController, File file) {
+    public AddNewPostDialog(MarklogApp app, MarklogPanel.MarklogController controller, File file) {
         super(app, true);
+        setName("newPost");
         this.file = file;
-        this.marklogController = marklogController;
+        this.controller = controller;
         JTextField postNameTextField = new JTextField();
         postNameTextField.setPreferredSize(new Dimension(300, 30));
         JButton createButton = new JButton("Create");
-
+        createButton.setName("createPost");
+        postNameTextField.setName("postName");
         setActions(postNameTextField, createButton);
         setView(app, postNameTextField, createButton);
     }
@@ -55,7 +57,7 @@ public final class AddNewPostDialog extends JDialog {
                     String message = "Please fill in post name";
                     JOptionPane.showMessageDialog(null, message, "No post name supplied", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    marklogController.addNewPost(file, postName);
+                    controller.addNewPost(file, postName);
                     dispose();
                 }
             }

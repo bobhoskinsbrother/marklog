@@ -17,13 +17,13 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public final class NewProjectDialog extends JDialog {
 
-    private final MarklogPanel.MarklogController marklogController;
+    private final MarklogPanel.MarklogController controller;
     private String projectName;
     private String projectDirectory;
 
-    public NewProjectDialog(MarklogApp marklogApp, MarklogPanel.MarklogController marklogController) {
+    public NewProjectDialog(MarklogApp marklogApp, MarklogPanel.MarklogController controller) {
         super(marklogApp, true);
-        this.marklogController = marklogController;
+        this.controller = controller;
         projectName = "";
         projectDirectory = "";
         setLayout(new MigLayout("insets 10"));
@@ -59,7 +59,7 @@ public final class NewProjectDialog extends JDialog {
                 } else {
                     ProjectConfigurationModel configuration = new ProjectConfigurationModel(new File(projectDirectory), projectName);
                     configuration.save();
-                    marklogController.newMarklogProject(configuration);
+                    controller.newMarklogProject(configuration);
                     dispose();
                 }
             }

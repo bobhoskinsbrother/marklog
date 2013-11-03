@@ -24,26 +24,45 @@ public final class RightClickTreeMenu extends JPopupMenu {
         this.fileModel = fileModel;
         final JMenuItem addNewPostMenuItem = new JMenuItem("Add New Post");
         final JMenuItem addNewDirectoryMenuItem = new JMenuItem("Add New Directory");
+        addNewDirectoryMenuItem.setName("addNewDirectory");
+        addNewPostMenuItem.setName("addNewPost");
         when(addNewPostMenuItem).hasBeenClicked(openAddNewPostDialog());
         when(addNewDirectoryMenuItem).hasBeenClicked(openAddNewDirectoryDialog());
+
         add(addNewPostMenuItem);
         add(addNewDirectoryMenuItem);
         if (fileModel.getAllowsChildren()) {
             final JMenuItem deleteDirectoryMenuItem = new JMenuItem("Delete Directory");
+            deleteDirectoryMenuItem.setName("deleteDirectory");
             if (fileModel.hasChildren()) {
                 when(deleteDirectoryMenuItem).hasBeenClicked(openDeleteDirectoryDialog());
             } else {
                 when(deleteDirectoryMenuItem).hasBeenClicked(deleteDirectory());
             }
             add(deleteDirectoryMenuItem);
+        } else {
+            if(fileModel.getFile().getName().endsWith(".md")) {
+                final JMenuItem deletePostMenuItem = new JMenuItem("Delete Post");
+                deletePostMenuItem.setName("deletePost");
+                when(deletePostMenuItem).hasBeenClicked(deletePost());
+                add(deletePostMenuItem);
+            }
         }
         show(tree, x, y);
+    }
+
+    private MenuItemActionBuilder.ApplyChanged deletePost() {
+        return new MenuItemActionBuilder.ApplyChanged() {
+            @Override public void apply() {
+                controller.deleteFile(fileModel.getFile());
+            }
+        };
     }
 
     private MenuItemActionBuilder.ApplyChanged deleteDirectory() {
         return new MenuItemActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                fileModel.getFile().delete();
+                controller.deleteDirectory(fileModel.getFile(), false);
             }
         };
     }

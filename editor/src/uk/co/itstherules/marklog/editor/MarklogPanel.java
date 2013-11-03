@@ -1,5 +1,6 @@
 package uk.co.itstherules.marklog.editor;
 
+import org.apache.commons.io.FileUtils;
 import uk.co.itstherules.marklog.editor.actionbuilder.MenuItemActionBuilder;
 import uk.co.itstherules.marklog.editor.dialogs.NewProjectDialog;
 import uk.co.itstherules.marklog.editor.model.PostModel;
@@ -9,6 +10,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
@@ -123,15 +125,33 @@ public final class MarklogPanel extends JPanel {
 
         public boolean deleteFile(File file) {
             if (file.isDirectory()) {
-                String[] children = file.list();
-                for (int i = 0; i < children.length; i++) {
-                    boolean success = deleteFile(new File(file, children[i]));
-                    if (!success) {
-                        return false;
-                    }
+                try {
+                    FileUtils.deleteDirectory(file);
+                    return true;
+                } catch (IOException e) {
+                    return false;
                 }
             }
             return file.delete();
+        }
+
+        public boolean deleteDirectory(File directory, boolean moveChildrenUp) {
+            if(moveChildrenUp) {
+                if (directory.isDirectory()) {
+                    File parentFile = directory.getParentFile();
+                    final File[] files = directory.listFiles();
+                    for (File file : files) {
+                        try {
+                            FileUtils.moveToDirectory(file, parentFile, false);
+                        } catch (IOException e) {
+                            return false;
+                        }
+                    }
+                }
+                return directory.delete();
+            } else {
+                return deleteFile(directory);
+            }
         }
 
         public void removeMarkdownTabFor(File file) {

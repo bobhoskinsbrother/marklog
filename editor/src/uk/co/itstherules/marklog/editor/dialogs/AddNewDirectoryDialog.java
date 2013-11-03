@@ -19,12 +19,15 @@ public final class AddNewDirectoryDialog extends JDialog {
 
     public AddNewDirectoryDialog(MarklogApp app, File directory) {
         super(app, true);
+        setName("newDirectory");
         this.app = app;
         this.directory = directory;
         setLayout(new MigLayout("insets 10"));
         JTextField directoryNameTextField = new JTextField();
+        directoryNameTextField.setName("directoryName");
         directoryNameTextField.setPreferredSize(new Dimension(300, 30));
         JButton createButton = new JButton("Create");
+        createButton.setName("createDirectory");
         when(directoryNameTextField).textHasChanged(applyToDirectoryName());
         when(createButton).hasBeenClicked(verifyAndCreateDirectory());
         paintView(directoryNameTextField, createButton);
