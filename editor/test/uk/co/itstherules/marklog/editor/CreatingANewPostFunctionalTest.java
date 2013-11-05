@@ -42,7 +42,7 @@ public class CreatingANewPostFunctionalTest {
         DialogFixture dialog = window.dialog("newPost");
         dialog.textBox("postName").setText("Output from Test");
         dialog.button("createPost").click();
-        final File expected = new File(PROJECT_DIRECTORY, "OutputFromTest.md");
+        final File expected = new File(PROJECT_DIRECTORY, "output-from-test.md");
         assertThat(expected, isCreatedWithin(1000));
     }
 

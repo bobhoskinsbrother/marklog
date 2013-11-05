@@ -10,15 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
+import static java.nio.file.StandardWatchEventKinds.*;
 
 public class FileWorker extends SwingWorker<Void, PropertyChangeEvent> {
 
     private final Map<WatchKey, Path> keys;
+    private final File root;
     private WatchService watcher;
 
     public FileWorker(File file) {
+        root = file;
         try {
             watcher = FileSystems.getDefault().newWatchService();
             keys = new HashMap<WatchKey, Path>();
@@ -30,7 +31,7 @@ public class FileWorker extends SwingWorker<Void, PropertyChangeEvent> {
 
     private void register(Path directory) {
         try {
-            final WatchKey key = directory.register(watcher, ENTRY_DELETE, ENTRY_CREATE);
+            final WatchKey key = directory.register(watcher, ENTRY_DELETE, ENTRY_CREATE, ENTRY_MODIFY);
             keys.put(key, directory);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -71,15 +72,15 @@ public class FileWorker extends SwingWorker<Void, PropertyChangeEvent> {
             }
             boolean valid = key.reset();
             if (!valid) {
-                break;
+                final Path path = keys.get(key);
+                publish(createChangeEvent(path, ENTRY_DELETE.name()));
+                keys.remove(key);
             }
         }
-        return null;
     }
 
     protected PropertyChangeEvent createChangeEvent(Path child, String eventName) {
-        PropertyChangeEvent e = new PropertyChangeEvent(this, eventName, null, child.toFile());
-        return e;
+        return new PropertyChangeEvent(this, eventName, null, child.toFile());
     }
 
     @Override

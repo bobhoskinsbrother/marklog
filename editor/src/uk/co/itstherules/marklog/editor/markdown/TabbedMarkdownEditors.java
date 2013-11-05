@@ -1,5 +1,7 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
+import net.miginfocom.swing.MigLayout;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,29 +28,26 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
     public void addMarkdownEditorFor(File file){
         if(tabExists(file)) {
             focusOn(file);
+            final int index = indexOfTab(identifier(file));
+            setSelectedIndex(index);
         } else {
             final String path = identifier(file);
-            addTab(path, new MarkdownEditorPanel(file));
-            JPanel panelForTab = new JPanel(new GridBagLayout());
+            addTab(path, new MarkdownAndHtmlPanel(file));
+
+            JPanel panelForTab = new JPanel(new MigLayout("","[center][right]","[center][center]"));
+
             panelForTab.setOpaque(false);
             JLabel tabTitleLabel = new JLabel(path);
             JButton closeButton = new JButton("x");
-            closeButton.setSize(20,20);
-            closeButton.setPreferredSize(new Dimension(20, 20));
+            closeButton.setSize(22, 22);
+            closeButton.setPreferredSize(new Dimension(22, 22));
 
-            GridBagConstraints constraints = new GridBagConstraints();
-            constraints.gridx = 0;
-            constraints.gridy = 0;
-            constraints.weightx = 1;
-
-            panelForTab.add(tabTitleLabel, constraints);
-
-            constraints.gridx++;
-            constraints.weightx = 0;
-            panelForTab.add(closeButton, constraints);
+            panelForTab.add(tabTitleLabel);
+            panelForTab.add(closeButton, "gapleft 10");
 
             int index = indexOfTab(path);
             setTabComponentAt(index, panelForTab);
+            setSelectedIndex(index);
 
             closeButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
@@ -72,5 +71,11 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
     public void focusOn(File file) {
         final int index = indexOfTab(identifier(file));
         getTabComponentAt(index).transferFocus();
+    }
+
+    public void reloadTabIfOpen(File file) {
+        if(tabExists(file) && file.exists()) {
+            //TODO implement me
+        }
     }
 }

@@ -17,6 +17,7 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 public final class MarklogPanel extends JPanel {
 
     private final MarklogApp app;
+    private final BlankPanel blankPanel;
     private MarklogProjectEditor projectEditor;
     private MarklogController controller;
 
@@ -24,14 +25,15 @@ public final class MarklogPanel extends JPanel {
         setName("marklogPanel");
         this.app = app;
         this.controller = new MarklogController();
+        blankPanel = new BlankPanel();
         setLayout(new BorderLayout());
         addMenu();
+        addBlankPanel();
     }
 
-    public MarklogPanel(MarklogApp app, ProjectConfigurationModel configuration) {
-        this(app);
-        controller.newMarklogProject(configuration);
-    }
+    private void addBlankPanel() {add(blankPanel, BorderLayout.CENTER);}
+
+    private void removeBlankPanel() {remove(blankPanel);}
 
     private void addMenu() {
         add(menu(), BorderLayout.NORTH);
@@ -98,21 +100,19 @@ public final class MarklogPanel extends JPanel {
         };
     }
 
-    public MarklogController getController() {
-        return controller;
-    }
-
     public class MarklogController {
 
         private void removeMarklogProject() {
             if (projectEditor != null) {
                 remove(projectEditor);
+                addBlankPanel();
                 app.pack();
             }
         }
 
         public void newMarklogProject(ProjectConfigurationModel configuration) {
             removeMarklogProject();
+            removeBlankPanel();
             projectEditor = new MarklogProjectEditor(app, configuration, controller);
             add(projectEditor, BorderLayout.CENTER);
             app.pack();
@@ -136,7 +136,7 @@ public final class MarklogPanel extends JPanel {
         }
 
         public boolean deleteDirectory(File directory, boolean moveChildrenUp) {
-            if(moveChildrenUp) {
+            if (moveChildrenUp) {
                 if (directory.isDirectory()) {
                     File parentFile = directory.getParentFile();
                     final File[] files = directory.listFiles();
@@ -171,5 +171,11 @@ public final class MarklogPanel extends JPanel {
             }
 
         }
+
+        public void reloadTabIfOpen(File file) {
+            projectEditor.reloadTabIfOpen(file);
+        }
+
     }
+
 }

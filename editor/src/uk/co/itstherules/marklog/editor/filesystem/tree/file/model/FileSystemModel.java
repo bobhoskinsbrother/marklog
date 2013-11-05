@@ -7,7 +7,6 @@ import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import java.beans.ConstructorProperties;
 import java.io.*;
-import java.util.EventListener;
 import java.util.Vector;
 
 public class FileSystemModel implements Serializable, TreeModel {
@@ -42,7 +41,6 @@ public class FileSystemModel implements Serializable, TreeModel {
         final FileModel fileModel = FileModel.class.cast(node);
         return !fileModel.getAllowsChildren();
     }
-
 
     public FileModel findFileModelFor(File file) {
         return root.find(file);
@@ -130,12 +128,6 @@ public class FileSystemModel implements Serializable, TreeModel {
         }
     }
 
-    public void nodeStructureChanged(FileModel node) {
-        if (node != null) {
-            fireTreeStructureChanged(this, getPathToRoot(node), null, null);
-        }
-    }
-
     public FileModel[] getPathToRoot(FileModel aNode) {
         return getPathToRoot(aNode, 0);
     }
@@ -164,10 +156,6 @@ public class FileSystemModel implements Serializable, TreeModel {
 
     public void removeTreeModelListener(TreeModelListener l) {
         listenerList.remove(TreeModelListener.class, l);
-    }
-
-    public TreeModelListener[] getTreeModelListeners() {
-        return listenerList.getListeners(TreeModelListener.class);
     }
 
     protected void fireTreeNodesChanged(Object source, Object[] path, int[] childIndices, Object[] children) {
@@ -218,22 +206,6 @@ public class FileSystemModel implements Serializable, TreeModel {
         }
     }
 
-    private void fireTreeStructureChanged(Object source, TreePath path) {
-        Object[] listeners = listenerList.getListenerList();
-        TreeModelEvent e = null;
-        for (int i = listeners.length - 2; i >= 0; i -= 2) {
-            if (listeners[i] == TreeModelListener.class) {
-                if (e == null)
-                    e = new TreeModelEvent(source, path);
-                ((TreeModelListener) listeners[i + 1]).treeStructureChanged(e);
-            }
-        }
-    }
-
-    public <T extends EventListener> T[] getListeners(Class<T> listenerType) {
-        return listenerList.getListeners(listenerType);
-    }
-
     private void writeObject(ObjectOutputStream s) throws IOException {
         Vector<Object> values = new Vector<Object>();
         s.defaultWriteObject();
@@ -249,8 +221,7 @@ public class FileSystemModel implements Serializable, TreeModel {
         Vector values = (Vector) s.readObject();
         int indexCounter = 0;
         int maxCounter = values.size();
-        if (indexCounter < maxCounter && values.elementAt(indexCounter).
-                equals("root")) {
+        if (indexCounter < maxCounter && values.elementAt(indexCounter).equals("root")) {
             root = (FileModel) values.elementAt(++indexCounter);
             indexCounter++;
         }

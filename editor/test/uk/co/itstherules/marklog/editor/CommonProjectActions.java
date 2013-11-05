@@ -18,7 +18,7 @@ public final class CommonProjectActions {
     private static final String PROJECT_NAME = "My New Test Project";
     private static final File TEMP_DIRECTORY = new File(System.getProperty("java.io.tmpdir"));
     public static final File PROJECT_DIRECTORY = new File(TEMP_DIRECTORY, "test_project");
-    public static final File PROJECT_FILE = new File(PROJECT_DIRECTORY, "MyNewTestProject.marklog");
+    public static final File PROJECT_FILE = new File(PROJECT_DIRECTORY, "my-new-test-project.marklog");
 
 
     private CommonProjectActions(){}

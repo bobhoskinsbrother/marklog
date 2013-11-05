@@ -4,20 +4,47 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
-public final class MarkdownAndHtmlPanel extends JSplitPane {
+public final class MarkdownAndHtmlPanel extends JPanel {
+
+    private final HtmlPanel htmlPanel;
+    private final JTextArea markdownArea;
 
     public MarkdownAndHtmlPanel(File file) {
-        HtmlPanel htmlPanel = new HtmlPanel();
-        JTextArea markdownArea = new MarkdownTextArea(htmlPanel, file);
+        setLayout(new GridBagLayout());
+        setPreferredSize(new Dimension(1024, 720));
+        htmlPanel = new HtmlPanel();
+        markdownArea = new MarkdownTextArea(htmlPanel, file);
+        splitPane(htmlScroller(), markdownScroller());
+    }
+
+    public void setText(String text) {
+        markdownArea.setText(text);
+    }
+
+    private JScrollPane markdownScroller() {
         final JScrollPane markdownScroller = new JScrollPane(markdownArea);
-        final JScrollPane htmlScroller = new JScrollPane(htmlPanel);
         markdownScroller.setPreferredSize(new Dimension(480, 720));
+        return markdownScroller;
+    }
+
+    private JScrollPane htmlScroller() {
+        final JScrollPane htmlScroller = new JScrollPane(htmlPanel);
         htmlScroller.setPreferredSize(new Dimension(480, 720));
-        setResizeWeight(0.5);
-        setLeftComponent(markdownScroller);
-        setRightComponent(htmlScroller);
-        setDividerLocation(JSplitPane.HORIZONTAL_SPLIT);
-        setPreferredSize(new Dimension(1000, 720));
-        setDividerLocation(0.5);
+        return htmlScroller;
+    }
+
+    private void splitPane(JScrollPane htmlScroller, JScrollPane markdownScroller) {
+        JSplitPane splitPane = new JSplitPane();
+        splitPane.setResizeWeight(0.5);
+        splitPane.setLeftComponent(markdownScroller);
+        splitPane.setRightComponent(htmlScroller);
+        splitPane.setDividerLocation(JSplitPane.HORIZONTAL_SPLIT);
+        splitPane.setPreferredSize(new Dimension(1000, 720));
+        splitPane.setDividerLocation(0.5);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.weightx = 1.0;
+        constraints.weighty = 1.0;
+        add(splitPane, constraints);
     }
 }

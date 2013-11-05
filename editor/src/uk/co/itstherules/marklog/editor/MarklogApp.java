@@ -8,7 +8,7 @@ public final class MarklogApp extends JFrame {
     private MarklogPanel marklogPanel;
 
     public MarklogApp() {
-        super("Marklog Editor");
+        super("Marklog");
         setLookAndFeel();
         setLayout(new GridBagLayout());
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();

@@ -44,8 +44,9 @@ public final class MarkdownTextArea extends JTextArea {
         });
         InputMap inputMap = getInputMap(JComponent.WHEN_FOCUSED);
         ActionMap actionMap = getActionMap();
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Undo");
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, Toolkit.getDefaultToolkit().getMenuShortcutKeyMask()), "Redo");
+        final int shortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, shortcutKeyMask), "Undo");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, shortcutKeyMask), "Redo");
         actionMap.put("Undo", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

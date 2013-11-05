@@ -1,5 +1,6 @@
 package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
+import uk.co.itstherules.marklog.editor.IconLoader;
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogPanel;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
@@ -19,24 +20,25 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public class FileSystemTree extends JPanel {
 
-    private final JScrollPane scrollPane;
     private final MarklogApp app;
     private final MarklogPanel.MarklogController controller;
     private final FileSystemModel fileSystemModel;
+    private final File root;
     private JTree tree;
 
     public FileSystemTree(MarklogApp app, MarklogPanel.MarklogController controller, final File baseDirectory) {
+        root = baseDirectory;
         setName("fileSystemTree");
         this.app = app;
         this.controller = controller;
         fileSystemModel = new FileSystemModel(baseDirectory);
         tree = makeTree(fileSystemModel);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        scrollPane = makeScrollPaneWithTree(tree);
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(200, 400));
         setPreferredSize(new Dimension(200, 400));
-        add(BorderLayout.CENTER, scrollPane);
+        JPanel panel = makeScrollPaneWithTree(tree);
+        add(BorderLayout.CENTER, panel);
         setVisible(true);
         setupWorker(baseDirectory);
     }
@@ -54,10 +56,17 @@ public class FileSystemTree extends JPanel {
         return tree;
     }
 
-    private JScrollPane makeScrollPaneWithTree(JTree tree) {
-        JScrollPane scrollpane = new JScrollPane();
-        scrollpane.getViewport().add(tree);
-        return scrollpane;
+    private JPanel makeScrollPaneWithTree(JTree tree) {
+        JPanel reply = new JPanel(new BorderLayout());
+        JPanel buttonPanel = new JPanel();
+        final JButton syncButton = new JButton(IconLoader.fromResource("/sync.png"));
+        syncButton.setToolTipText("Sync with Server");
+        buttonPanel.add(syncButton);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.getViewport().add(tree);
+        reply.add(BorderLayout.CENTER, scrollPane);
+        reply.add(BorderLayout.SOUTH, buttonPanel);
+        return reply;
     }
 
     private TreeActionBuilder.ApplyChanged openFile() {
@@ -72,6 +81,10 @@ public class FileSystemTree extends JPanel {
         };
     }
 
+    private void reloadTabIfOpen(File file) {
+        controller.reloadTabIfOpen(file);
+    }
+
     private void addNode(File file) {
         FileModel parent = fileSystemModel.findFileModelFor(file.getParentFile());
         FileModel child = new DefaultFileModel(file);
@@ -80,7 +93,7 @@ public class FileSystemTree extends JPanel {
 
     private void removeNode(File file) {
         FileModel child = fileSystemModel.findFileModelFor(file);
-        if(child != null) {
+        if (child != null) {
             fileSystemModel.removeNodeFromParent(child);
             controller.removeMarkdownTabFor(child.getFile());
         }
@@ -110,6 +123,9 @@ public class FileSystemTree extends JPanel {
                 }
                 if ("ENTRY_CREATE".equals(propertyName)) {
                     addNode(file);
+                }
+                if ("ENTRY_MODIFY".equals(propertyName)) {
+                    reloadTabIfOpen(file);
                 }
             }
         }

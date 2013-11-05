@@ -21,7 +21,7 @@ import static uk.co.itstherules.marklog.editor.CommonProjectActions.*;
 public class OpeningAndEditingAPostFunctionalTest {
 
     private FrameFixture window;
-    private final File postFile = new File(PROJECT_DIRECTORY, "WizardsAreAllEvil.md");
+    private final File postFile = new File(PROJECT_DIRECTORY, "wizards-are-all-evil.md");
 
     @BeforeClass
     public static void setUpOnce() {
@@ -46,7 +46,7 @@ public class OpeningAndEditingAPostFunctionalTest {
         final JPanelFixture fileSystemTree = window.panel("fileSystemTree");
         fileSystemTree.requireVisible();
         final JTreeFixture tree = fileSystemTree.tree();
-        tree.doubleClickPath("test_project/WizardsAreAllEvil.md");
+        tree.doubleClickPath("test_project/wizards-are-all-evil.md");
         window.textBox("markdownTextArea").enterText("\nEspecially Sauron");
         final String fileContents = MakeString.from(postFile);
         assertThat(fileContents, containsString("Especially Sauron"));

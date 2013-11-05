@@ -14,7 +14,7 @@ import static org.junit.internal.matchers.StringContains.containsString;
 public class ProjectConfigurationModelTest {
 
     private final File tempDir = new File(System.getProperty("java.io.tmpdir")+"/tmp_test_dir");
-    private final File tempProjectFile = new File(tempDir, "I'mATempProject.marklog");
+    private final File tempProjectFile = new File(tempDir, "i'm-a-temp-project.marklog");
 
     @Before
     public void setup() {

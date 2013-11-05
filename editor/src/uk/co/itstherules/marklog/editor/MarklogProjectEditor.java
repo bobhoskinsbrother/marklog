@@ -29,4 +29,8 @@ public final class MarklogProjectEditor extends JSplitPane {
     public void removeMarkdownTabFor(File file) {
         markdownEditors.removeMarkdownTabFor(file);
     }
+
+    public void reloadTabIfOpen(File file) {
+        markdownEditors.reloadTabIfOpen(file);
+    }
 }

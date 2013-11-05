@@ -32,14 +32,16 @@ public final class RightClickTreeMenu extends JPopupMenu {
         add(addNewPostMenuItem);
         add(addNewDirectoryMenuItem);
         if (fileModel.getAllowsChildren()) {
-            final JMenuItem deleteDirectoryMenuItem = new JMenuItem("Delete Directory");
-            deleteDirectoryMenuItem.setName("deleteDirectory");
-            if (fileModel.hasChildren()) {
-                when(deleteDirectoryMenuItem).hasBeenClicked(openDeleteDirectoryDialog());
-            } else {
-                when(deleteDirectoryMenuItem).hasBeenClicked(deleteDirectory());
+            if(!fileModel.isRoot()) {
+                final JMenuItem deleteDirectoryMenuItem = new JMenuItem("Delete Directory");
+                deleteDirectoryMenuItem.setName("deleteDirectory");
+                if (fileModel.hasChildren()) {
+                    when(deleteDirectoryMenuItem).hasBeenClicked(openDeleteDirectoryDialog());
+                } else {
+                    when(deleteDirectoryMenuItem).hasBeenClicked(deleteDirectory());
+                }
+                add(deleteDirectoryMenuItem);
             }
-            add(deleteDirectoryMenuItem);
         } else {
             if(fileModel.getFile().getName().endsWith(".md")) {
                 final JMenuItem deletePostMenuItem = new JMenuItem("Delete Post");

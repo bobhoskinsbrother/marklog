@@ -23,7 +23,7 @@ import static uk.co.itstherules.marklog.editor.StrictXHtmlMatcher.isValidStrictX
 public class EditingTextFunctionalTest {
 
     private FrameFixture window;
-    private final File file = new File(PROJECT_DIRECTORY, "OutputFromTest.md");
+    private final File file = new File(PROJECT_DIRECTORY, "output-from-test.md");
 
     @BeforeClass
     public static void setUpOnce() {
