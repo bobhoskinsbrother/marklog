@@ -1,17 +1,16 @@
-package uk.co.isttherules.marklog.sync;
+package uk.co.itstherules.marklog.sync;
 
 import org.apache.commons.net.ftp.FTPReply;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
-import sync.FtpCode;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
-import static sync.FtpCode.*;
+import static uk.co.itstherules.marklog.sync.FtpCode.*;
 
 @RunWith(Parameterized.class)
 public class FtpCodeTest {

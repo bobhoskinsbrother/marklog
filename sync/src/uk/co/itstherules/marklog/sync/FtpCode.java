@@ -1,4 +1,4 @@
-package sync;
+package uk.co.itstherules.marklog.sync;
 
 public enum FtpCode {
     RESTART_MARKER(110),

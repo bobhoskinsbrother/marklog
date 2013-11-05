@@ -1,7 +1,6 @@
-package uk.co.isttherules.marklog.sync;
+package uk.co.itstherules.marklog.sync;
 
 import org.junit.Test;
-import sync.FtpCode;
 
 public final class FtpCodeFailuresTest {
 

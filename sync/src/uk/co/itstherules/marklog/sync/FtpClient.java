@@ -1,4 +1,4 @@
-package sync;
+package uk.co.itstherules.marklog.sync;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPReply;

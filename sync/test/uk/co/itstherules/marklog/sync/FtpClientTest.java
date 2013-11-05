@@ -1,4 +1,4 @@
-package uk.co.isttherules.marklog.sync;
+package uk.co.itstherules.marklog.sync;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,8 +9,6 @@ import org.mockftpserver.fake.filesystem.DirectoryEntry;
 import org.mockftpserver.fake.filesystem.FileEntry;
 import org.mockftpserver.fake.filesystem.FileSystem;
 import org.mockftpserver.fake.filesystem.UnixFakeFileSystem;
-import sync.FtpClient;
-import sync.FtpCode;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -18,9 +16,7 @@ import java.nio.charset.Charset;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static sync.FtpCode.CLOSING_DATA_CONNECTION;
-import static sync.FtpCode.FILE_ACTION_OK;
-import static sync.FtpCode.FILE_UNAVAILABLE;
+import static uk.co.itstherules.marklog.sync.FtpCode.*;
 
 public final class FtpClientTest {
 
