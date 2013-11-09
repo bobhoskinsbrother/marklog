@@ -6,7 +6,7 @@ public final class IconLoader {
 
     private IconLoader() { }
 
-    public static ImageIcon fromResource(String path) {
+    public static ImageIcon icon(String path) {
         return new ImageIcon(MarklogApp.class.getResource(path));
     }
 

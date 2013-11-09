@@ -10,7 +10,7 @@ import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
 
 import javax.swing.*;
 
-import static uk.co.itstherules.marklog.editor.viewbuilder.MenuBuilder.item;
+import static uk.co.itstherules.marklog.editor.viewbuilder.MenuItemBuilder.item;
 
 public final class RightClickTreeMenu extends JPopupMenu {
 
@@ -23,22 +23,22 @@ public final class RightClickTreeMenu extends JPopupMenu {
         this.controller = controller;
         this.fileModel = fileModel;
 
-        add(item("Add New Post").withClickAction(openAddNewPostDialog()).build());
-        add(item("Add New Directory").withClickAction(openAddNewDirectoryDialog()).build());
+        add(item("Add New Post").withClickAction(openAddNewPostDialog()).ok());
+        add(item("Add New Directory").withClickAction(openAddNewDirectoryDialog()).ok());
 
         if (fileModel.getAllowsChildren()) {
             if(!fileModel.isRoot()) {
                 if (fileModel.hasChildren()) {
-                    add(item("Delete Directory").withClickAction(openDeleteDirectoryDialog()).build());
+                    add(item("Delete Directory").withClickAction(openDeleteDirectoryDialog()).ok());
                 } else {
-                    add(item("Delete Directory").withClickAction(deleteDirectory()).build());
+                    add(item("Delete Directory").withClickAction(deleteDirectory()).ok());
                 }
             }
         } else {
             if(fileModel.getFile().getName().endsWith(".md")) {
-                add(item("Delete Post").withClickAction(deleteFile()).build());
+                add(item("Delete Post").withClickAction(deleteFile()).ok());
             } else if(!fileModel.getFile().getName().endsWith(".marklog")) {
-                add(item("Delete File").withClickAction(deleteFile()).build());
+                add(item("Delete File").withClickAction(deleteFile()).ok());
             }
         }
         show(tree, x, y);

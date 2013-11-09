@@ -16,8 +16,12 @@ public final class MenuItemBuilder implements Builder<JMenuItem> {
         item.setName(new VariableName().manipulate(text));
     }
 
-    @Override public JMenuItem build() {
+    @Override public JMenuItem ok() {
         return item;
+    }
+
+    public static MenuItemBuilder item(String text) {
+        return new MenuItemBuilder(text);
     }
 
     public MenuItemBuilder withClickAction(MenuItemActionBuilder.ApplyChanged applyChanged) {

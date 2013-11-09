@@ -44,7 +44,7 @@ public class CreatingANewProjectFunctionalTest {
         dialog.panel("directoryChooser").button("chooseDirectoryButton").click();
         dialog.fileChooser().fileNameTextBox().setText(PROJECT_DIRECTORY.getAbsolutePath());
         dialog.fileChooser().approve();
-        dialog.button("createButton").click();
+        dialog.button("createProject").click();
         assertThat(PROJECT_FILE, isCreatedWithin(1000));
         final String projectFileString = MakeString.from(PROJECT_FILE);
         assertThat(projectFileString, containsString("project.name=" + projectName));

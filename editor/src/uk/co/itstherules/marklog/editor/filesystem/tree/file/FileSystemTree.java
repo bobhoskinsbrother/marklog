@@ -1,8 +1,8 @@
 package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
-import uk.co.itstherules.marklog.editor.IconLoader;
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogController;
+import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.DefaultFileModel;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
@@ -16,7 +16,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 
+import static java.awt.BorderLayout.CENTER;
+import static java.awt.BorderLayout.SOUTH;
+import static uk.co.itstherules.marklog.editor.IconLoader.icon;
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
+import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
 
 public class FileSystemTree extends JPanel {
 
@@ -38,7 +42,7 @@ public class FileSystemTree extends JPanel {
         setMinimumSize(new Dimension(200, 400));
         setPreferredSize(new Dimension(200, 400));
         JPanel panel = makeScrollPaneWithTree(tree);
-        add(BorderLayout.CENTER, panel);
+        add(CENTER, panel);
         setVisible(true);
         setupWorker(baseDirectory);
     }
@@ -59,14 +63,21 @@ public class FileSystemTree extends JPanel {
     private JPanel makeScrollPaneWithTree(JTree tree) {
         JPanel reply = new JPanel(new BorderLayout());
         JPanel buttonPanel = new JPanel();
-        final JButton syncButton = new JButton(IconLoader.fromResource("/sync.png"));
-        syncButton.setToolTipText("Sync with Server");
+        final JButton syncButton = button(icon("/sync.png"), "Sync with Server").withClickAction(openSyncDialog()).ok();
         buttonPanel.add(syncButton);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.getViewport().add(tree);
-        reply.add(BorderLayout.CENTER, scrollPane);
-        reply.add(BorderLayout.SOUTH, buttonPanel);
+        reply.add(CENTER, scrollPane);
+        reply.add(SOUTH, buttonPanel);
         return reply;
+    }
+
+    private ButtonActionBuilder.ApplyChanged openSyncDialog() {
+        return new ButtonActionBuilder.ApplyChanged() {
+            @Override public void apply() {
+                controller.openSyncDialog();
+            }
+        };
     }
 
     private TreeActionBuilder.ApplyChanged openFile() {

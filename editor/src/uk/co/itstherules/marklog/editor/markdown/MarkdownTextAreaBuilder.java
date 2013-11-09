@@ -120,7 +120,7 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
         htmlPanel.setHtmlText(html);
     }
 
-    @Override public JTextArea build() {
+    @Override public JTextArea ok() {
         return textArea;
     }
 }

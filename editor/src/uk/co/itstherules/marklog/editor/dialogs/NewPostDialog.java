@@ -11,6 +11,7 @@ import java.awt.*;
 import java.io.File;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
+import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
 
 public final class NewPostDialog extends JDialog {
 
@@ -25,10 +26,9 @@ public final class NewPostDialog extends JDialog {
         this.controller = controller;
         JTextField postNameTextField = new JTextField();
         postNameTextField.setPreferredSize(new Dimension(300, 30));
-        JButton createButton = new JButton("Create");
-        createButton.setName("createPost");
+        JButton createButton = button("Create Post").withClickAction(verifyAndCreatePost()).ok();
         postNameTextField.setName("postName");
-        setActions(postNameTextField, createButton);
+        when(postNameTextField).textHasChanged(applyToPostName());
         setView(app, postNameTextField, createButton);
     }
 
@@ -43,11 +43,6 @@ public final class NewPostDialog extends JDialog {
         add(createButton);
         pack();
         setVisible(true);
-    }
-
-    private void setActions(JTextField postNameTextField, JButton createButton) {
-        when(postNameTextField).textHasChanged(applyToPostName());
-        when(createButton).hasBeenClicked(verifyAndCreatePost());
     }
 
     private ButtonActionBuilder.ApplyChanged verifyAndCreatePost() {

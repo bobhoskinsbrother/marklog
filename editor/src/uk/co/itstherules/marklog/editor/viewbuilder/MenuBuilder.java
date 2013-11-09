@@ -10,16 +10,16 @@ public final class MenuBuilder implements Builder<JMenu> {
         menu = new JMenu(text);
     }
 
+    public static MenuBuilder menu(String text) {
+        return new MenuBuilder(text);
+    }
+
     public MenuBuilder add(JMenuItem item) {
         menu.add(item);
         return this;
     }
 
-    public static MenuItemBuilder item(String text) {
-        return new MenuItemBuilder(text);
-    }
-
-    @Override public JMenu build() {
+    @Override public JMenu ok() {
         return menu;
     }
 }

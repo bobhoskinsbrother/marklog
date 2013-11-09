@@ -8,44 +8,55 @@ import uk.co.itstherules.marklog.editor.actionbuilder.DirectoryChooserActionBuil
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
 import uk.co.itstherules.marklog.editor.filesystem.DirectoryChooserComponent;
 import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
+import uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder;
 
 import javax.swing.*;
-import java.awt.*;
 import java.io.File;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
+import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
+import static uk.co.itstherules.marklog.editor.viewbuilder.LabelBuilder.label;
+import static uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder.panel;
+import static uk.co.itstherules.marklog.editor.viewbuilder.TextFieldBuilder.textField;
 
 public final class NewProjectDialog extends JDialog {
 
     private final MarklogController controller;
-    private String projectName;
-    private String projectDirectory;
+    private ProjectConfigurationModel configuration;
 
     public NewProjectDialog(MarklogApp app, MarklogController controller) {
         super(app, true);
         this.controller = controller;
-        projectName = "";
-        projectDirectory = "";
+        configuration = new ProjectConfigurationModel();
         setLayout(new MigLayout("insets 10"));
-        JTextField projectNameTextField = new JTextField();
-        projectNameTextField.setPreferredSize(new Dimension(300, 30));
+        JTextField projectNameTextField = textField().ofSize(300, 30).withTextChangedAction(applyToProjectName()).ok();
+        JTextField ftpUrlTextField = textField().ofSize(300, 30).withTextChangedAction(applyToFtpUrl()).ok();
+        JTextField ftpUserNameTextField = textField().ofSize(300, 30).withTextChangedAction(applyToFtpUsername()).ok();
+        JTextField ftpPasswordTextField = textField().ofSize(300, 30).withTextChangedAction(applyToFtpPassword()).ok();
+
+
+
         DirectoryChooserComponent directoryChooser = new DirectoryChooserComponent();
-        JButton createButton = new JButton("Create");
-        createButton.setName("createButton");
+        JButton createButton = button("Create Project").withClickAction(verifyAndCreateProjectFile()).ok();
 
-        when(projectNameTextField).textHasChanged(applyToProjectName());
         when(directoryChooser).fileHasBeenChosen(applyToProjectDirectory());
-        when(createButton).hasBeenClicked(verifyAndCreateProjectFile());
-
-        setPreferredSize(new Dimension(475, 250));
         setLocationRelativeTo(app);
+
         add(new JLabel("<html><h2>New Project</h2>"), "wrap");
         add(new JSeparator(), "wrap");
-        add(new JLabel("Project Name:"));
-        add(projectNameTextField, "gapleft 10, wrap");
-        add(new JLabel("Path for project:"));
-        add(directoryChooser, "gapleft 10, wrap");
-        add(createButton);
+        final PanelBuilder b =
+            panel("b").ofSize(475, 250)
+                .withLayout("wrap 2",
+                            "[  left  ][ right ]",
+                            "[ center ]")
+                .add(label("Project Name").ok()).add(projectNameTextField)
+                .add(label("Path for Project").ok()).add(directoryChooser)
+                .add(label("FTP Url").ok()).add(ftpUrlTextField)
+                .add(label("FTP Username").ok()).add(ftpUserNameTextField)
+                .add(label("FTP Password").ok()).add(ftpPasswordTextField)
+                .add(createButton)
+                ;
+        add(b.ok());
         pack();
         setVisible(true);
     }
@@ -53,11 +64,10 @@ public final class NewProjectDialog extends JDialog {
     private ButtonActionBuilder.ApplyChanged verifyAndCreateProjectFile() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                if ("".equals(projectDirectory) || "".equals(projectName)) {
-                    String message = "Please fill in both the project name\nand select a directory";
-                    JOptionPane.showMessageDialog(null, message, "No name or directory supplied", JOptionPane.ERROR_MESSAGE);
+                if (!configuration.isValid()) {
+                    String message = "Please fill in all of the fields";
+                    JOptionPane.showMessageDialog(null, message, "Information Missing", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    ProjectConfigurationModel configuration = new ProjectConfigurationModel(new File(projectDirectory), projectName);
                     configuration.save();
                     controller.newMarklogProject(configuration);
                     dispose();
@@ -69,7 +79,7 @@ public final class NewProjectDialog extends JDialog {
     private DirectoryChooserActionBuilder.ApplyChanged applyToProjectDirectory() {
         return new DirectoryChooserActionBuilder.ApplyChanged() {
             @Override public void apply(File file) {
-                projectDirectory = file.getAbsolutePath();
+                configuration.setDirectory(file.getAbsoluteFile());
             }
         };
     }
@@ -77,7 +87,31 @@ public final class NewProjectDialog extends JDialog {
     private TextFieldActionBuilder.ApplyChanged applyToProjectName() {
         return new TextFieldActionBuilder.ApplyChanged() {
             @Override public void apply(String textFieldText) {
-                projectName = textFieldText;
+                configuration.setName(textFieldText);
+            }
+        };
+    }
+
+    private TextFieldActionBuilder.ApplyChanged applyToFtpUrl() {
+        return new TextFieldActionBuilder.ApplyChanged() {
+            @Override public void apply(String textFieldText) {
+                configuration.setFtpUrl(textFieldText);
+            }
+        };
+    }
+
+    private TextFieldActionBuilder.ApplyChanged applyToFtpUsername() {
+        return new TextFieldActionBuilder.ApplyChanged() {
+            @Override public void apply(String textFieldText) {
+                configuration.setFtpUsername(textFieldText);
+            }
+        };
+    }
+
+    private TextFieldActionBuilder.ApplyChanged applyToFtpPassword() {
+        return new TextFieldActionBuilder.ApplyChanged() {
+            @Override public void apply(String textFieldText) {
+                configuration.setFtpPassword(textFieldText);
             }
         };
     }

@@ -20,11 +20,7 @@ public final class MenuBarBuilder implements Builder<JMenuBar>{
         return new MenuBarBuilder(text);
     }
 
-    public static MenuBuilder menu(String text) {
-        return new MenuBuilder(text);
-    }
-
-    @Override public JMenuBar build() {
+    @Override public JMenuBar ok() {
         return bar;
     }
 }

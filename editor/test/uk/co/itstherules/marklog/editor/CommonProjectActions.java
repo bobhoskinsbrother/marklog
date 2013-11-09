@@ -29,7 +29,13 @@ public final class CommonProjectActions {
     }
 
     public static void makeProjectFile() throws IOException {
-        new ProjectConfigurationModel(PROJECT_DIRECTORY, PROJECT_NAME).save();
+        final ProjectConfigurationModel configuration = new ProjectConfigurationModel();
+        configuration.setDirectory(PROJECT_DIRECTORY);
+        configuration.setName(PROJECT_NAME);
+        configuration.setFtpUrl("");
+        configuration.setFtpUsername("");
+        configuration.setFtpPassword("");
+        configuration.save();
     }
 
     public static FrameFixture openProject() throws IOException {

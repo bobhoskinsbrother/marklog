@@ -18,10 +18,10 @@ public final class MarklogApp extends JFrame {
         setPreferredSize(new Dimension(width, height));
         setLocationRelativeTo(null);
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        marklogPanel = new MarklogPanelBuilder(this).build();
+        marklogPanel = new MarklogPanelBuilder(this).ok();
         add(marklogPanel, fillTheSpaceConstraints());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImageIcon image = IconLoader.fromResource("/marklog_logo.png");
+        ImageIcon image = IconLoader.icon("/marklog_logo.png");
         setIconImage(image.getImage());
         pack();
         setVisible(true);

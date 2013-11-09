@@ -3,30 +3,25 @@ package uk.co.itstherules.marklog.editor;
 import uk.co.itstherules.marklog.editor.viewbuilder.Builder;
 
 import javax.swing.*;
-import java.awt.*;
+
+import static uk.co.itstherules.marklog.editor.viewbuilder.LabelBuilder.label;
+import static uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder.panel;
 
 public final class BlankPanelBuilder implements Builder<JPanel> {
 
     private final JPanel panel;
 
     public BlankPanelBuilder() {
-        panel = new JPanel();
-        panel.setLayout(new GridBagLayout());
-        panel.setName("blankPanel");
-        JLabel label = new JLabel("Please select or create a new project");
-        label.setHorizontalAlignment( SwingConstants.CENTER );
-        panel.add(label, fillTheSpaceConstraints());
+        panel = panel("blankPanel").addFullyExpanded(
+                label("Please select a project or create one").withCenteredText().ok()
+        ).ok();
     }
 
-    private static GridBagConstraints fillTheSpaceConstraints() {
-        GridBagConstraints constraints = new GridBagConstraints();
-        constraints.fill = GridBagConstraints.BOTH;
-        constraints.weightx = 1.0;
-        constraints.weighty = 1.0;
-        return constraints;
+    public static BlankPanelBuilder blankPanel(){
+        return new BlankPanelBuilder();
     }
 
-    @Override public JPanel build() {
+    @Override public JPanel ok() {
         return panel;
     }
 }

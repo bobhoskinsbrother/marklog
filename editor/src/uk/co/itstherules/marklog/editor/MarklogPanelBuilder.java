@@ -10,9 +10,11 @@ import javax.swing.filechooser.FileFilter;
 import java.awt.*;
 import java.io.File;
 
-import static uk.co.itstherules.marklog.editor.viewbuilder.MenuBarBuilder.menu;
+import static uk.co.itstherules.marklog.editor.BlankPanelBuilder.blankPanel;
+import static uk.co.itstherules.marklog.editor.viewbuilder.MenuBuilder.menu;
+import static uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder.panel;
+import static uk.co.itstherules.marklog.editor.viewbuilder.MenuItemBuilder.item;
 import static uk.co.itstherules.marklog.editor.viewbuilder.MenuBarBuilder.menuBar;
-import static uk.co.itstherules.marklog.editor.viewbuilder.MenuBuilder.item;
 
 public final class MarklogPanelBuilder implements Builder<JPanel> {
 
@@ -22,21 +24,13 @@ public final class MarklogPanelBuilder implements Builder<JPanel> {
 
     public MarklogPanelBuilder(MarklogApp app) {
         this.app = app;
-        panel = makePanel();
+        panel = panel("marklogPanel").borderLayout().ok();
         addMenuTo(panel);
-        JPanel blankPanel = new BlankPanelBuilder().build();
-        controller = new MarklogController(build(), blankPanel, app);
+        controller = new MarklogController(panel, blankPanel().ok(), app);
         controller.addBlankPanel();
     }
 
-    private JPanel makePanel() {
-        JPanel panel = new JPanel();
-        panel.setName("marklogPanel");
-        panel.setLayout(new BorderLayout());
-        return panel;
-    }
-
-    @Override public JPanel build() {
+    @Override public JPanel ok() {
         return panel;
     }
 
@@ -47,11 +41,11 @@ public final class MarklogPanelBuilder implements Builder<JPanel> {
     private JMenuBar createMenu() {
         return menuBar("menuBar").add(
                     menu("File")
-                        .add(item("New Project...").withClickAction(openNewProjectDialog()).build())
-                        .add(item("Open Project...").withClickAction(openOpenProjectDialog()).build())
-                        .add(item("Close Project").withClickAction(closeCurrentProject()).build())
-                    .build())
-                .build();
+                        .add(item("New Project...").withClickAction(openNewProjectDialog()).ok())
+                        .add(item("Open Project...").withClickAction(openOpenProjectDialog()).ok())
+                        .add(item("Close Project").withClickAction(closeCurrentProject()).ok())
+                    .ok())
+                .ok();
     }
 
     private MenuItemActionBuilder.ApplyChanged closeCurrentProject() {

@@ -100,4 +100,7 @@ public class MarklogController {
         projectEditor.reloadTabIfOpen(file);
     }
 
+    public void openSyncDialog() {
+        throw new UnsupportedOperationException("TODO");
+    }
 }
