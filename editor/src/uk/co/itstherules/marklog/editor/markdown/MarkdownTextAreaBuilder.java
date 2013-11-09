@@ -1,5 +1,6 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
+import uk.co.itstherules.marklog.editor.viewbuilder.Builder;
 import uk.co.itstherules.marklog.string.MakeString;
 
 import javax.swing.*;
@@ -17,14 +18,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public final class MarkdownTextArea extends JTextArea {
+public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
 
     private final HtmlPanel htmlPanel;
     private final File file;
     private final UndoManager undoManager;
+    private final JTextArea textArea;
 
-    public MarkdownTextArea(final HtmlPanel htmlPanel, final File file) {
-        setName("markdownTextArea");
+    public MarkdownTextAreaBuilder(final HtmlPanel htmlPanel, final File file) {
+        textArea = new JTextArea();
+        textArea.setName("markdownTextArea");
         this.htmlPanel = htmlPanel;
         this.file = file;
         this.undoManager = new UndoManager();
@@ -35,15 +38,15 @@ public final class MarkdownTextArea extends JTextArea {
     }
 
     private void setupUndoRedo() {
-        Document doc = getDocument();
+        Document doc = textArea.getDocument();
         doc.addUndoableEditListener(new UndoableEditListener() {
             @Override
             public void undoableEditHappened(UndoableEditEvent e) {
                 undoManager.addEdit(e.getEdit());
             }
         });
-        InputMap inputMap = getInputMap(JComponent.WHEN_FOCUSED);
-        ActionMap actionMap = getActionMap();
+        InputMap inputMap = textArea.getInputMap(JComponent.WHEN_FOCUSED);
+        ActionMap actionMap = textArea.getActionMap();
         final int shortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, shortcutKeyMask), "Undo");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Y, shortcutKeyMask), "Redo");
@@ -70,7 +73,7 @@ public final class MarkdownTextArea extends JTextArea {
     }
 
     private void addTextFrom(File file) {
-        setText(getTextFrom(file));
+        textArea.setText(getTextFrom(file));
     }
 
     private String getTextFrom(File file) {
@@ -82,14 +85,14 @@ public final class MarkdownTextArea extends JTextArea {
     }
 
     private void setStyling() {
-        setUI(new NiceInlineColouringForMarkdownTextArea());
-        setFont(new Font("monospaced", Font.PLAIN, 14));
-        setBackground(Color.WHITE);
-        setMargin(new Insets(10, 10, 10, 10));
+        textArea.setUI(new NiceInlineColouringForMarkdownTextArea());
+        textArea.setFont(new Font("monospaced", Font.PLAIN, 14));
+        textArea.setBackground(Color.WHITE);
+        textArea.setMargin(new Insets(10, 10, 10, 10));
     }
 
     private void listenForChangesToDocument() {
-        getDocument().addDocumentListener(new DocumentListener() {
+        textArea.getDocument().addDocumentListener(new DocumentListener() {
             @Override public void insertUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
             @Override public void removeUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
             @Override public void changedUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
@@ -97,7 +100,7 @@ public final class MarkdownTextArea extends JTextArea {
     }
 
     private void updateHtmlPanelAndFile() {
-        final String markdownText = getText();
+        final String markdownText = textArea.getText();
         updateHtmlPanelWith(markdownText);
         updateFileWith(markdownText);
     }
@@ -115,5 +118,9 @@ public final class MarkdownTextArea extends JTextArea {
     private void updateHtmlPanelWith(String text) {
         final String html = MarkdownTransformer.toHtml(text);
         htmlPanel.setHtmlText(html);
+    }
+
+    @Override public JTextArea build() {
+        return textArea;
     }
 }

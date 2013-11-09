@@ -13,7 +13,7 @@ public final class MarkdownAndHtmlPanel extends JPanel {
         setLayout(new GridBagLayout());
         setPreferredSize(new Dimension(1024, 720));
         htmlPanel = new HtmlPanel();
-        markdownArea = new MarkdownTextArea(htmlPanel, file);
+        markdownArea = new MarkdownTextAreaBuilder(htmlPanel, file).build();
         splitPane(htmlScroller(), markdownScroller());
     }
 

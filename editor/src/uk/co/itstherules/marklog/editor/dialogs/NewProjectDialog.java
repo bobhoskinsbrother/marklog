@@ -2,7 +2,7 @@ package uk.co.itstherules.marklog.editor.dialogs;
 
 import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.MarklogApp;
-import uk.co.itstherules.marklog.editor.MarklogPanel;
+import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.DirectoryChooserActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
@@ -17,12 +17,12 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public final class NewProjectDialog extends JDialog {
 
-    private final MarklogPanel.MarklogController controller;
+    private final MarklogController controller;
     private String projectName;
     private String projectDirectory;
 
-    public NewProjectDialog(MarklogApp marklogApp, MarklogPanel.MarklogController controller) {
-        super(marklogApp, true);
+    public NewProjectDialog(MarklogApp app, MarklogController controller) {
+        super(app, true);
         this.controller = controller;
         projectName = "";
         projectDirectory = "";
@@ -38,7 +38,7 @@ public final class NewProjectDialog extends JDialog {
         when(createButton).hasBeenClicked(verifyAndCreateProjectFile());
 
         setPreferredSize(new Dimension(475, 250));
-        setLocationRelativeTo(marklogApp);
+        setLocationRelativeTo(app);
         add(new JLabel("<html><h2>New Project</h2>"), "wrap");
         add(new JSeparator(), "wrap");
         add(new JLabel("Project Name:"));

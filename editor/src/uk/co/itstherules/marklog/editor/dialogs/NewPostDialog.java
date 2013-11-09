@@ -2,7 +2,7 @@ package uk.co.itstherules.marklog.editor.dialogs;
 
 import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.MarklogApp;
-import uk.co.itstherules.marklog.editor.MarklogPanel;
+import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
 
@@ -12,13 +12,13 @@ import java.io.File;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
-public final class AddNewPostDialog extends JDialog {
+public final class NewPostDialog extends JDialog {
 
     private final File file;
-    private final MarklogPanel.MarklogController controller;
+    private final MarklogController controller;
     private String postName = "";
 
-    public AddNewPostDialog(MarklogApp app, MarklogPanel.MarklogController controller, File file) {
+    public NewPostDialog(MarklogApp app, MarklogController controller, File file) {
         super(app, true);
         setName("newPost");
         this.file = file;

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public final class MarklogApp extends JFrame {
 
-    private MarklogPanel marklogPanel;
+    private JPanel marklogPanel;
 
     public MarklogApp() {
         super("Marklog");
@@ -18,7 +18,7 @@ public final class MarklogApp extends JFrame {
         setPreferredSize(new Dimension(width, height));
         setLocationRelativeTo(null);
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        marklogPanel = new MarklogPanel(this);
+        marklogPanel = new MarklogPanelBuilder(this).build();
         add(marklogPanel, fillTheSpaceConstraints());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon image = IconLoader.fromResource("/marklog_logo.png");

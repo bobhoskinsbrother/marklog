@@ -11,13 +11,13 @@ import java.io.File;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
-public final class AddNewDirectoryDialog extends JDialog {
+public final class NewDirectoryDialog extends JDialog {
 
     private final MarklogApp app;
     private final File directory;
     private String directoryName = "";
 
-    public AddNewDirectoryDialog(MarklogApp app, File directory) {
+    public NewDirectoryDialog(MarklogApp app, File directory) {
         super(app, true);
         setName("newDirectory");
         this.app = app;
@@ -52,7 +52,7 @@ public final class AddNewDirectoryDialog extends JDialog {
                     String message = "Please fill in a legal directory name\nNo weird characters please";
                     JOptionPane.showMessageDialog(null, message, "No directory name supplied", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    File directory = new File(AddNewDirectoryDialog.this.directory, directoryName);
+                    File directory = new File(NewDirectoryDialog.this.directory, directoryName);
                     directory.mkdirs();
                     dispose();
                 }

@@ -17,38 +17,32 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
         setPreferredSize(new Dimension(1024, 720));
     }
 
-
     public void removeMarkdownTabFor(File file) {
-        if(tabExists(file)) {
-            final int index = indexOfTab(identifier(file));
+        if (tabExists(file)) {
+            final int index = indexOfTab(file);
             removeTabAt(index);
         }
     }
 
-    public void addMarkdownEditorFor(File file){
-        if(tabExists(file)) {
+    public void addMarkdownEditorFor(File file) {
+        if (tabExists(file)) {
             focusOn(file);
-            final int index = indexOfTab(identifier(file));
+            final int index = indexOfTab(file);
             setSelectedIndex(index);
         } else {
             final String path = identifier(file);
             addTab(path, new MarkdownAndHtmlPanel(file));
-
-            JPanel panelForTab = new JPanel(new MigLayout("","[center][right]","[center][center]"));
-
+            JPanel panelForTab = new JPanel(new MigLayout("", "[center][right]", "[center][center]"));
             panelForTab.setOpaque(false);
             JLabel tabTitleLabel = new JLabel(path);
             JButton closeButton = new JButton("x");
             closeButton.setSize(22, 22);
             closeButton.setPreferredSize(new Dimension(22, 22));
-
             panelForTab.add(tabTitleLabel);
             panelForTab.add(closeButton, "gapleft 10");
-
             int index = indexOfTab(path);
             setTabComponentAt(index, panelForTab);
             setSelectedIndex(index);
-
             closeButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     Component selected = getSelectedComponent();
@@ -61,21 +55,25 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
     }
 
     private String identifier(File file) {
-        return file.getAbsolutePath().substring(projectRoot.length()+1);
+        return file.getAbsolutePath().substring(projectRoot.length() + 1);
     }
 
     private boolean tabExists(File file) {
-        return indexOfTab(identifier(file)) > -1;
+        return indexOfTab(file) > -1;
     }
 
+    private int indexOfTab(File file) {return indexOfTab(identifier(file));}
+
     public void focusOn(File file) {
-        final int index = indexOfTab(identifier(file));
+        final int index = indexOfTab(file);
         getTabComponentAt(index).transferFocus();
     }
 
     public void reloadTabIfOpen(File file) {
-        if(tabExists(file) && file.exists()) {
-            //TODO implement me
+        if (tabExists(file) && file.exists()) {
+            final Component tab = getTabFor(file);
         }
     }
+
+    private Component getTabFor(File file) {return getTabComponentAt(indexOfTab(file));}
 }

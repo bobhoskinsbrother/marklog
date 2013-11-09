@@ -2,7 +2,7 @@ package uk.co.itstherules.marklog.editor.dialogs;
 
 import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.MarklogApp;
-import uk.co.itstherules.marklog.editor.MarklogPanel;
+import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 
 import javax.swing.*;
@@ -15,10 +15,10 @@ public final class DeleteDirectoryDialog extends JDialog {
 
     private final MarklogApp app;
     private final File directory;
-    private final MarklogPanel.MarklogController controller;
+    private final MarklogController controller;
     private final JRadioButton moveUp;
 
-    public DeleteDirectoryDialog(MarklogApp app, MarklogPanel.MarklogController controller, File directory) {
+    public DeleteDirectoryDialog(MarklogApp app, MarklogController controller, File directory) {
         super(app, true);
         this.app = app;
         this.controller = controller;

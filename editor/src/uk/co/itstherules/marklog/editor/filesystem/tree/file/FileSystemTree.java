@@ -2,7 +2,7 @@ package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 
 import uk.co.itstherules.marklog.editor.IconLoader;
 import uk.co.itstherules.marklog.editor.MarklogApp;
-import uk.co.itstherules.marklog.editor.MarklogPanel;
+import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.DefaultFileModel;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
@@ -21,12 +21,12 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 public class FileSystemTree extends JPanel {
 
     private final MarklogApp app;
-    private final MarklogPanel.MarklogController controller;
+    private final MarklogController controller;
     private final FileSystemModel fileSystemModel;
     private final File root;
     private JTree tree;
 
-    public FileSystemTree(MarklogApp app, MarklogPanel.MarklogController controller, final File baseDirectory) {
+    public FileSystemTree(MarklogApp app, MarklogController controller, final File baseDirectory) {
         root = baseDirectory;
         setName("fileSystemTree");
         this.app = app;
