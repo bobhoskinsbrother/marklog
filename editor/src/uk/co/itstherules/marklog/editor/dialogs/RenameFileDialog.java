@@ -22,6 +22,7 @@ public final class RenameFileDialog extends JDialog {
 
     public RenameFileDialog(MarklogApp app, MarklogController controller, File oldFile) {
         super(app, true);
+        setName("renameFileDialog");
         setPreferredSize(new Dimension(475, 250));
         this.controller = controller;
         this.oldFile = oldFile;
@@ -33,7 +34,7 @@ public final class RenameFileDialog extends JDialog {
         add(new JLabel("<html><h2>Rename File</h2>"), "wrap");
         add(new JSeparator(), "wrap");
         add(new JLabel("File Name: " + oldFile.getName()), "wrap");
-        add(textField().ofSize(340, 30).withValue(oldFileName).withTextChangedAction(applyToFileName()).ok(), "wrap");
+        add(textField(oldFileName).name("newFileName").ofSize(340, 30).withTextChangedAction(applyToFileName()).ok(), "wrap");
         add(renameButton);
         pack();
         setLocationRelativeTo(app);
