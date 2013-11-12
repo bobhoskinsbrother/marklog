@@ -1,0 +1,7 @@
+#This project "Demo Marklog Blog" was created on 12 November 2013
+#Tue Nov 12 13:44:09 GMT 2013
+project.name=Demo Marklog Blog
+project.ftp.host=itstherules.co.uk
+project.ftp.username=username
+project.directory=/home/ben/Dropbox/Code/java/marklog/demo_marklog_blog
+project.ftp.password=password

@@ -19,20 +19,20 @@ import static uk.co.itstherules.marklog.editor.viewbuilder.TextFieldBuilder.text
 
 public class FileTreeCellEditor extends AbstractCellEditor implements TreeCellEditor {
 
-    private JPanel panel;
-    private JTree tree;
     private MarklogController controller;
     private TreeCellRenderer renderer;
     private String value;
-    private JTextField textField;
     private FileModel fileModel;
 
-    public FileTreeCellEditor(JTree tree, MarklogController controller, TreeCellRenderer renderer) {
+
+    public FileTreeCellEditor(MarklogController controller, TreeCellRenderer renderer) {
         super();
-        this.tree = tree;
         this.controller = controller;
         this.renderer = renderer;
-        textField = textField().name("textField").ok();
+    }
+
+    private JTextField makeTextField() {
+        final JTextField textField = textField().name("textField").ok();
         textField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 value = textField.getText();
@@ -42,7 +42,7 @@ public class FileTreeCellEditor extends AbstractCellEditor implements TreeCellEd
                 stopEditing(value);
             }
         });
-        panel = panel("node").add(textField).ok();
+        return textField;
     }
 
     protected void stopEditing(String value) {
@@ -59,11 +59,11 @@ public class FileTreeCellEditor extends AbstractCellEditor implements TreeCellEd
         if(fileModel.isRoot()) {
             return renderer.getTreeCellRendererComponent(tree, value, isSelected, expanded, leaf, row, true);
         }
-        this.tree = tree;
+        JTextField textField = makeTextField();
         textField.setText(fileModel.getFile().getName());
         textField.setSelectionStart(0);
         textField.setSelectionEnd(textField.getText().length());
-        return panel;
+        return textField;
     }
 
     @Override public boolean isCellEditable(EventObject e) {
