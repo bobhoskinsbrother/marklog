@@ -4,7 +4,7 @@ import java.io.*;
 
 public final class MakeString {
 
-    public static final String from(File file) throws IOException {
+    public static String from(File file) throws IOException {
         final FileReader reader = new FileReader(file);
         StringWriter writer = new StringWriter();
         copy(reader,writer);

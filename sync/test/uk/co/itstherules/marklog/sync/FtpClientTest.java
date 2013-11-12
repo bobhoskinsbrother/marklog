@@ -45,7 +45,7 @@ public final class FtpClientTest {
         int port = fakeFtpServer.getServerControlPort();
         FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        final FtpCode outcome = unit.getFile("file.txt", output);
+        final FtpCode outcome = unit.getFile(output, "file.txt");
         String localString = new String(output.toByteArray());
         assertThat(localString, is("abcdef 1234567890"));
         assertThat(outcome, is(CLOSING_DATA_CONNECTION));
@@ -55,7 +55,7 @@ public final class FtpClientTest {
         int port = fakeFtpServer.getServerControlPort();
         FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        final FtpCode outcome = unit.getFile("file_that_doesnt_exist.txt", output);
+        final FtpCode outcome = unit.getFile(output, "file_that_doesnt_exist.txt");
         assertThat(output.toByteArray().length, is(0));
         assertThat(outcome, is(FILE_UNAVAILABLE));
     }
@@ -64,7 +64,7 @@ public final class FtpClientTest {
         int port = fakeFtpServer.getServerControlPort();
         FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
         ByteArrayInputStream input = new ByteArrayInputStream("abcdef 1234567890".getBytes(Charset.forName("utf8")));
-        final FtpCode outcome = unit.putFile("remote_file.txt", input);
+        final FtpCode outcome = unit.putFile(input, "remote_file.txt");
         FileSystem fileSystem = fakeFtpServer.getFileSystem();
         assertThat(fileSystem.isFile("/tmp/data/remote_file.txt"), is(true));
         assertThat(outcome, is(CLOSING_DATA_CONNECTION));
@@ -84,13 +84,13 @@ public final class FtpClientTest {
         FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
         final String overriddenText = "fred flintstone were ere";
         ByteArrayInputStream input = new ByteArrayInputStream(overriddenText.getBytes(Charset.forName("utf8")));
-        FtpCode outcome = unit.putFile("file.txt", input);
+        FtpCode outcome = unit.putFile(input, "file.txt");
         assertThat(outcome, is(CLOSING_DATA_CONNECTION));
 
         FileSystem fileSystem = fakeFtpServer.getFileSystem();
         assertThat(fileSystem.isFile("/tmp/data/file.txt"), is(true));
         ByteArrayOutputStream output = new ByteArrayOutputStream();
-        outcome = unit.getFile("file.txt", output);
+        outcome = unit.getFile(output, "file.txt");
         String reply = new String(output.toByteArray());
 
         assertThat(reply, is(overriddenText));

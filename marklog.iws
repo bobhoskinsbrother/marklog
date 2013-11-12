@@ -2,9 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b32c4b4d-2e32-4d6c-a299-8235b0192bde" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingADirectoryFunctionalTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingAFileFunctionalTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/RenameFileDialog.java" afterPath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/RenameFileDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/AppendTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/CombineAFewStringManipulatorsTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/LowerCaseTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/VariableNameTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/common/src_resource/root_folder.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/FileifyTitleTest.java" afterPath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/FileifyTitleTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java" afterPath="$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sync/test/uk/co/itstherules/marklog/sync/FtpClientTest.java" afterPath="$PROJECT_DIR$/sync/test/uk/co/itstherules/marklog/sync/FtpClientTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/HyphenateTest.java" afterPath="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/HyphenateTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/MakeString.java" afterPath="$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/MakeString.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marklog.iws" afterPath="$PROJECT_DIR$/marklog.iws" />
     </list>
     <ignored path="marklog.iws" />
@@ -21,7 +28,7 @@
     <file path="/FileSystemModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383520377100" ignored="false" />
     <file path="/MarklogPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383949862705" ignored="false" />
     <file path="/DefaultTreeModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383408895690" ignored="false" />
-    <file path="/fragment.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384284772746" ignored="false" />
+    <file path="/fragment.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288570601" ignored="false" />
     <file path="/DefaultMutableTreeNode.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383407934449" ignored="false" />
     <file path="/DefaultFileModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384204493504" ignored="false" />
     <file path="/RightClickTreeMenu.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384199640605" ignored="false" />
@@ -56,8 +63,8 @@
     <file path="/BlankPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383949381155" ignored="false" />
     <file path="/MarkdownAndHtmlPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383950773953" ignored="false" />
     <file path="/Hyphenate.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383688123525" ignored="false" />
-    <file path="/HyphenateTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383687987947" ignored="false" />
-    <file path="/FileifyTitleTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383688369934" ignored="false" />
+    <file path="/HyphenateTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288234164" ignored="false" />
+    <file path="/FileifyTitleTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288223342" ignored="false" />
     <file path="/FileifyTitle.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383688739455" ignored="false" />
     <file path="$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/Lower.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383688682214" ignored="false" />
     <file path="/LowerCase.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383688708941" ignored="false" />
@@ -83,7 +90,7 @@
     <file path="/LabelAndTextFieldBuilder.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384031650894" ignored="false" />
     <file path="/ProjectConfigurationModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384088608736" ignored="false" />
     <file path="/ProjectDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384088774194" ignored="false" />
-    <file path="/FtpClient.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384087754496" ignored="false" />
+    <file path="/FtpClient.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384287444268" ignored="false" />
     <file path="/SyncDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384091129857" ignored="false" />
     <file path="/posts.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384102101924" ignored="false" />
     <file path="/PostInformationModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384111545779" ignored="false" />
@@ -105,6 +112,10 @@
     <file path="/FileTreeCellEditor.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384216697011" ignored="false" />
     <file path="/RenamingADirectoryFunctionalTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384284615032" ignored="false" />
     <file path="/RenamingAFileFunctionalTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384284791106" ignored="false" />
+    <file path="/VariableNameTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288213804" ignored="false" />
+    <file path="/CamelCaseTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288853405" ignored="false" />
+    <file path="/LowerCaseTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288201536" ignored="false" />
+    <file path="/AppendTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288835673" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,21 +184,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RenamingAFileFunctionalTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingAFileFunctionalTest.java">
+      <file leaf-file-name="MakeString.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/MakeString.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="0" selection-start="2285" selection-end="2285" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FtpClient.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="19" selection-start="236" selection-end="236" vertical-scroll-proportion="0.07530454">
+            <state line="19" column="5" selection-start="577" selection-end="577" vertical-scroll-proportion="0.5401338">
               <folding />
             </state>
           </provider>
@@ -211,15 +211,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/model/PostHeader.java" />
-        <option value="$PROJECT_DIR$/templates/src_resource/templates/simple/post.ftl" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogController.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/DeleteDirectoryDialog.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/Validator.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/NewDirectoryDialog.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/model/DefaultFileModel.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownTextAreaBuilder.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/RightClickTreeMenu.java" />
         <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/actionbuilder/TreeActionBuilder.java" />
         <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/FileSystemTreeCellRenderer.java" />
         <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/FileSystemTree.java" />
@@ -227,6 +218,15 @@
         <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/RenameFileDialog.java" />
         <option value="$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingADirectoryFunctionalTest.java" />
         <option value="$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingAFileFunctionalTest.java" />
+        <option value="$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/LowerCaseTest.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/CamelCaseTest.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/VariableNameTest.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/FileifyTitleTest.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/HyphenateTest.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/AppendTest.java" />
+        <option value="$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/CombineAFewStringManipulatorsTest.java" />
+        <option value="$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/MakeString.java" />
       </list>
     </option>
   </component>
@@ -289,6 +289,106 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src_resource" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="simple" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="co" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itstherules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templating" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -372,6 +472,82 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="co" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itstherules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="string" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="co" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itstherules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="string" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane">
@@ -412,82 +588,20 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.RenamingAFileFunctionalTest">
-    <configuration default="false" name="MarklogApp" type="Application" factoryName="Application" temporary="true">
+  <component name="RunManager" selected="JUnit.uk.co.itstherules.marklog.string in common">
+    <configuration default="false" name="CombineAFewStringManipulatorsTest.escapingSlashesAndWhatnot" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="uk.co.itstherules.marklog.editor.*" />
+          <option name="PATTERN" value="uk.co.itstherules.marklog.string.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.editor.MarklogApp" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="common" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="editor" />
-      <envs />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RenamingADirectoryFunctionalTest.canRenameDirectoryViaRightClick" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="uk.co.itstherules.marklog.editor.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="editor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.editor" />
-      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.editor.RenamingADirectoryFunctionalTest" />
-      <option name="METHOD_NAME" value="canRenameDirectoryViaRightClick" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="RenamingADirectoryFunctionalTest.canRenameDirectoryViaDoubleTapF2" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="uk.co.itstherules.marklog.editor.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="editor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.editor" />
-      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.editor.RenamingADirectoryFunctionalTest" />
-      <option name="METHOD_NAME" value="canRenameDirectoryViaDoubleTapF2" />
+      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.string" />
+      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.string.CombineAFewStringManipulatorsTest" />
+      <option name="METHOD_NAME" value="escapingSlashesAndWhatnot" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -503,20 +617,48 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="RenamingAFileFunctionalTest" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="LowerCaseTest.escapingSlashesAndWhatnot" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="uk.co.itstherules.marklog.editor.*" />
+          <option name="PATTERN" value="uk.co.itstherules.marklog.string.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="editor" />
+      <module name="common" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.editor" />
-      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.editor.RenamingAFileFunctionalTest" />
+      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.string" />
+      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.string.LowerCaseTest" />
+      <option name="METHOD_NAME" value="escapingSlashesAndWhatnot" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="uk.co.itstherules.marklog.string in common" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="uk.co.itstherules.marklog.string.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="common" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.string" />
+      <option name="MAIN_CLASS_NAME" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="package" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -531,19 +673,47 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="false" name="RenamingAFileFunctionalTest.canRenameFileViaRightClick" type="JUnit" factoryName="JUnit" temporary="true">
+    <configuration default="false" name="AppendTest.camelCase" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="uk.co.itstherules.marklog.editor.*" />
+          <option name="PATTERN" value="uk.co.itstherules.marklog.string.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <module name="editor" />
+      <module name="common" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.editor" />
-      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.editor.RenamingAFileFunctionalTest" />
-      <option name="METHOD_NAME" value="canRenameFileViaRightClick" />
+      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.string" />
+      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.string.AppendTest" />
+      <option name="METHOD_NAME" value="camelCase" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="CombineAFewStringManipulatorsTest.chainTransform" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="uk.co.itstherules.marklog.string.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="common" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="uk.co.itstherules.marklog.string" />
+      <option name="MAIN_CLASS_NAME" value="uk.co.itstherules.marklog.string.CombineAFewStringManipulatorsTest" />
+      <option name="METHOD_NAME" value="chainTransform" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -623,19 +793,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Application.MarklogApp" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.RenamingADirectoryFunctionalTest.canRenameDirectoryViaRightClick" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.RenamingADirectoryFunctionalTest.canRenameDirectoryViaDoubleTapF2" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.RenamingAFileFunctionalTest" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.RenamingAFileFunctionalTest.canRenameFileViaRightClick" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.CombineAFewStringManipulatorsTest.escapingSlashesAndWhatnot" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.LowerCaseTest.escapingSlashesAndWhatnot" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.uk.co.itstherules.marklog.string in common" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.AppendTest.camelCase" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.CombineAFewStringManipulatorsTest.chainTransform" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.RenamingAFileFunctionalTest" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.RenamingAFileFunctionalTest.canRenameFileViaRightClick" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.RenamingADirectoryFunctionalTest.canRenameDirectoryViaDoubleTapF2" />
-        <item index="3" class="java.lang.String" itemvalue="Application.MarklogApp" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.RenamingADirectoryFunctionalTest.canRenameDirectoryViaRightClick" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.uk.co.itstherules.marklog.string in common" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.CombineAFewStringManipulatorsTest.chainTransform" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.AppendTest.camelCase" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LowerCaseTest.escapingSlashesAndWhatnot" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.CombineAFewStringManipulatorsTest.escapingSlashesAndWhatnot" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -654,10 +824,11 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="56" y="-4" width="1865" height="1085" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37875536" sideWeight="0.4997242" order="3" side_tool="false" content_ui="tabs" />
@@ -669,14 +840,13 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22173193" sideWeight="0.6727468" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32725322" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22173193" sideWeight="0.6727468" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32725322" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498621" sideWeight="0.6727468" order="5" side_tool="true" content_ui="tabs" />
@@ -749,87 +919,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$PROJECT_DIR$/libs/fest-swing-1.2.jar!/org/fest/swing/driver/BasicJTreeCellReader.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="33" selection-start="164" selection-end="184" vertical-scroll-proportion="0.14834206">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/FileSystemTreeCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="6" selection-start="374" selection-end="374" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/DeletingADirectoryAndPromoteTheChildrenFunctionalTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="0" selection-start="1876" selection-end="2047" vertical-scroll-proportion="0.67121726">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/viewbuilder/MenuItemBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="24" selection-start="677" selection-end="677" vertical-scroll-proportion="0.34812286">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/EditingTextFunctionalTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="38" selection-start="4635" selection-end="4635" vertical-scroll-proportion="1.010453">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/RightClickTreeMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="32" selection-start="2488" selection-end="2488" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/RenameFileDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="33" selection-start="1546" selection-end="1546" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/model/FileSystemModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="1978" selection-end="1978" vertical-scroll-proportion="-5.83871">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/FileSystemTree.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="962" selection-end="962" vertical-scroll-proportion="-0.05923345">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/model/FileWorker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="0" selection-start="2997" selection-end="2997" vertical-scroll-proportion="0.73344946">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/model/FileTreeCellEditor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="90" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.9216028">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/viewbuilder/TextFieldBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="29" selection-start="534" selection-end="534" vertical-scroll-proportion="0.38501742">
@@ -851,18 +940,97 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingAFileFunctionalTest.java">
+    <entry file="file://$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2285" selection-end="2285" vertical-scroll-proportion="0.0">
+        <state line="39" column="14" selection-start="1139" selection-end="1139" vertical-scroll-proportion="0.45404208">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/LowerCaseFirstLetter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="19" selection-start="62" selection-end="62" vertical-scroll-proportion="0.05923345">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/LowerCaseTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="31" selection-start="222" selection-end="222" vertical-scroll-proportion="0.17770036">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/VariableNameTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="34" selection-start="228" selection-end="228" vertical-scroll-proportion="0.17056856">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/HyphenateTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="31" selection-start="222" selection-end="222" vertical-scroll-proportion="0.17056856">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/FileifyTitleTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="35" selection-start="511" selection-end="535" vertical-scroll-proportion="0.28428093">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/CombineAFewStringManipulatorsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="36" selection-start="247" selection-end="247" vertical-scroll-proportion="0.25585285">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java">
+    <entry file="file://$PROJECT_DIR$/common/test/uk/co/itstherules/marklog/string/AppendTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="19" selection-start="236" selection-end="236" vertical-scroll-proportion="0.07530454">
+        <state line="9" column="28" selection-start="216" selection-end="216" vertical-scroll-proportion="0.17056856">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/HtmlPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="46" selection-start="754" selection-end="754" vertical-scroll-proportion="0.5401338">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/src/uk/co/itstherules/marklog/templating/TemplateProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="22" selection-start="739" selection-end="739" vertical-scroll-proportion="0.7959866">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingAFileFunctionalTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="0" selection-start="2285" selection-end="2285" vertical-scroll-proportion="0.8812709">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/LowerCase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="19" selection-start="62" selection-end="62" vertical-scroll-proportion="0.05685619">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/string/MakeString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="5" selection-start="577" selection-end="577" vertical-scroll-proportion="0.5401338">
           <folding />
         </state>
       </provider>

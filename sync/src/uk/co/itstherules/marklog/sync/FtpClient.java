@@ -28,7 +28,7 @@ public final class FtpClient {
         try {
             super.finalize();
             close();
-        } catch (Throwable e) {
+        } catch (Throwable ignored) {
         }
     }
 
@@ -37,17 +37,17 @@ public final class FtpClient {
             try {
                 client.logout();
                 client.disconnect();
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
     }
 
-    public FtpCode getFile(String remoteFileName, OutputStream localOutput) throws IOException {
+    public FtpCode getFile(OutputStream localOutput, String remoteFileName) throws IOException {
         client.retrieveFile(remoteFileName, localOutput);
         return getFtpCode();
     }
 
-    public FtpCode putFile(String remoteFileName, InputStream localInput) throws IOException {
+    public FtpCode putFile(InputStream localInput, String remoteFileName) throws IOException {
         client.storeFile(remoteFileName, localInput);
         return getFtpCode();
     }
