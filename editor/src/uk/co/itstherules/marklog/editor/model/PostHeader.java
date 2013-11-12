@@ -7,6 +7,7 @@ import java.util.*;
 
 public final class PostHeader {
 
+    public static final String HEADER_DELIMITER = "#######";
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
     private Map<String, String> map;
 
@@ -25,7 +26,7 @@ public final class PostHeader {
 
     @Override public String toString() {
         final StringWriter writer = new StringWriter();
-        writer.write("##################################################################################");
+        writer.write(HEADER_DELIMITER + HEADER_DELIMITER + HEADER_DELIMITER);
         writer.write(LINE_SEPARATOR);
         for (String key : map.keySet()) {
             writer.write(key);
@@ -33,7 +34,7 @@ public final class PostHeader {
             writer.write(map.get(key));
             writer.write(LINE_SEPARATOR);
         }
-        writer.write("##################################################################################");
+        writer.write(HEADER_DELIMITER + HEADER_DELIMITER + HEADER_DELIMITER);
         writer.write(LINE_SEPARATOR);
         return writer.toString();
     }
@@ -105,11 +106,11 @@ public final class PostHeader {
         Map<String, String> properties = new LinkedHashMap<>();
         final String[] lines = header.split(LINE_SEPARATOR);
         for (String line : lines) {
-            if (!line.startsWith("#")) {
+            if (!line.startsWith(HEADER_DELIMITER)) {
                 final int index = line.indexOf(":");
-                if(index > -1) {
+                if (index > -1) {
                     String key = line.substring(0, index).trim();
-                    String value = line.substring(index+1).trim();
+                    String value = line.substring(index + 1).trim();
                     properties.put(key, value);
                 }
             }

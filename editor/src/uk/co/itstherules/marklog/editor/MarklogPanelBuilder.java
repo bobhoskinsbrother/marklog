@@ -2,7 +2,7 @@ package uk.co.itstherules.marklog.editor;
 
 import uk.co.itstherules.marklog.editor.actionbuilder.MenuItemActionBuilder;
 import uk.co.itstherules.marklog.editor.dialogs.NewProjectDialog;
-import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
+import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 import uk.co.itstherules.marklog.editor.viewbuilder.Builder;
 
 import javax.swing.*;
@@ -78,7 +78,7 @@ public final class MarklogPanelBuilder implements Builder<JPanel> {
                 int returnVal = fileChooser.showOpenDialog(app);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-                    final ProjectConfigurationModel configuration = new ProjectConfigurationModel(file);
+                    final ProjectConfiguration configuration = new ProjectConfiguration(file);
                     controller.newMarklogProject(configuration);
                 }
             }

@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.internal.matchers.StringContains.containsString;
 
-public class ProjectConfigurationModelTest {
+public class ProjectConfigurationTest {
 
     private final File tempDir = new File(System.getProperty("java.io.tmpdir")+"/tmp_test_dir");
     private final File tempProjectFile = new File(tempDir, "i'm-a-temp-project.marklog");
@@ -24,7 +24,7 @@ public class ProjectConfigurationModelTest {
 
     @Test
     public void canSaveProject() throws IOException {
-        final ProjectConfigurationModel configuration = new ProjectConfigurationModel();
+        final ProjectConfiguration configuration = new ProjectConfiguration();
         configuration.setDirectory(tempDir);
         configuration.setName("I'm A Temp Project");
         configuration.setFtpHost("hello.mom");

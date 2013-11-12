@@ -3,7 +3,7 @@ package uk.co.itstherules.marklog.editor;
 import org.apache.commons.io.FileUtils;
 import uk.co.itstherules.marklog.editor.dialogs.ProjectDialog;
 import uk.co.itstherules.marklog.editor.model.Post;
-import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
+import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +33,7 @@ public class MarklogController {
         }
     }
 
-    public void newMarklogProject(ProjectConfigurationModel configuration) {
+    public void newMarklogProject(ProjectConfiguration configuration) {
         removeMarklogProject();
         removeBlankPanel();
         projectEditor = new MarklogProjectEditor(app, configuration, this);
@@ -113,6 +113,6 @@ public class MarklogController {
     }
 
     public void editProject(File file) {
-        new ProjectDialog(app, this, new ProjectConfigurationModel(file));
+        new ProjectDialog(app, this, new ProjectConfiguration(file));
     }
 }

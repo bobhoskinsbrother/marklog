@@ -1,5 +1,7 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
+import uk.co.itstherules.marklog.editor.markdown.html.HtmlPanel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -9,10 +11,10 @@ public final class MarkdownAndHtmlPanel extends JPanel {
     private final HtmlPanel htmlPanel;
     private final JTextArea markdownArea;
 
-    public MarkdownAndHtmlPanel(File file) {
+    public MarkdownAndHtmlPanel(File root, File file) {
         setLayout(new GridBagLayout());
         setPreferredSize(new Dimension(1024, 720));
-        htmlPanel = new HtmlPanel();
+        htmlPanel = new HtmlPanel(root);
         markdownArea = new MarkdownTextAreaBuilder(htmlPanel, file).ok();
         splitPane(htmlScroller(), markdownScroller());
     }

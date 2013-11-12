@@ -6,7 +6,7 @@ import java.io.*;
 import java.text.DateFormat;
 import java.util.*;
 
-public final class ProjectConfigurationModel {
+public final class ProjectConfiguration {
 
     private static final String PROJECT_NAME = "project.name";
     private static final String PROJECT_DIRECTORY = "project.directory";
@@ -20,7 +20,7 @@ public final class ProjectConfigurationModel {
     private String ftpUsername;
     private String ftpPassword;
 
-    public ProjectConfigurationModel() {
+    public ProjectConfiguration() {
         directory = new File(System.getProperty("user.dir"));
         setName("New Blog");
         ftpHost = "";
@@ -28,7 +28,7 @@ public final class ProjectConfigurationModel {
         ftpPassword = "";
     }
 
-    public ProjectConfigurationModel(File propertyFile) {
+    public ProjectConfiguration(File propertyFile) {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(propertyFile));

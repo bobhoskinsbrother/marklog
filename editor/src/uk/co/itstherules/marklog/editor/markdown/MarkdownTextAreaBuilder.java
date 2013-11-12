@@ -1,5 +1,6 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
+import uk.co.itstherules.marklog.editor.markdown.html.HtmlPanel;
 import uk.co.itstherules.marklog.editor.model.Post;
 import uk.co.itstherules.marklog.editor.viewbuilder.Builder;
 

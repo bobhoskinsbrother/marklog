@@ -8,7 +8,7 @@ import org.fest.swing.fixture.FrameFixture;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.internal.matchers.TypeSafeMatcher;
-import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
+import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +29,7 @@ public final class CommonProjectActions {
     }
 
     public static void makeProjectFile() throws IOException {
-        final ProjectConfigurationModel configuration = new ProjectConfigurationModel();
+        final ProjectConfiguration configuration = new ProjectConfiguration();
         configuration.setDirectory(PROJECT_DIRECTORY);
         configuration.setName(PROJECT_NAME);
         configuration.setFtpHost("");

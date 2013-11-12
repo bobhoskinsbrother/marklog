@@ -7,9 +7,10 @@ import java.io.*;
 import java.util.Calendar;
 import java.util.Collections;
 
+import static uk.co.itstherules.marklog.editor.model.PostHeader.HEADER_DELIMITER;
+
 public final class Post {
 
-    public static final String HEADER_DELIMITER = "#######";
     private final File directory;
     private final String fileName;
     private PostHeader postHeader;

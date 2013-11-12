@@ -7,7 +7,7 @@ import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.DirectoryChooserActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
 import uk.co.itstherules.marklog.editor.filesystem.DirectoryChooserComponent;
-import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
+import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 import uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder;
 import uk.co.itstherules.marklog.sync.FtpClient;
 
@@ -24,9 +24,9 @@ import static uk.co.itstherules.marklog.editor.viewbuilder.TextFieldBuilder.text
 public class ProjectDialog extends JDialog {
 
     private final MarklogController controller;
-    private ProjectConfigurationModel configuration;
+    private ProjectConfiguration configuration;
 
-    public ProjectDialog(MarklogApp app, MarklogController controller, ProjectConfigurationModel configuration) {
+    public ProjectDialog(MarklogApp app, MarklogController controller, ProjectConfiguration configuration) {
         super(app, true);
         this.controller = controller;
         this.configuration = configuration;

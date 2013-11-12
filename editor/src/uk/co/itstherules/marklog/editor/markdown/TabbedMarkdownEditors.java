@@ -7,15 +7,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
 
 public final class TabbedMarkdownEditors extends JTabbedPane {
 
-    private final String projectRoot;
+    private final File projectRoot;
+    private final String projectRootPath;
 
     public TabbedMarkdownEditors(File projectRoot) {
-        this.projectRoot = projectRoot.getAbsolutePath();
+        this.projectRoot = projectRoot;
+        try {
+            this.projectRootPath = projectRoot.getCanonicalPath();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         setPreferredSize(new Dimension(1024, 720));
     }
 
@@ -33,7 +40,7 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
             setSelectedIndex(index);
         } else {
             final String path = identifier(file);
-            addTab(path, new MarkdownAndHtmlPanel(file));
+            addTab(path, new MarkdownAndHtmlPanel(projectRoot, file));
             JPanel panelForTab = new JPanel(new MigLayout("inset 0 10 0 10, hmax 45px", "[center][right]", "[center][center]"));
             panelForTab.setOpaque(false);
             JLabel tabTitleLabel = new JLabel(path);
@@ -56,7 +63,11 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
     }
 
     private String identifier(File file) {
-        return file.getAbsolutePath().substring(projectRoot.length() + 1);
+        try {
+            return file.getCanonicalPath().substring(projectRootPath.length() + 1);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private boolean tabExists(File file) {

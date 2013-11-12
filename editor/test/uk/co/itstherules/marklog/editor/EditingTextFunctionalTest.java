@@ -7,7 +7,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import uk.co.itstherules.marklog.editor.markdown.HtmlPanel;
+import uk.co.itstherules.marklog.editor.markdown.html.HtmlPanel;
 import uk.co.itstherules.marklog.string.MakeString;
 
 import java.io.File;
