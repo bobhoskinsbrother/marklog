@@ -101,6 +101,7 @@
       </library>
     </orderEntry>
     <orderEntry type="module" module-name="sync" />
+    <orderEntry type="module" module-name="resources" />
   </component>
 </module>
 

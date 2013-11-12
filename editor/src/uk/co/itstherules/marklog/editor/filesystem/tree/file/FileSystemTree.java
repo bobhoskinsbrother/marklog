@@ -56,7 +56,7 @@ public class FileSystemTree extends JPanel {
         final FileSystemTreeCellRenderer renderer = new FileSystemTreeCellRenderer();
         tree.setCellRenderer(renderer);
         tree.setEditable(true);
-        tree.setCellEditor(new FileTreeCellEditor(tree, controller, renderer));
+        tree.setCellEditor(new FileTreeCellEditor(controller, renderer));
         when(tree).hasBeenDoubleClicked(openFile()).hasBeenRightClicked(showPopupMenu()).hasKeyBeenPressed("F2", renameSelectedFile());
         return tree;
     }
