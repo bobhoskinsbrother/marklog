@@ -4,6 +4,7 @@ import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
+import uk.co.itstherules.marklog.editor.filesystem.Validator;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,38 +36,27 @@ public final class NewDirectoryDialog extends JDialog {
 
     private void paintView(JTextField directoryNameTextField, JButton createButton) {
         setPreferredSize(new Dimension(475, 200));
-        setLocationRelativeTo(app);
         add(new JLabel("<html><h2>New Directory</h2>"), "wrap");
         add(new JSeparator(), "wrap");
         add(new JLabel("Directory Name:"));
         add(directoryNameTextField, "gapleft 10, wrap");
         add(createButton);
         pack();
+        setLocationRelativeTo(app);
         setVisible(true);
     }
 
     private ButtonActionBuilder.ApplyChanged verifyAndCreateDirectory() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                if ("".equals(directoryName) && isIllegalDirectoryName()) {
+                if (!Validator.isLegalFileName(directoryName)) {
                     String message = "Please fill in a legal directory name\nNo weird characters please";
-                    JOptionPane.showMessageDialog(null, message, "No directory name supplied", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, message, "No or illegal directory name supplied", JOptionPane.ERROR_MESSAGE);
                 } else {
                     File directory = new File(NewDirectoryDialog.this.directory, directoryName);
                     directory.mkdirs();
                     dispose();
                 }
-            }
-
-            private boolean isIllegalDirectoryName() {
-                char[] illegal = {'/', '\n', '\r', '\t', '\0', '\f', '`', '?', '*', '\\', '<', '>', '|', '\"', ':'};
-                for (int i = 0; i < illegal.length; i++) {
-                    char illegalChar = illegal[i];
-                    if (directoryName.contains(Character.toString(illegalChar))) {
-                        return false;
-                    }
-                }
-                return true;
             }
         };
     }

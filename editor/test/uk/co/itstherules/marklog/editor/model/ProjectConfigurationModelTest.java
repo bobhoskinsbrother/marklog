@@ -27,7 +27,7 @@ public class ProjectConfigurationModelTest {
         final ProjectConfigurationModel configuration = new ProjectConfigurationModel();
         configuration.setDirectory(tempDir);
         configuration.setName("I'm A Temp Project");
-        configuration.setFtpUrl("ftp://hello.mom");
+        configuration.setFtpHost("hello.mom");
         configuration.setFtpUsername("fred");
         configuration.setFtpPassword("badgers");
 
@@ -39,7 +39,7 @@ public class ProjectConfigurationModelTest {
 
         assertThat(reply, containsString("project.name=I'm A Temp Project"));
         assertThat(reply, containsString("project.directory="+tempDir));
-        assertThat(reply, containsString("project.ftp.url=ftp\\://hello.mom"));
+        assertThat(reply, containsString("project.ftp.host=hello.mom"));
         assertThat(reply, containsString("project.ftp.username=fred"));
         assertThat(reply, containsString("project.ftp.password=badgers"));
     }

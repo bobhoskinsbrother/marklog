@@ -3,9 +3,10 @@ package uk.co.itstherules.marklog.editor.filesystem.tree.file;
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.MenuItemActionBuilder;
+import uk.co.itstherules.marklog.editor.dialogs.DeleteDirectoryDialog;
 import uk.co.itstherules.marklog.editor.dialogs.NewDirectoryDialog;
 import uk.co.itstherules.marklog.editor.dialogs.NewPostDialog;
-import uk.co.itstherules.marklog.editor.dialogs.DeleteDirectoryDialog;
+import uk.co.itstherules.marklog.editor.dialogs.RenameFileDialog;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
 
 import javax.swing.*;
@@ -25,6 +26,7 @@ public final class RightClickTreeMenu extends JPopupMenu {
 
         add(item("Add New Post").withClickAction(openAddNewPostDialog()).ok());
         add(item("Add New Directory").withClickAction(openAddNewDirectoryDialog()).ok());
+        add(item("Rename File").withClickAction(openRenameFileDialog()).ok());
 
         if (fileModel.getAllowsChildren()) {
             if(!fileModel.isRoot()) {
@@ -37,11 +39,29 @@ public final class RightClickTreeMenu extends JPopupMenu {
         } else {
             if(fileModel.getFile().getName().endsWith(".md")) {
                 add(item("Delete Post").withClickAction(deleteFile()).ok());
+            } else if(fileModel.getFile().getName().endsWith(".marklog")) {
+                add(item("Edit Project Settings").withClickAction(openEditProjectDialog()).ok());
             } else if(!fileModel.getFile().getName().endsWith(".marklog")) {
                 add(item("Delete File").withClickAction(deleteFile()).ok());
             }
         }
         show(tree, x, y);
+    }
+
+    private MenuItemActionBuilder.ApplyChanged openRenameFileDialog() {
+        return new MenuItemActionBuilder.ApplyChanged() {
+            @Override public void apply() {
+                new RenameFileDialog(app, controller, fileModel.getFile());
+            }
+        };
+    }
+
+    private MenuItemActionBuilder.ApplyChanged openEditProjectDialog() {
+        return new MenuItemActionBuilder.ApplyChanged() {
+            @Override public void apply() {
+                controller.editProject(fileModel.getFile());
+            }
+        };
     }
 
     private MenuItemActionBuilder.ApplyChanged deleteFile() {

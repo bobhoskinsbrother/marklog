@@ -8,7 +8,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import uk.co.itstherules.marklog.editor.model.PostModel;
+import uk.co.itstherules.marklog.editor.model.Post;
 import uk.co.itstherules.marklog.string.MakeString;
 
 import java.io.File;
@@ -31,7 +31,7 @@ public class OpeningAndEditingAPostFunctionalTest {
     @Before
     public void setUp() throws IOException {
         reset();
-        new PostModel(PROJECT_DIRECTORY, "Wizards are all Evil").save();
+        new Post(PROJECT_DIRECTORY, "Wizards are all Evil").save();
         window = openProject();
     }
 
@@ -49,6 +49,7 @@ public class OpeningAndEditingAPostFunctionalTest {
         tree.doubleClickPath("test_project/wizards-are-all-evil.md");
         window.textBox("markdownTextArea").enterText("\nEspecially Sauron");
         final String fileContents = MakeString.from(postFile);
+        assertThat(fileContents, containsString("Wizards are all Evil"));
         assertThat(fileContents, containsString("Especially Sauron"));
     }
 

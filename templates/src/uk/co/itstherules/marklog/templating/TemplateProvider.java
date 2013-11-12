@@ -7,10 +7,7 @@ import templates.Root;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public final class TemplateProvider {
 
@@ -18,7 +15,7 @@ public final class TemplateProvider {
 
     private enum TemplateType {
 
-        POSTS("posts.ftl");
+        POST("post.ftl");
 
         private final String path;
 
@@ -36,19 +33,23 @@ public final class TemplateProvider {
         this.directory = directory;
     }
 
-    public String posts(String... html) {
-        return merge(TemplateType.POSTS, "posts", Arrays.asList(html));
+    public String posts(String html, String title, String author, Date date, List<String> tags) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("post", html);
+        map.put("title", title);
+        map.put("author", author);
+        map.put("date", date);
+        map.put("tags", tags);
+        return merge(TemplateType.POST, map);
     }
 
-    private String merge(TemplateType type, String name, List<?> values) {
+    private String merge(TemplateType type, Map<String, Object> dataModel) {
         try {
             final Template template = template(type);
             final StringWriter writer = new StringWriter();
-            template.createProcessingEnvironment(Collections.singletonMap(name, values), writer).process();
+            template.createProcessingEnvironment(dataModel, writer).process();
             return writer.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } catch (TemplateException e) {
+        } catch (IOException | TemplateException e) {
             throw new RuntimeException(e);
         }
     }

@@ -5,25 +5,21 @@ import java.awt.*;
 
 public final class MarklogApp extends JFrame {
 
-    private JPanel marklogPanel;
-
     public MarklogApp() {
         super("Marklog");
         setLookAndFeel();
         setLayout(new GridBagLayout());
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int width = ((int) screenSize.getWidth());
-        int height = ((int) screenSize.getHeight());
-        setSize(width, height);
-        setPreferredSize(new Dimension(width, height));
-        setLocationRelativeTo(null);
+        setSize(screenSize);
+        setPreferredSize(screenSize);
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        marklogPanel = new MarklogPanelBuilder(this).ok();
+        JPanel marklogPanel = new MarklogPanelBuilder(this).ok();
         add(marklogPanel, fillTheSpaceConstraints());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon image = IconLoader.icon("/marklog_logo.png");
         setIconImage(image.getImage());
         pack();
+        setLocationRelativeTo(null);
         setVisible(true);
     }
 
@@ -47,13 +43,7 @@ public final class MarklogApp extends JFrame {
     private void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (UnsupportedLookAndFeelException e) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             throw new RuntimeException(e);
         }
     }

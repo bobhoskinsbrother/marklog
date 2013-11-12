@@ -38,6 +38,8 @@ class FileSystemTreeCellRenderer extends DefaultTreeCellRenderer {
         return label;
     }
 
+
+
     private Icon rootIcon() {
         return icon("/root_folder.png");
     }

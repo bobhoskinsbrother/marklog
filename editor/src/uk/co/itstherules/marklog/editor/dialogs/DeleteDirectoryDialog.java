@@ -13,14 +13,12 @@ import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public final class DeleteDirectoryDialog extends JDialog {
 
-    private final MarklogApp app;
     private final File directory;
     private final MarklogController controller;
     private final JRadioButton moveUp;
 
     public DeleteDirectoryDialog(MarklogApp app, MarklogController controller, File directory) {
         super(app, true);
-        this.app = app;
         this.controller = controller;
         this.directory = directory;
         setLayout(new MigLayout("insets 10"));
@@ -35,7 +33,6 @@ public final class DeleteDirectoryDialog extends JDialog {
         deleteButton.setName("deleteDirectory");
         when(deleteButton).hasBeenClicked(deleteDirectory());
         setPreferredSize(new Dimension(475, 250));
-        setLocationRelativeTo(this.app);
         add(new JLabel("<html><h2>Delete Directory</h2>"), "wrap");
         add(new JSeparator(), "wrap");
         add(new JLabel("Directory Name: " + this.directory.getName()), "wrap");
@@ -43,6 +40,7 @@ public final class DeleteDirectoryDialog extends JDialog {
         add(moveUp, "wrap");
         add(deleteButton);
         pack();
+        setLocationRelativeTo(app);
         setVisible(true);
     }
 

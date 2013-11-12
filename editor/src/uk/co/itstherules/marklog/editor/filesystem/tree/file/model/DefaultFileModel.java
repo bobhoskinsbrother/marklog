@@ -21,6 +21,7 @@ public class DefaultFileModel implements Cloneable, FileModel {
             @Override protected Void doInBackground() throws Exception {
                 if (allowsChildren) {
                     final File[] files = file.listFiles();
+                    Arrays.sort(files);
                     for (int i = 0; i < files.length; i++) {
                         insert(new DefaultFileModel(files[i]), i);
                     }

@@ -4,10 +4,8 @@ import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
-import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.DefaultFileModel;
-import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
-import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileSystemModel;
-import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileWorker;
+import uk.co.itstherules.marklog.editor.dialogs.RenameFileDialog;
+import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.*;
 
 import javax.swing.*;
 import javax.swing.tree.TreeSelectionModel;
@@ -55,8 +53,11 @@ public class FileSystemTree extends JPanel {
 
     private JTree makeTree(FileSystemModel model) {
         JTree tree = new JTree(model);
-        tree.setCellRenderer(new FileSystemTreeCellRenderer());
-        when(tree).hasBeenDoubleClicked(openFile()).hasBeenRightClicked(showPopupMenu());
+        final FileSystemTreeCellRenderer renderer = new FileSystemTreeCellRenderer();
+        tree.setCellRenderer(renderer);
+        tree.setEditable(true);
+        tree.setCellEditor(new FileTreeCellEditor(tree, controller, renderer));
+        when(tree).hasBeenDoubleClicked(openFile()).hasBeenRightClicked(showPopupMenu()).hasKeyBeenPressed("F2", renameSelectedFile());
         return tree;
     }
 
@@ -75,7 +76,15 @@ public class FileSystemTree extends JPanel {
     private ButtonActionBuilder.ApplyChanged openSyncDialog() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                controller.openSyncDialog();
+                controller.openSyncDialog(root);
+            }
+        };
+    }
+
+    private TreeActionBuilder.ApplyChanged renameSelectedFile() {
+        return new TreeActionBuilder.ApplyChanged() {
+            @Override public void apply(FileModel node) {
+                new RenameFileDialog(app,controller,node.getFile());
             }
         };
     }

@@ -35,13 +35,13 @@ public final class NewPostDialog extends JDialog {
     private void setView(MarklogApp app, JTextField postNameTextField, JButton createButton) {
         setLayout(new MigLayout("insets 10"));
         setPreferredSize(new Dimension(475, 200));
-        setLocationRelativeTo(app);
         add(new JLabel("<html><h2>New Post</h2>"), "wrap");
         add(new JSeparator(), "wrap");
         add(new JLabel("Post Name:"));
         add(postNameTextField, "gapleft 10, wrap");
         add(createButton);
         pack();
+        setLocationRelativeTo(app);
         setVisible(true);
     }
 

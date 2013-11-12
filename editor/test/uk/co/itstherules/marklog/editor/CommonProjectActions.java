@@ -32,7 +32,7 @@ public final class CommonProjectActions {
         final ProjectConfigurationModel configuration = new ProjectConfigurationModel();
         configuration.setDirectory(PROJECT_DIRECTORY);
         configuration.setName(PROJECT_NAME);
-        configuration.setFtpUrl("");
+        configuration.setFtpHost("");
         configuration.setFtpUsername("");
         configuration.setFtpPassword("");
         configuration.save();

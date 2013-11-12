@@ -1,13 +1,16 @@
 package uk.co.itstherules.marklog.editor;
 
 import org.apache.commons.io.FileUtils;
-import uk.co.itstherules.marklog.editor.model.PostModel;
+import uk.co.itstherules.marklog.editor.dialogs.ProjectDialog;
+import uk.co.itstherules.marklog.editor.model.Post;
 import uk.co.itstherules.marklog.editor.model.ProjectConfigurationModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+
+import static uk.co.itstherules.marklog.editor.dialogs.SyncDialog.syncDialog;
 
 public class MarklogController {
 
@@ -84,23 +87,32 @@ public class MarklogController {
     }
 
     public void addNewPost(File file, String postName) {
-        PostModel post = new PostModel(file, postName);
+        Post post = new Post(file, postName);
         post.save();
         newMarkdownTabFor(post.getFile());
+    }
+
+
+    public boolean renameFile(File oldFile, String newFileName) {
+        final File newFile = new File(oldFile.getParent(), newFileName);
+        return oldFile.renameTo(newFile);
     }
 
     public void openFile(File file) {
         if (file.getName().endsWith(".md")) {
             newMarkdownTabFor(file);
         }
-
     }
 
     public void reloadTabIfOpen(File file) {
         projectEditor.reloadTabIfOpen(file);
     }
 
-    public void openSyncDialog() {
-        throw new UnsupportedOperationException("TODO");
+    public void openSyncDialog(File root) {
+        syncDialog(app, root).ok();
+    }
+
+    public void editProject(File file) {
+        new ProjectDialog(app, this, new ProjectConfigurationModel(file));
     }
 }

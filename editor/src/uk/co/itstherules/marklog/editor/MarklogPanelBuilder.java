@@ -62,6 +62,8 @@ public final class MarklogPanelBuilder implements Builder<JPanel> {
             @Override
             public void apply() {
                 final JFileChooser fileChooser = new JFileChooser(System.getProperty("user.dir"));
+                fileChooser.setSize(500,400);
+                fileChooser.setPreferredSize(new Dimension(500,400));
                 fileChooser.setFileFilter(new FileFilter() {
                     @Override
                     public boolean accept(File file) {

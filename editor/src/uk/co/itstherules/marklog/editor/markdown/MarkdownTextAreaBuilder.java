@@ -1,7 +1,7 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
+import uk.co.itstherules.marklog.editor.model.Post;
 import uk.co.itstherules.marklog.editor.viewbuilder.Builder;
-import uk.co.itstherules.marklog.string.MakeString;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -15,8 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
 
@@ -24,6 +22,7 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
     private final File file;
     private final UndoManager undoManager;
     private final JTextArea textArea;
+    private final Post post;
 
     public MarkdownTextAreaBuilder(final HtmlPanel htmlPanel, final File file) {
         textArea = new JTextArea();
@@ -34,7 +33,8 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
         setStyling();
         listenForChangesToDocument();
         setupUndoRedo();
-        addTextFrom(file);
+        post = new Post(file);
+        addTextFrom(post);
     }
 
     private void setupUndoRedo() {
@@ -45,7 +45,7 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
                 undoManager.addEdit(e.getEdit());
             }
         });
-        InputMap inputMap = textArea.getInputMap(JComponent.WHEN_FOCUSED);
+        InputMap inputMap = textArea.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap actionMap = textArea.getActionMap();
         final int shortcutKeyMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMask();
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Z, shortcutKeyMask), "Undo");
@@ -72,16 +72,8 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
         });
     }
 
-    private void addTextFrom(File file) {
-        textArea.setText(getTextFrom(file));
-    }
-
-    private String getTextFrom(File file) {
-        try {
-            return MakeString.from(file);
-        } catch (IOException e) {
-            return "";
-        }
+    private void addTextFrom(Post post) {
+        textArea.setText(post.toString());
     }
 
     private void setStyling() {
@@ -93,31 +85,22 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
 
     private void listenForChangesToDocument() {
         textArea.getDocument().addDocumentListener(new DocumentListener() {
-            @Override public void insertUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
-            @Override public void removeUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
-            @Override public void changedUpdate(DocumentEvent documentEvent) { updateHtmlPanelAndFile(); }
+            @Override public void insertUpdate(DocumentEvent event) { updateHtmlPanelAndFile(); }
+            @Override public void removeUpdate(DocumentEvent event) { updateHtmlPanelAndFile(); }
+            @Override public void changedUpdate(DocumentEvent event) { updateHtmlPanelAndFile(); }
         });
     }
 
     private void updateHtmlPanelAndFile() {
-        final String markdownText = textArea.getText();
-        updateHtmlPanelWith(markdownText);
-        updateFileWith(markdownText);
+        final String headerAndMarkdownText = textArea.getText();
+        post.setText(headerAndMarkdownText);
+        updateHtmlPanelWith(post);
+        post.save();
     }
 
-    private void updateFileWith(String markdownText) {
-        try {
-            final FileWriter writer = new FileWriter(file);
-            writer.write(markdownText);
-            writer.close();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    private void updateHtmlPanelWith(String text) {
-        final String html = MarkdownTransformer.toHtml(text);
-        htmlPanel.setHtmlText(html);
+    private void updateHtmlPanelWith(Post post) {
+        final String html = MarkdownTransformer.toHtml(post.getMarkdown());
+        htmlPanel.updateWith(html, post.getHeader());
     }
 
     @Override public JTextArea ok() {

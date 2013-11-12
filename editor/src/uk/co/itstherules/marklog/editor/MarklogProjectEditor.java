@@ -10,13 +10,12 @@ import java.io.File;
 public final class MarklogProjectEditor extends JSplitPane {
 
     private final TabbedMarkdownEditors markdownEditors;
-    private final FileSystemTree fileSystemTree;
 
     public MarklogProjectEditor(MarklogApp app, ProjectConfigurationModel configuration, MarklogController controller) {
         setName("MarklogProjectEditor");
         final File directory = configuration.getDirectory();
         markdownEditors = new TabbedMarkdownEditors(directory);
-        fileSystemTree = new FileSystemTree(app, controller, directory);
+        FileSystemTree fileSystemTree = new FileSystemTree(app, controller, directory);
         setLeftComponent(fileSystemTree);
         setRightComponent(markdownEditors);
         setResizeWeight(0.25);

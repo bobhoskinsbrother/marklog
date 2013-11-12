@@ -12,15 +12,17 @@ public final class DirectoryChooserComponent extends JPanel {
     private final JButton button;
     private final JLabel label;
     private final java.util.List<FileChosenListener> listeners;
+    private final File directory;
 
-
-    public DirectoryChooserComponent() {
+    public DirectoryChooserComponent(File directory) {
+        this.directory = directory;
         setName("directoryChooser");
         listeners = new ArrayList<FileChosenListener>();
         setLayout(new MigLayout());
         button = new JButton("Choose Directory");
         button.setName("chooseDirectoryButton");
-        label = new JLabel("No directory chosen");
+        label = new JLabel();
+        selectDirectory(directory);
         add(button);
         add(label, "gapleft 10");
         button.addActionListener(new ChooseDirectoryButtonClicked(this));
@@ -33,7 +35,6 @@ public final class DirectoryChooserComponent extends JPanel {
     private void setLabelText(String text) {
         label.setToolTipText(text);
         label.setText(abbreviatePath(text));
-
     }
 
     private String abbreviatePath(String absolutePath) {
@@ -57,19 +58,23 @@ public final class DirectoryChooserComponent extends JPanel {
 
         @Override public void actionPerformed(ActionEvent actionEvent) {
             if (actionEvent.getSource() == button) {
-                final JFileChooser fileChooser = new JFileChooser();
+                final JFileChooser fileChooser = new JFileChooser(directory);
                 fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
                 int returnVal = fileChooser.showOpenDialog(directoryChooserComponent);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File directory = fileChooser.getSelectedFile();
-                    for (FileChosenListener listener : listeners) {
-                        listener.fileChosen(directory);
-                    }
-                    setLabelText(directory.getAbsolutePath());
+                    selectDirectory(directory);
                 }
             }
         }
 
+    }
+
+    private void selectDirectory(File directory) {
+        for (FileChosenListener listener : listeners) {
+            listener.fileChosen(directory);
+        }
+        setLabelText(directory.getAbsolutePath());
     }
 
     public interface FileChosenListener {

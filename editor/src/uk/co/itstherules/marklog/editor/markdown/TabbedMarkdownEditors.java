@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
+
 public final class TabbedMarkdownEditors extends JTabbedPane {
 
     private final String projectRoot;
@@ -32,12 +34,11 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
         } else {
             final String path = identifier(file);
             addTab(path, new MarkdownAndHtmlPanel(file));
-            JPanel panelForTab = new JPanel(new MigLayout("", "[center][right]", "[center][center]"));
+            JPanel panelForTab = new JPanel(new MigLayout("inset 0 10 0 10, hmax 45px", "[center][right]", "[center][center]"));
             panelForTab.setOpaque(false);
             JLabel tabTitleLabel = new JLabel(path);
-            JButton closeButton = new JButton("x");
-            closeButton.setSize(22, 22);
-            closeButton.setPreferredSize(new Dimension(22, 22));
+            JButton closeButton = button("x").ofSize(22, 22).ok();
+
             panelForTab.add(tabTitleLabel);
             panelForTab.add(closeButton, "gapleft 10");
             int index = indexOfTab(path);

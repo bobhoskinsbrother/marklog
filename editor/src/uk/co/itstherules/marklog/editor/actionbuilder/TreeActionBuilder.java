@@ -5,6 +5,7 @@ import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.FileModel;
 import javax.swing.*;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -14,6 +15,32 @@ public class TreeActionBuilder {
 
     public TreeActionBuilder(JTree tree) {
         this.tree = tree;
+    }
+
+    public TreeActionBuilder hasKeyBeenPressed(String key, final ApplyChanged applyChanged) {
+        InputMap inputMap = tree.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        KeyStroke keyStroke = KeyStroke.getKeyStroke(key);
+        removeAllFromInputMap(inputMap, keyStroke);
+        inputMap = tree.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(keyStroke, "RenameFile");
+        ActionMap actionMap = tree.getActionMap();
+        actionMap.put("RenameFile", new AbstractAction() {
+            @Override public void actionPerformed(ActionEvent e) {
+                Object lastSelected = tree.getLastSelectedPathComponent();
+                if(lastSelected!=null && FileModel.class.isInstance(lastSelected)) {
+                    final FileModel fileModel = FileModel.class.cast(lastSelected);
+                    applyChanged.apply(fileModel);
+                }
+            }
+        });
+        return this;
+    }
+
+    private void removeAllFromInputMap(InputMap inputMap, KeyStroke keyStroke) {
+        while (inputMap!= null) {
+            inputMap.remove(keyStroke);
+            inputMap = inputMap.getParent();
+        }
     }
 
     public TreeActionBuilder hasBeenDoubleClicked(final ApplyChanged applyChanged) {

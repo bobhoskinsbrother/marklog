@@ -4,6 +4,7 @@ import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.string.VariableName;
 
 import javax.swing.*;
+import java.awt.*;
 
 import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
@@ -35,6 +36,15 @@ public final class ButtonBuilder implements Builder<JButton> {
 
     public ButtonBuilder withClickAction(ButtonActionBuilder.ApplyChanged applyChanged) {
         when(item).hasBeenClicked(applyChanged);
+        return this;
+    }
+
+    public ButtonBuilder ofSize(int width, int height) {
+        final Dimension size = new Dimension(width, height);
+        item.setSize(size);
+        item.setPreferredSize(size);
+        item.setMaximumSize(size);
+        item.setMinimumSize(size);
         return this;
     }
 }

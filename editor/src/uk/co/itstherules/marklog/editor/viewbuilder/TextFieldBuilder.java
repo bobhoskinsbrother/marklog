@@ -28,7 +28,7 @@ public final class TextFieldBuilder implements Builder<JTextField> {
         return this;
     }
 
-    public TextFieldBuilder value(String value) {
+    public TextFieldBuilder withValue(String value) {
         item.setText(value);
         return this;
     }

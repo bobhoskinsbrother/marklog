@@ -26,8 +26,9 @@ public final class FtpClient {
 
     @Override protected void finalize() {
         try {
+            super.finalize();
             close();
-        } catch (IOException e) {
+        } catch (Throwable e) {
         }
     }
 
