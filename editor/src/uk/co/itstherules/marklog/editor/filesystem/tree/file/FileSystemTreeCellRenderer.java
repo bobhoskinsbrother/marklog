@@ -20,6 +20,9 @@ class FileSystemTreeCellRenderer extends DefaultTreeCellRenderer {
         defaultFile = icon("/file.png");
         iconCache.put("", icon("/folder.png"));
         iconCache.put("md", icon("/md_file.png"));
+        iconCache.put("png", icon("/image_file.png"));
+        iconCache.put("gif", icon("/image_file.png"));
+        iconCache.put("jpg", icon("/image_file.png"));
         iconCache.put("marklog", icon("/marklog_file.png"));
     }
 

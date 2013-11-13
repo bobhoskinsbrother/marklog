@@ -5,17 +5,35 @@
     <title>${title!""}</title>
     <style type="text/css">
         body {
-            font-family: ubuntu;
-            font-size: 0.8em;
+            font-family: sans-serif;
+            font-size: 0.9em;
+        }
+
+        pre {
+            padding: 10px;
+            overflow: auto;
+            color: white;
+            background: #1d1f21;
+            position: relative;
+        }
+
+        .article_info {
+            background: #FAF0FB;
+            color: #000000;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
 ${post}
+<br/>
 
-<#if author?? && author?has_content>Author: ${author}<br/></#if>
-<#if date??>Date Posted: ${date?string("dd MMM yyyy HH:mm z")}<br/></#if>
-<#if tags?? && tags?size != 0>Tags: <#list tags as tag>${tag}<#if tag_has_next>, </#if></#list><br/></#if>
+<div class="article_info">
+<#if author?? && author?has_content><strong>Author</strong> ${author}<br/></#if>
+<#if date??><strong>Date Posted</strong> ${date?string("dd MMM yyyy HH:mm z")}<br/></#if>
+<#if tags?? && tags?size != 0><strong>Tags</strong> <#list tags as tag>${tag}<#if tag_has_next>, </#if></#list>
+    <br/></#if>
+</div>
 
 </body>
 </html>

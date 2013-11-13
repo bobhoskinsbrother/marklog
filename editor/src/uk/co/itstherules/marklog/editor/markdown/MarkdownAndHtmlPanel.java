@@ -1,5 +1,6 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
+import org.xhtmlrenderer.simple.FSScrollPane;
 import uk.co.itstherules.marklog.editor.markdown.html.HtmlPanel;
 
 import javax.swing.*;
@@ -30,7 +31,7 @@ public final class MarkdownAndHtmlPanel extends JPanel {
     }
 
     private JScrollPane htmlScroller() {
-        final JScrollPane htmlScroller = new JScrollPane(htmlPanel);
+        final JScrollPane htmlScroller = new FSScrollPane(htmlPanel);
         htmlScroller.setPreferredSize(new Dimension(480, 720));
         return htmlScroller;
     }

@@ -53,6 +53,8 @@ public class FileSystemTree extends JPanel {
 
     private JTree makeTree(FileSystemModel model) {
         JTree tree = new JTree(model);
+        tree.setDragEnabled(true);
+        tree.setTransferHandler(new TreeTransferHandler(root));
         final FileSystemTreeCellRenderer renderer = new FileSystemTreeCellRenderer();
         tree.setCellRenderer(renderer);
         tree.setEditable(true);
