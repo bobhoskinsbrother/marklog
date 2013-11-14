@@ -100,8 +100,7 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
     }
 
     private void updateHtmlPanelWith(Post post) {
-        final String html = MarkdownTransformer.toHtml(post.getMarkdown());
-        htmlPanel.updateWith(html, post.getHeader());
+        htmlPanel.updateWith(post);
     }
 
     @Override public JTextArea ok() {

@@ -2,13 +2,13 @@
 title:Welcome
 author:Ben Hoskins
 date:12/11/2013 14:03
-stage:publish
+stage:draft
 tags:simple, efficient, publishing
 #####################
 
 # Welcome to the Blogosphere
 
-This is a demo blog in marklog, a piece of blog writing and publishing software.  
+This is a demo blog in marklog, a piece of blog writing and publishing software.
 
 It was originally conceived as a way of:
 * Blogging, quickly and simply

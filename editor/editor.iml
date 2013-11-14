@@ -20,15 +20,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../libs/markdown4j-2.2.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/../libs/core-renderer.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -102,6 +93,8 @@
     </orderEntry>
     <orderEntry type="module" module-name="sync" />
     <orderEntry type="module" module-name="resources" />
+    <orderEntry type="module" module-name="model" />
+    <orderEntry type="module" module-name="publisher" />
   </component>
 </module>
 

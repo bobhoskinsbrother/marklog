@@ -62,8 +62,7 @@ public final class CommonProjectActions {
     public static FrameFixture openApp() throws IOException {
         MarklogApp app = GuiActionRunner.execute(new GuiQuery<MarklogApp>() {
             protected MarklogApp executeInEDT() {
-                MarklogApp app = new MarklogApp();
-                return app;
+                return new MarklogApp();
             }
         });
         FrameFixture window = new FrameFixture(app);
@@ -89,6 +88,27 @@ public final class CommonProjectActions {
 
             @Override public void describeTo(Description description) {
                 description.appendText("File not created within "+millis+" milliseconds");
+            }
+        };
+    }
+
+    public static Matcher<File> isDestroyedWithin(final long millis) {
+        return new TypeSafeMatcher<File>() {
+            @Override public boolean matchesSafely(File file) {
+                long currentMillis = System.currentTimeMillis();
+                while((currentMillis+millis) > System.currentTimeMillis()) {
+                    if(!file.exists()) { return true; }
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        return false;
+                    }
+                }
+                return false;
+            }
+
+            @Override public void describeTo(Description description) {
+                description.appendText("File not destroyed within "+millis+" milliseconds");
             }
         };
     }

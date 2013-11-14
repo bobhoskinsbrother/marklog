@@ -38,7 +38,7 @@ public class ProjectConfigurationTest {
         String reply = MakeString.from(tempProjectFile);
 
         assertThat(reply, containsString("project.name=I'm A Temp Project"));
-        assertThat(reply, containsString("project.directory="+tempDir));
+        assertThat(reply, containsString("project.directory=" + tempDir));
         assertThat(reply, containsString("project.ftp.host=hello.mom"));
         assertThat(reply, containsString("project.ftp.username=fred"));
         assertThat(reply, containsString("project.ftp.password=badgers"));

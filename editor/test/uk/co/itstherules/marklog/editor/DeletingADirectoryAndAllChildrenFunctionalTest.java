@@ -64,9 +64,9 @@ public class DeletingADirectoryAndAllChildrenFunctionalTest {
         assertThat(PROJECT_FILE.exists(), is(true));
         assertThat(PROJECT_DIRECTORY.exists(), is(true));
 
-        assertThat(grandchildDirectory.exists(), is(false));
-        assertThat(childDirectory.exists(), is(false));
-        assertThat(grandchildFile.exists(), is(false));
+        assertThat(grandchildDirectory, isDestroyedWithin(1000));
+        assertThat(childDirectory, isDestroyedWithin(1000));
+        assertThat(grandchildFile, isDestroyedWithin(1000));
     }
 
 }

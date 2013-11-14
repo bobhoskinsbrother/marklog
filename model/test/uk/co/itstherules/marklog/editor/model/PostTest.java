@@ -1,5 +1,6 @@
 package uk.co.itstherules.marklog.editor.model;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,18 +12,20 @@ import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static uk.co.itstherules.marklog.editor.CommonProjectActions.PROJECT_DIRECTORY;
-import static uk.co.itstherules.marklog.editor.CommonProjectActions.reset;
 
 public final class PostTest {
+    
+    private static final File TEMP_DIRECTORY = new File(System.getProperty("java.io.tmpdir"));
+    public static final File PROJECT_DIRECTORY = new File(TEMP_DIRECTORY, "test_project");
+    
 
     private static final String HEADER_STRING =
-            "##################################################################################\n" +
+            "#####################\n" +
             "author:admin\n" +
             "date:23/06/2010 13:28\n" +
             "title:Epicenter Dublin Update\n" +
             "tags:Conferences\n" +
-            "##################################################################################\n";
+            "#####################\n";
     private static final String MARKDOWN_STRING =
             "\n" +
             "\n" +
@@ -42,6 +45,11 @@ public final class PostTest {
             "- Intuition can be taught, if the conventions are simple enough (a.k.a. people aren't dumb)\n";
     private static final String POST_STRING = HEADER_STRING+ MARKDOWN_STRING;
 
+    public static void reset() throws IOException {
+        FileUtils.deleteDirectory(PROJECT_DIRECTORY);
+        PROJECT_DIRECTORY.mkdirs();
+    }
+   
     @Before
     public void setUp() throws IOException {
         reset();
@@ -83,8 +91,7 @@ public final class PostTest {
     @Test public void canParseHeader() {
         final Post post = new Post(new File(System.getProperty("user.dir")), "A Post");
         post.setText(POST_STRING);
-        assertThat(post.getMarkdown(), is(
-                "\n" +
+        assertThat(post.getMarkdown(), is("\n" +
                 "\n" +
                 "Hi Folks\n" +
                 "\n" +
@@ -100,13 +107,12 @@ public final class PostTest {
                 "- \"Do The Simplest Thing That Could Possibly Work\" shouldn't mean barely useable\n" +
                 "- Write fewer, more elegant features, which are used more often\n" +
                 "- Intuition can be taught, if the conventions are simple enough (a.k.a. people aren't dumb)\n"));
-        assertThat(post.getHeader().toString(), is(
-                "##################################################################################\n" +
+        assertThat(post.getHeader().toString(), is("#####################\n" +
                 "author:admin\n" +
                 "date:23/06/2010 13:28\n" +
                 "title:Epicenter Dublin Update\n" +
                 "tags:Conferences\n" +
-                "##################################################################################\n"));
+                "#####################\n"));
     }
 
 

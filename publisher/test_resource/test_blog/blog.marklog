@@ -1,0 +1,6 @@
+project.name=Test Marklog Blog
+project.directory=./publisher/test_resource/test_blog
+
+project.ftp.host=itstherules.co.uk
+project.ftp.username=username
+project.ftp.password=password

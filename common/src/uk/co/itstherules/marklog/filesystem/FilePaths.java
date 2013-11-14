@@ -1,11 +1,11 @@
-package uk.co.itstherules.marklog.editor.filesystem;
+package uk.co.itstherules.marklog.filesystem;
 
 import java.io.File;
 import java.io.IOException;
 
-public final class Files {
+public final class FilePaths {
 
-    private Files() { }
+    private FilePaths() { }
 
 
     public static String rootRelativePath(File root, File file) {

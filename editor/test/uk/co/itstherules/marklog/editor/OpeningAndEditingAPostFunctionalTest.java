@@ -47,10 +47,10 @@ public class OpeningAndEditingAPostFunctionalTest {
         fileSystemTree.requireVisible();
         final JTreeFixture tree = fileSystemTree.tree();
         tree.doubleClickPath("test_project/wizards-are-all-evil.md");
-        window.textBox("markdownTextArea").enterText("\nEspecially Sauron");
+        window.textBox("markdownTextArea").enterText("\nEspecially Saruman");
         final String fileContents = MakeString.from(postFile);
         assertThat(fileContents, containsString("Wizards are all Evil"));
-        assertThat(fileContents, containsString("Especially Sauron"));
+        assertThat(fileContents, containsString("Especially Saruman"));
     }
 
 }

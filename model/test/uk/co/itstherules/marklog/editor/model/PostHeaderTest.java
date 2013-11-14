@@ -10,9 +10,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
-import static uk.co.itstherules.marklog.editor.model.PostHeader.PostStage.complete;
-import static uk.co.itstherules.marklog.editor.model.PostHeader.PostStage.draft;
-import static uk.co.itstherules.marklog.editor.model.PostHeader.PostStage.publish;
+import static uk.co.itstherules.marklog.editor.model.PostHeader.PostStage.*;
 
 public final class PostHeaderTest {
 
@@ -88,7 +86,7 @@ public final class PostHeaderTest {
         calendar.set(Calendar.YEAR, 2013);
         PostHeader unit = new PostHeader("Title", "Author", calendar.getTime(), publish, Arrays.asList("fred","badgers"));
         String reply = unit.toString();
-        assertThat(reply, containsString("############################################################"));
+        assertThat(reply, containsString("#####################"));
         assertThat(reply, containsString("tags:fred,badgers"));
         assertThat(reply, containsString("stage:publish"));
         assertThat(reply, containsString("author:Author"));

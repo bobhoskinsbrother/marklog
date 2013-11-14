@@ -106,7 +106,7 @@ public class RenamingAFileFunctionalTest {
         renameFileDialog.button("renameButton").click();
 
         assertThat(new File(PROJECT_DIRECTORY, "im_a_renamed_post.md").exists(), is(true));
-        assertThat(file.exists(), is(false));
+        assertThat(file, isDestroyedWithin(1000));
     }
 
 }
