@@ -4,59 +4,46 @@ import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.MarklogApp;
 import uk.co.itstherules.marklog.editor.MarklogController;
 import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
-import uk.co.itstherules.marklog.editor.actionbuilder.DirectoryChooserActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TextFieldActionBuilder;
-import uk.co.itstherules.marklog.editor.filesystem.DirectoryChooserComponent;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 import uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder;
 import uk.co.itstherules.marklog.sync.FtpClient;
 
 import javax.swing.*;
-import java.io.File;
 import java.io.IOException;
 
-import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
 import static uk.co.itstherules.marklog.editor.viewbuilder.LabelBuilder.label;
 import static uk.co.itstherules.marklog.editor.viewbuilder.PanelBuilder.panel;
 import static uk.co.itstherules.marklog.editor.viewbuilder.TextFieldBuilder.textField;
 
-public class ProjectDialog extends JDialog {
+public class EditProjectDialog extends JDialog {
 
     private final MarklogController controller;
     private ProjectConfiguration configuration;
 
-    public ProjectDialog(MarklogApp app, MarklogController controller, ProjectConfiguration configuration) {
+    public EditProjectDialog(MarklogApp app, MarklogController controller, ProjectConfiguration configuration) {
         super(app, true);
         this.controller = controller;
         this.configuration = configuration;
         setLayout(new MigLayout("insets 10"));
-
         JTextField projectNameTextField = textFieldWhenTextChanged(applyToProjectName(), "projectName", configuration.getName());
         JTextField ftpHostTextField = textFieldWhenTextChanged(applyToFtpHost(), "ftpHost", configuration.getFtpHost());
         JTextField ftpUserNameTextField = textFieldWhenTextChanged(applyToFtpUsername(), "ftpUserName", configuration.getFtpUsername());
         JTextField ftpPasswordTextField = textFieldWhenTextChanged(applyToFtpPassword(), "ftpPassword", configuration.getFtpPassword());
-
-        DirectoryChooserComponent directoryChooser = new DirectoryChooserComponent(configuration.getDirectory());
         JButton saveButton = button("Save Project").withClickAction(verifyAndSaveProjectFile()).ok();
         JButton testConnectionButton = button("Test Connection").withClickAction(testConnection()).ok();
-
-        when(directoryChooser).fileHasBeenChosen(applyToProjectDirectory());
-
         add(new JLabel("<html><h2>Project</h2>"), "wrap");
         add(new JSeparator(), "wrap");
-        final PanelBuilder b = panel("projectPanel").ofSize(475, 250)
-                .withLayout("wrap 2",
-                            "[  left  ][ right ]",
-                            "[ center ]")
+        final PanelBuilder b = panel("projectPanel").ofSize(475, 250).withLayout("wrap 2",
+                "[  left  ][ right ]",
+                "[ center ]")
                 .add(label("Project Name").ok()).add(projectNameTextField)
-                .add(label("Path for Project").ok()).add(directoryChooser)
                 .add(label("FTP Host").ok()).add(ftpHostTextField)
                 .add(label("FTP Username").ok()).add(ftpUserNameTextField)
                 .add(label("FTP Password").ok()).add(ftpPasswordTextField)
                 .add(saveButton)
-                .add(testConnectionButton)
-                ;
+                .add(testConnectionButton);
         add(b.ok());
         pack();
         setLocationRelativeTo(app);
@@ -97,16 +84,8 @@ public class ProjectDialog extends JDialog {
                     client.close();
                     JOptionPane.showMessageDialog(null, "Connected successfully to the host with the credentials provided", "Connected Successfully", JOptionPane.INFORMATION_MESSAGE);
                 } catch (IOException e) {
-                    JOptionPane.showMessageDialog(null, "Unsuccessful connection: "+e.getMessage(), "Connected Failed", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Unsuccessful connection: " + e.getMessage(), "Connected Failed", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-        };
-    }
-
-    private DirectoryChooserActionBuilder.ApplyChanged applyToProjectDirectory() {
-        return new DirectoryChooserActionBuilder.ApplyChanged() {
-            @Override public void apply(File file) {
-                configuration.setDirectory(file.getAbsoluteFile());
             }
         };
     }

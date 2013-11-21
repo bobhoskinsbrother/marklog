@@ -49,7 +49,8 @@ public final class HtmlPublisherTest {
 
     @Test public void canPublish() {
         File configFile = new File("publisher/test_resource/test_blog/blog.marklog");
-        ProjectConfiguration configuration = new ProjectConfiguration(configFile);
+        ProjectConfiguration configuration = new ProjectConfiguration();
+        configuration.load(configFile);
         HtmlPublisher unit = new HtmlPublisher(configuration, TARGET_DIRECTORY, reporter());
         unit.publishUsingTemplate("simple", true);
         assertThat(file("index.html"), existsWithin(1000));
@@ -81,7 +82,8 @@ public final class HtmlPublisherTest {
 
     @Test public void canPublishWithoutOriginals() {
         File configFile = new File("publisher/test_resource/test_blog/blog.marklog");
-        ProjectConfiguration configuration = new ProjectConfiguration(configFile);
+        ProjectConfiguration configuration = new ProjectConfiguration();
+        configuration.load(configFile);
         HtmlPublisher unit = new HtmlPublisher(configuration, TARGET_DIRECTORY, reporter());
         unit.publishUsingTemplate("simple", false);
         assertThat(file("index.html"), existsWithin(1000));

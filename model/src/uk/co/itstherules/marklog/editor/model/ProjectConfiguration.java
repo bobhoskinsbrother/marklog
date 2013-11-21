@@ -9,7 +9,6 @@ import java.util.*;
 public final class ProjectConfiguration {
 
     private static final String PROJECT_NAME = "project.name";
-    private static final String PROJECT_DIRECTORY = "project.directory";
     private static final String PROJECT_FTP_HOST = "project.ftp.host";
     private static final String PROJECT_FTP_USERNAME = "project.ftp.username";
     private static final String PROJECT_FTP_PASSWORD = "project.ftp.password";
@@ -27,7 +26,7 @@ public final class ProjectConfiguration {
         ftpPassword = "";
     }
 
-    public ProjectConfiguration(File file) {
+    public void load(File file) {
         Properties properties = new Properties();
         try {
             properties.load(new FileInputStream(file));
@@ -35,7 +34,7 @@ public final class ProjectConfiguration {
             throw new RuntimeException(e);
         }
         name = properties.getProperty(PROJECT_NAME);
-        directory = new File(properties.getProperty(PROJECT_DIRECTORY));
+        directory = file.getParentFile();
         ftpHost = properties.getProperty(PROJECT_FTP_HOST);
         ftpUsername = properties.getProperty(PROJECT_FTP_USERNAME);
         ftpPassword = properties.getProperty(PROJECT_FTP_PASSWORD);
@@ -50,7 +49,6 @@ public final class ProjectConfiguration {
 
             Properties properties = new Properties();
             properties.setProperty(PROJECT_NAME, name);
-            properties.setProperty(PROJECT_DIRECTORY, getDirectory().getAbsolutePath());
             properties.setProperty(PROJECT_FTP_HOST, ftpHost);
             properties.setProperty(PROJECT_FTP_USERNAME, ftpUsername);
             properties.setProperty(PROJECT_FTP_PASSWORD, ftpPassword);

@@ -1,7 +1,7 @@
 package uk.co.itstherules.marklog.editor;
 
 import org.apache.commons.io.FileUtils;
-import uk.co.itstherules.marklog.editor.dialogs.ProjectDialog;
+import uk.co.itstherules.marklog.editor.dialogs.EditProjectDialog;
 import uk.co.itstherules.marklog.editor.model.Post;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
@@ -113,6 +113,8 @@ public class MarklogController {
     }
 
     public void editProject(File file) {
-        new ProjectDialog(app, this, new ProjectConfiguration(file));
+        final ProjectConfiguration configuration = new ProjectConfiguration();
+        configuration.load(file);
+        new EditProjectDialog(app, this, configuration);
     }
 }

@@ -47,12 +47,12 @@ public class DeletingADirectoryWithNoChildrenFunctionalTest {
 
         openProjectIn(window);
 
-        final JPanelFixture fileSystemTree = window.panel("fileSystemTree");
+        JPanelFixture fileSystemTree = window.panel("fileSystemTree");
         fileSystemTree.requireVisible();
-        final JTreeFixture tree = fileSystemTree.tree();
+        JTreeFixture tree = fileSystemTree.tree();
         tree.rightClickPath("test_project/" + subFolder);
         window.menuItem("deleteDirectory").click();
-        assertThat(childDirectory.exists(), is(false));
+        assertThat(childDirectory, isDestroyedWithin(1000));
     }
 
 }

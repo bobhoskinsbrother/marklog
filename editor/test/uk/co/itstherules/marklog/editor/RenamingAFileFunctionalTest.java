@@ -79,8 +79,8 @@ public class RenamingAFileFunctionalTest {
         newFileName.setText("im_a_renamed_post.md");
         renameFileDialog.button("renameButton").click();
 
-        assertThat(new File(PROJECT_DIRECTORY, "im_a_renamed_post.md").exists(), is(true));
-        assertThat(file.exists(), is(false));
+        assertThat(new File(PROJECT_DIRECTORY, "im_a_renamed_post.md"), isCreatedWithin(1000));
+        assertThat(file, isDestroyedWithin(1000));
     }
 
     @Test
@@ -105,7 +105,7 @@ public class RenamingAFileFunctionalTest {
         newFileName.setText("im_a_renamed_post.md");
         renameFileDialog.button("renameButton").click();
 
-        assertThat(new File(PROJECT_DIRECTORY, "im_a_renamed_post.md").exists(), is(true));
+        assertThat(new File(PROJECT_DIRECTORY, "im_a_renamed_post.md"), isCreatedWithin(1000));
         assertThat(file, isDestroyedWithin(1000));
     }
 

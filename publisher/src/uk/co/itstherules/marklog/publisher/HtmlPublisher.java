@@ -41,7 +41,8 @@ public final class HtmlPublisher {
             throw new RuntimeException("Project Configuration file (" + FilePaths.canonicalFor(confFile) + ") doesn't exist");
         }
         boolean copyOriginals = (args.length == 3 ? Boolean.getBoolean(args[3]) : false);
-        ProjectConfiguration configuration = new ProjectConfiguration(confFile);
+        ProjectConfiguration configuration = new ProjectConfiguration();
+        configuration.load(confFile);
         HtmlPublisher publisher = new HtmlPublisher(configuration, new File(args[1]), sysOutReporter());
         publisher.publishUsingTemplate("simple", copyOriginals);
     }

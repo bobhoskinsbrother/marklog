@@ -78,7 +78,8 @@ public final class MarklogPanelBuilder implements Builder<JPanel> {
                 int returnVal = fileChooser.showOpenDialog(app);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     File file = fileChooser.getSelectedFile();
-                    final ProjectConfiguration configuration = new ProjectConfiguration(file);
+                    ProjectConfiguration configuration = new ProjectConfiguration();
+                    configuration.load(file);
                     controller.newMarklogProject(configuration);
                 }
             }

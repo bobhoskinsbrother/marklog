@@ -56,8 +56,8 @@ public class RenamingADirectoryFunctionalTest {
 
         textField.setText("new_directory_name").pressAndReleaseKeys(VK_ENTER);
 
-        assertThat(new File(PROJECT_DIRECTORY, "new_directory_name").exists(), is(true));
-        assertThat(directory.exists(), is(false));
+        assertThat(new File(PROJECT_DIRECTORY, "new_directory_name"), isCreatedWithin(1000));
+        assertThat(directory, isDestroyedWithin(1000));
     }
 
     @Test
@@ -79,8 +79,8 @@ public class RenamingADirectoryFunctionalTest {
         newFileName.setText("new_directory_name");
         renameFileDialog.button("renameButton").click();
 
-        assertThat(new File(PROJECT_DIRECTORY, "new_directory_name").exists(), is(true));
-        assertThat(directory.exists(), is(false));
+        assertThat(new File(PROJECT_DIRECTORY, "new_directory_name"), isCreatedWithin(1000));
+        assertThat(directory, isDestroyedWithin(1000));
     }
 
     @Test
@@ -105,8 +105,8 @@ public class RenamingADirectoryFunctionalTest {
         newFileName.setText("new_directory_name");
         renameFileDialog.button("renameButton").click();
 
-        assertThat(new File(PROJECT_DIRECTORY, "new_directory_name").exists(), is(true));
-        assertThat(directory.exists(), is(false));
+        assertThat(new File(PROJECT_DIRECTORY, "new_directory_name"), isCreatedWithin(1000));
+        assertThat(directory, isDestroyedWithin(1000));
     }
 
 }
