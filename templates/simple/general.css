@@ -1,0 +1,103 @@
+@font-face {
+    font-family: 'bitter';
+    src: url('fonts/bitter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'sanchez';
+    src: url('fonts/sanchez.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'mavenpro';
+    src: url('fonts/mavenpro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'dejavu_mono';
+    src: url('fonts/dejavu_sans_mono.eot'),url('fonts/dejavu_sans_mono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    background: #D7D7D7;
+    font-family: 'mavenpro', sans-serif;
+    font-size: 1em;
+}
+
+
+.posts {
+    margin: auto;
+    background: #FFFFFF;
+    width: 65%;
+    padding: 20px;
+    box-shadow:0px 0px 20px 0px #999999;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -o-border-radius: 5px;
+    -ms-border-radius: 5px;
+}
+
+
+.post {
+    padding-bottom: 10px;
+}
+
+pre {
+    font-family: 'dejavu_mono', monospace;
+    font-size: 1.2em;
+    padding: 10px;
+    overflow: auto;
+    color: #000000;
+    background: #FFFFFF;
+    position: relative;
+    box-shadow: inset 0 0 3px #888888;
+    -o-box-shadow: inset 0 0 3px #888888;
+    -ms-box-shadow: inset 0 0 3px #888888;
+    -moz-box-shadow: inset 0 0 3px #888888;
+    -webkit-box-shadow: inset 0 0 3px #888888;
+}
+
+a {
+    color: #555555;
+}
+
+h1 {
+    font-family: 'sanchez', sans-serif;
+    font-size: 1.5em;
+    color: #000000;
+    padding: 0px 0px;
+}
+
+.header {
+    padding: 5px 15px;
+    background: #FDF5E7;
+}
+
+.a_bit_smaller{ font-size: 0.8em; }
+
+.post_info {
+    background: #FDF5E7;
+    color: #000000;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 0px none #FFFFFF;
+    border-top: 3px dashed #D7D7D7;
+    margin-bottom: 50px;
+}
+
+img{
+    float: left;
+    padding: 15px;
+}

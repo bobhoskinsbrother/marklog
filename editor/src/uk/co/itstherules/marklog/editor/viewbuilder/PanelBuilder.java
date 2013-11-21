@@ -33,20 +33,6 @@ public final class PanelBuilder implements Builder<JPanel> {
         return this;
     }
 
-    public PanelBuilder gridLayout(int rows, int columns, int horizontalGap, int verticalGap) {
-        layout(new GridLayout(rows, columns, horizontalGap, verticalGap));
-        return this;
-    }
-
-    public PanelBuilder gridLayout(int rows, int columns, int gap) {
-        layout(new GridLayout(rows, columns, gap, gap));
-        return this;
-    }
-
-    public PanelBuilder gridLayout(int rows, int columns) {
-        return gridLayout(rows, columns, 0);
-    }
-
     public PanelBuilder ofSize(int width, int height) {
         item.setPreferredSize(new Dimension(width, height));
         return this;
@@ -61,6 +47,11 @@ public final class PanelBuilder implements Builder<JPanel> {
         constraints.weighty = 1.0;
         return constraints;
 
+    }
+
+    public PanelBuilder add(Component component, String details) {
+        item.add(component, details);
+        return this;
     }
 
     public PanelBuilder add(Component component) {

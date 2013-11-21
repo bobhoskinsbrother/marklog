@@ -13,7 +13,6 @@ public final class ProjectConfiguration {
     private static final String PROJECT_FTP_HOST = "project.ftp.host";
     private static final String PROJECT_FTP_USERNAME = "project.ftp.username";
     private static final String PROJECT_FTP_PASSWORD = "project.ftp.password";
-    private File file;
     private File directory;
     private String name;
     private String ftpHost;
@@ -28,10 +27,10 @@ public final class ProjectConfiguration {
         ftpPassword = "";
     }
 
-    public ProjectConfiguration(File propertyFile) {
+    public ProjectConfiguration(File file) {
         Properties properties = new Properties();
         try {
-            properties.load(new FileInputStream(propertyFile));
+            properties.load(new FileInputStream(file));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -40,7 +39,6 @@ public final class ProjectConfiguration {
         ftpHost = properties.getProperty(PROJECT_FTP_HOST);
         ftpUsername = properties.getProperty(PROJECT_FTP_USERNAME);
         ftpPassword = properties.getProperty(PROJECT_FTP_PASSWORD);
-        file = propertyFile;
     }
 
     public void save() {
@@ -48,6 +46,8 @@ public final class ProjectConfiguration {
             if (!directory.exists()) {
                 directory.mkdirs();
             }
+            File file = makeFile();
+
             Properties properties = new Properties();
             properties.setProperty(PROJECT_NAME, name);
             properties.setProperty(PROJECT_DIRECTORY, getDirectory().getAbsolutePath());
@@ -63,12 +63,14 @@ public final class ProjectConfiguration {
         }
     }
 
-    public File getDirectory() {
-        return directory;
+    private File makeFile() {
+        final FileifyTitle fileifyTitle = new FileifyTitle(".marklog");
+        final String fileName = fileifyTitle.manipulate(name);
+        return new File(directory, fileName);
     }
 
-    public void setDirectory(File directory) {
-        this.directory = directory;
+    public File getDirectory() {
+        return directory;
     }
 
     public boolean isValid() {
@@ -85,38 +87,38 @@ public final class ProjectConfiguration {
         return true;
     }
 
-    public String getName() {
-        return name;
+    public void setDirectory(File directory) {
+        this.directory = directory;
     }
 
     public void setName(String name) {
         this.name = name;
-        final FileifyTitle fileifyTitle = new FileifyTitle(".marklog");
-        final String fileName = fileifyTitle.manipulate(name);
-        file = new File(directory, fileName);
-    }
-
-    public String getFtpHost() {
-        return ftpHost;
     }
 
     public void setFtpHost(String ftpHost) {
         this.ftpHost = ftpHost;
     }
 
-    public String getFtpUsername() {
-        return ftpUsername;
-    }
-
     public void setFtpUsername(String ftpUsername) {
         this.ftpUsername = ftpUsername;
     }
 
-    public String getFtpPassword() {
-        return ftpPassword;
-    }
-
     public void setFtpPassword(String ftpPassword) {
         this.ftpPassword = ftpPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getFtpHost() {
+        return ftpHost;
+    }
+    public String getFtpUsername() {
+        return ftpUsername;
+    }
+
+    public String getFtpPassword() {
+        return ftpPassword;
     }
 }

@@ -34,7 +34,7 @@ public final class RenameFileDialog extends JDialog {
         add(new JLabel("<html><h2>Rename File</h2>"), "wrap");
         add(new JSeparator(), "wrap");
         add(new JLabel("File Name: " + oldFile.getName()), "wrap");
-        add(textField(oldFileName).name("newFileName").ofSize(340, 30).withTextChangedAction(applyToFileName()).ok(), "wrap");
+        add(textField(oldFileName).withName("newFileName").ofSize(340, 30).withTextChangedAction(applyToFileName()).ok(), "wrap");
         add(renameButton);
         pack();
         setLocationRelativeTo(app);

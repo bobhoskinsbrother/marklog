@@ -31,23 +31,34 @@ public class CreatingANewProjectFunctionalTest {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown() throws IOException {
         window.cleanUp();
+        reset();
     }
 
     @Test
     public void canStartANewProject() throws Exception {
         window.menuItemWithPath("File", "New Project...").click();
         final DialogFixture dialog = window.dialog();
-        final String projectName = "My New Test Project";
-        dialog.textBox().setText(projectName);
+        final String ftpHost = "my.host.com";
+        final String ftpUserName = "bigdaddy";
+        final String ftpPassword = "scareyBadgers";
+        dialog.textBox("projectName").setText(PROJECT_NAME);
         dialog.panel("directoryChooser").button("chooseDirectoryButton").click();
         dialog.fileChooser().fileNameTextBox().setText(PROJECT_DIRECTORY.getAbsolutePath());
         dialog.fileChooser().approve();
-        dialog.button("createProject").click();
-        assertThat(PROJECT_FILE, isCreatedWithin(1000));
-        final String projectFileString = MakeString.from(PROJECT_FILE);
-        assertThat(projectFileString, containsString("project.name=" + projectName));
+        dialog.textBox("ftpHost").setText(ftpHost);
+        dialog.textBox("ftpUserName").setText(ftpUserName);
+        dialog.textBox("ftpPassword").setText(ftpPassword);
+        dialog.button("saveProject").click();
+
+        assertThat(PROJECT_FILE, isCreatedWithin(2000));
+
+        String projectFileString = MakeString.from(PROJECT_FILE);
+        assertThat(projectFileString, containsString("project.name=" + PROJECT_NAME));
+        assertThat(projectFileString, containsString("project.ftp.host=" + ftpHost));
+        assertThat(projectFileString, containsString("project.ftp.username=" + ftpUserName));
+        assertThat(projectFileString, containsString("project.ftp.password=" + ftpPassword));
         assertThat(projectFileString, containsString("project.directory=" + PROJECT_DIRECTORY.getAbsolutePath()));
     }
 

@@ -6,6 +6,7 @@ import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
 import uk.co.itstherules.marklog.editor.dialogs.RenameFileDialog;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.*;
+import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import javax.swing.*;
 import javax.swing.tree.TreeSelectionModel;
@@ -26,14 +27,16 @@ public class FileSystemTree extends JPanel {
     private final MarklogController controller;
     private final FileSystemModel fileSystemModel;
     private final File root;
+    private final ProjectConfiguration configuration;
     private JTree tree;
 
-    public FileSystemTree(MarklogApp app, MarklogController controller, final File baseDirectory) {
-        root = baseDirectory;
+    public FileSystemTree(MarklogApp app, MarklogController controller, ProjectConfiguration configuration) {
+        this.configuration = configuration;
+        root = configuration.getDirectory();
         setName("fileSystemTree");
         this.app = app;
         this.controller = controller;
-        fileSystemModel = new FileSystemModel(baseDirectory);
+        fileSystemModel = new FileSystemModel(root);
         tree = makeTree(fileSystemModel);
         tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         setLayout(new BorderLayout());
@@ -42,7 +45,7 @@ public class FileSystemTree extends JPanel {
         JPanel panel = makeScrollPaneWithTree(tree);
         add(CENTER, panel);
         setVisible(true);
-        setupWorker(baseDirectory);
+        setupWorker(root);
     }
 
     private void setupWorker(File baseDirectory) {
@@ -78,7 +81,7 @@ public class FileSystemTree extends JPanel {
     private ButtonActionBuilder.ApplyChanged openSyncDialog() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                controller.openSyncDialog(root);
+                controller.openSyncDialog(configuration);
             }
         };
     }

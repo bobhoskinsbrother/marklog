@@ -20,7 +20,6 @@ import java.io.File;
 public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
 
     private final HtmlPanel htmlPanel;
-    private final File file;
     private final UndoManager undoManager;
     private final JTextArea textArea;
     private final Post post;
@@ -29,7 +28,6 @@ public final class MarkdownTextAreaBuilder implements Builder<JTextArea> {
         textArea = new JTextArea();
         textArea.setName("markdownTextArea");
         this.htmlPanel = htmlPanel;
-        this.file = file;
         this.undoManager = new UndoManager();
         setStyling();
         listenForChangesToDocument();

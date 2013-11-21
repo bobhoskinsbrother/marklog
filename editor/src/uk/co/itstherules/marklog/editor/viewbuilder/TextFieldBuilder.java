@@ -23,7 +23,7 @@ public final class TextFieldBuilder implements Builder<JTextField> {
         return new TextFieldBuilder("");
     }
 
-    public TextFieldBuilder name(String name) {
+    public TextFieldBuilder withName(String name) {
         item.setName(name);
         return this;
     }

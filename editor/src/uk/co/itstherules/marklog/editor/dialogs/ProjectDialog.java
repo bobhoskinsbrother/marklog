@@ -32,10 +32,10 @@ public class ProjectDialog extends JDialog {
         this.configuration = configuration;
         setLayout(new MigLayout("insets 10"));
 
-        JTextField projectNameTextField = textFieldWhenTextChanged(applyToProjectName(), configuration.getName());
-        JTextField ftpHostTextField = textFieldWhenTextChanged(applyToFtpHost(), configuration.getFtpHost());
-        JTextField ftpUserNameTextField = textFieldWhenTextChanged(applyToFtpUsername(), configuration.getFtpUsername());
-        JTextField ftpPasswordTextField = textFieldWhenTextChanged(applyToFtpPassword(), configuration.getFtpPassword());
+        JTextField projectNameTextField = textFieldWhenTextChanged(applyToProjectName(), "projectName", configuration.getName());
+        JTextField ftpHostTextField = textFieldWhenTextChanged(applyToFtpHost(), "ftpHost", configuration.getFtpHost());
+        JTextField ftpUserNameTextField = textFieldWhenTextChanged(applyToFtpUsername(), "ftpUserName", configuration.getFtpUsername());
+        JTextField ftpPasswordTextField = textFieldWhenTextChanged(applyToFtpPassword(), "ftpPassword", configuration.getFtpPassword());
 
         DirectoryChooserComponent directoryChooser = new DirectoryChooserComponent(configuration.getDirectory());
         JButton saveButton = button("Save Project").withClickAction(verifyAndSaveProjectFile()).ok();
@@ -63,8 +63,8 @@ public class ProjectDialog extends JDialog {
         setVisible(true);
     }
 
-    private JTextField textFieldWhenTextChanged(TextFieldActionBuilder.ApplyChanged applyChanged, String text) {
-        return textField().ofSize(340, 30).withValue(text).withTextChangedAction(applyChanged).ok();
+    private JTextField textFieldWhenTextChanged(TextFieldActionBuilder.ApplyChanged applyChanged, String name, String text) {
+        return textField(text).ofSize(340, 30).withName(name).withTextChangedAction(applyChanged).ok();
     }
 
     private ButtonActionBuilder.ApplyChanged verifyAndSaveProjectFile() {

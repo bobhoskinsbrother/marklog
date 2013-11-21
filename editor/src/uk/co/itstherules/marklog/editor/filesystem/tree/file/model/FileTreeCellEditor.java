@@ -31,7 +31,7 @@ public class FileTreeCellEditor extends AbstractCellEditor implements TreeCellEd
     }
 
     private JTextField makeTextField() {
-        final JTextField textField = textField().name("textField").ok();
+        final JTextField textField = textField().withName("textField").ok();
         textField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 value = textField.getText();

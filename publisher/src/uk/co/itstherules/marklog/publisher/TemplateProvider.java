@@ -4,56 +4,39 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
 import org.markdown4j.Markdown4jProcessor;
-import templates.Root;
 import uk.co.itstherules.marklog.editor.model.Post;
-import uk.co.itstherules.marklog.editor.model.PostHeader;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 final class TemplateProvider {
 
     private final String directory;
 
-    private enum TemplateType {
-
-        POST("post.ftl");
-
-        private final String path;
-
-        private TemplateType(String path) {
-            this.path = path;
-        }
-
-        @Override
-        public String toString() {
-            return path;
-        }
-    }
-
     TemplateProvider(String directory) {
         this.directory = directory;
     }
 
-    String makePost(Post post) {
-        final PostHeader header = post.getHeader();
+    String makePosts(String title, List<Post> posts) {
         Map<String, Object> map = new HashMap<>();
-        map.put("post", htmlFrom(post));
-        map.put("title", header.getTitle());
-        map.put("author", header.getAuthor());
-        map.put("date", header.getDate());
-        map.put("tags", header.getTags());
-        return merge(TemplateType.POST, map);
+        map.put("title", title);
+        map.put("convert", new Convert());
+        map.put("posts", posts);
+        return merge(TemplateType.POSTS, map);
     }
 
-    private String htmlFrom(Post post) {
-        try {
-            return new Markdown4jProcessor().process(new StringReader(post.getMarkdown()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    String makePost(Post post) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("title", post.getHeader().getTitle());
+        map.put("convert", new Convert());
+        map.put("post", post);
+        return merge(TemplateType.POST, map);
     }
 
     private String merge(TemplateType type, Map<String, Object> dataModel) {
@@ -71,8 +54,35 @@ final class TemplateProvider {
         Configuration configuration = new Configuration();
         configuration.setEncoding(Locale.UK, "UTF-8");
         configuration.setURLEscapingCharset("UTF-8");
-        configuration.setClassForTemplateLoading(Root.class, directory);
-        return configuration.getTemplate(templateType.toString());
+        configuration.setDirectoryForTemplateLoading(new File(System.getProperty("user.dir")));
+        return configuration.getTemplate("templates/"+directory+"/"+templateType.toString());
+    }
+
+    private enum TemplateType {
+        POST("post.ftl"),
+        POSTS("posts.ftl");
+        private final String path;
+
+        private TemplateType(String path) {
+            this.path = path;
+        }
+
+        @Override
+        public String toString() {
+            return path;
+        }
+    }
+
+    public class Convert {
+
+        public String toHtml(String markdown) {
+            try {
+                return new Markdown4jProcessor().process(new StringReader(markdown));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
     }
 
 }

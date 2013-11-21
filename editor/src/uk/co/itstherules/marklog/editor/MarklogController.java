@@ -108,8 +108,8 @@ public class MarklogController {
         projectEditor.reloadTabIfOpen(file);
     }
 
-    public void openSyncDialog(File root) {
-        syncDialog(app, root).ok();
+    public void openSyncDialog(ProjectConfiguration configuration) {
+        syncDialog(app, configuration).ok();
     }
 
     public void editProject(File file) {
