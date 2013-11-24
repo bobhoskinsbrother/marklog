@@ -2,13 +2,11 @@ package uk.co.itstherules.marklog.publisher;
 
 import org.apache.commons.io.FileUtils;
 import uk.co.itstherules.marklog.actions.UpdateReporter;
+import uk.co.itstherules.marklog.editor.model.Link;
 import uk.co.itstherules.marklog.editor.model.Post;
 import uk.co.itstherules.marklog.editor.model.PostService;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 import uk.co.itstherules.marklog.filesystem.FilePaths;
-import uk.co.itstherules.marklog.string.Append;
-import uk.co.itstherules.marklog.string.Chomp;
-import uk.co.itstherules.marklog.string.CompositeStringManipulator;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -32,44 +30,6 @@ public final class HtmlPublisher {
         this.service = service;
     }
 
-    public static void main(String[] args) {
-        if (args.length < 2) {
-            throw new RuntimeException("Usage: uk.co.itstherules.marklog.publisher.HtmlPublisher <marklog configuration file> <target directory> <!optional copy original md files>");
-        }
-        File confFile = new File(args[0]);
-        if (!confFile.exists()) {
-            throw new RuntimeException("Project Configuration file (" + FilePaths.canonicalFor(confFile) + ") doesn't exist");
-        }
-        boolean copyOriginals = (args.length == 3 ? Boolean.getBoolean(args[3]) : false);
-        ProjectConfiguration configuration = new ProjectConfiguration();
-        configuration.load(confFile);
-        PostService service = new PostService(configuration.getDirectory());
-        HtmlPublisher publisher = new HtmlPublisher(configuration, new File(args[1]), sysOutReporter(), service);
-        publisher.publishUsingTemplate("simple", copyOriginals);
-    }
-
-    private static UpdateReporter sysOutReporter() {
-        return new UpdateReporter() {
-            @Override public void report(String... toReport) {
-                for (String s : toReport) {
-                    System.out.println(s);
-                }
-                System.out.println("\n");
-            }
-
-            @Override public void error(String... toReport) {
-                for (String s : toReport) {
-                    System.err.println(s);
-                }
-                System.err.println("\n");
-            }
-
-            @Override public void success(String... success) {
-                report(success);
-            }
-        };
-    }
-
     public String makePosts(String templateName, String title, List<Post> posts) {
         return new TemplateProvider(templateName, service).makePosts(title, posts);
     }
@@ -85,6 +45,8 @@ public final class HtmlPublisher {
         resetTargetDirectory();
 
         publishTop10Posts(templateName);
+        publishTags(templateName);
+        publishArchives(templateName);
         publishIndividualPosts(templateName, projectDirectory, FilePaths.canonicalFor(projectDirectory), copyOriginals);
         copyTemplateAssets();
 
@@ -123,6 +85,30 @@ public final class HtmlPublisher {
         deleteTargetIfExists();
         targetDirectory.mkdirs();
         reporter.success("Made target project directory");
+    }
+
+    private void publishTags(String templateName) {
+        reporter.report("Publish all tag pages from project directory");
+        final List<Link> links = service.tagsLinks();
+        for (Link link : links) {
+            final String tag = link.getText();
+            String postsString = makePosts(templateName, configuration.getName(), service.postsForTag(tag));
+            File targetFile = new File(targetDirectory, link.getLocation());
+            writeFileWithReport(postsString, targetFile);
+        }
+        reporter.success("Successfully published all tag pages");
+    }
+
+    private void publishArchives(String templateName) {
+        reporter.report("Publish all archives from project directory");
+        final List<Link> links = service.archivesLinks();
+        for (Link link : links) {
+            final String archiveText = link.getText();
+            String postsString = makePosts(templateName, configuration.getName(), service.postsForArchive(archiveText));
+            File targetFile = new File(targetDirectory, link.getLocation());
+            writeFileWithReport(postsString, targetFile);
+        }
+        reporter.success("Successfully published all archives pages");
     }
 
     private void publishTop10Posts(String templateName) {
@@ -191,6 +177,10 @@ public final class HtmlPublisher {
 
     private void writeHtml(String relativePath, String reply) {
         File targetFile = new File(targetDirectory, switchMdForHtml(relativePath));
+        writeFileWithReport(reply, targetFile);
+    }
+
+    private void writeFileWithReport(String reply, File targetFile) {
         reporter.report("    Html file is: " + targetFile.getAbsolutePath());
         makeParentIfNotExists(targetFile);
         reporter.report("    About to write html file: " + targetFile.getAbsolutePath());
@@ -244,4 +234,44 @@ public final class HtmlPublisher {
             throw new RuntimeException(e);
         }
     }
+
+    public static void main(String[] args) {
+        if (args.length < 2) {
+            throw new RuntimeException("Usage: uk.co.itstherules.marklog.publisher.HtmlPublisher <marklog configuration file> <target directory> <!optional copy original md files>");
+        }
+        File confFile = new File(args[0]);
+        if (!confFile.exists()) {
+            throw new RuntimeException("Project Configuration file (" + FilePaths.canonicalFor(confFile) + ") doesn't exist");
+        }
+        boolean copyOriginals = (args.length == 3 ? Boolean.getBoolean(args[3]) : false);
+        ProjectConfiguration configuration = new ProjectConfiguration();
+        configuration.load(confFile);
+        PostService service = new PostService(configuration.getDirectory());
+        HtmlPublisher publisher = new HtmlPublisher(configuration, new File(args[1]), sysOutReporter(), service);
+        publisher.publishUsingTemplate("simple", copyOriginals);
+    }
+
+    private static UpdateReporter sysOutReporter() {
+        return new UpdateReporter() {
+            @Override public void report(String... toReport) {
+                for (String s : toReport) {
+                    System.out.println(s);
+                }
+                System.out.println("\n");
+            }
+
+            @Override public void error(String... toReport) {
+                for (String s : toReport) {
+                    System.err.println(s);
+                }
+                System.err.println("\n");
+            }
+
+            @Override public void success(String... success) {
+                report(success);
+            }
+        };
+    }
+
+
 }

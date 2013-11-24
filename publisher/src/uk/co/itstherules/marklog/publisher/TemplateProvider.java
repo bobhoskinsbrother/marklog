@@ -44,6 +44,7 @@ final class TemplateProvider {
         map.put("posts", posts);
         map.put("tags_links", tagsLinks);
         map.put("archives_links", archivesLinks);
+        map.put("link_resolver", new LinkResolver());
         return merge(TemplateType.POSTS, map);
     }
 
@@ -64,14 +65,13 @@ final class TemplateProvider {
 
     private Template template(TemplateType templateType) throws IOException {
         Configuration configuration = new Configuration();
-        configuration.setEncoding(Locale.UK, "UTF-8");
-        configuration.setURLEscapingCharset("UTF-8");
+        configuration.setEncoding(Locale.UK, "utf8");
+        configuration.setURLEscapingCharset("utf8");
         configuration.setDirectoryForTemplateLoading(new File(System.getProperty("user.dir")));
         return configuration.getTemplate("templates/"+ templateDirectory +"/"+templateType.toString());
     }
 
     private enum TemplateType {
-        POST("post.ftl"),
         POSTS("posts.ftl"),
         JSON_POSTS("posts.json.ftl");
 

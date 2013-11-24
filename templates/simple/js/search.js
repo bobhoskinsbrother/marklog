@@ -120,7 +120,7 @@ var events = {
 
 var search_initialize = function (id) {
     rc.ajax({
-        "url": "posts.json",
+        "url": "/posts.json",
         "success": function (data) {
             var index = model.build_index(data);
             events.bind_search_to(id, index);

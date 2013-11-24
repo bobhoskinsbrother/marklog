@@ -11,7 +11,26 @@
 <div class="main_area">
     <div class="posts">
     <#list posts as post>
-        <#include "_post.ftl" />
+        <#assign header = post.header/>
+
+        <div class="header">
+            <#if header.title?? && header.title?has_content>
+                <h1><a href="${link_resolver.resolve(post)}">${convert.toHtml(header.title)}</a></h1>
+            </#if>
+            <#if header.author?? && header.author?has_content><p class="a_bit_smaller">by ${header.author}, <#if header.date??>${header.date?string("dd MMM yyyy")}</#if></p></#if>
+        </div>
+
+        <div class="post">
+        ${convert.toHtml(post.markdown)}
+        </div>
+
+
+        <div class="post_info">
+            <#if header.date??><strong>At</strong> ${header.date?string("HH:mm")}<br/></#if>
+            <#if header.tags?? && header.tags?size != 0>
+                <strong>Tags</strong> <#list header.tags as tag>${tag}<#if tag_has_next>, </#if></#list></#if>
+        </div>
+
         <#if post_has_next>
             <hr/>
         </#if>
@@ -22,21 +41,21 @@
         <input type="search" placeholder="Search" id="posts_search" class="search_field"/>
 
         <#if (tags_links?? && tags_links?size > 0)>
-        <h3>Tags</h3>
+            <h3>Tags</h3>
             <#list tags_links as link>
                 <a href="${link.location}">${link.text}</a>
                 <#if link_has_next>
-                <br/>
+                    <br/>
                 </#if>
             </#list>
         </#if>
 
         <#if (archives_links?? && archives_links?size > 0)>
-        <h3>Archives</h3>
+            <h3>Archives</h3>
             <#list archives_links as link>
                 <a href="${link.location}">${link.text}</a>
                 <#if link_has_next>
-                <br/>
+                    <br/>
                 </#if>
             </#list>
         </#if>

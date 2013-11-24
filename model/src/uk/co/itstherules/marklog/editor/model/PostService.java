@@ -21,23 +21,20 @@ public final class PostService {
 
     public PostService(File root) {
         this.root = root;
-        this.postsDirectory = new File(root,POSTS_DIRECTORY);
+        this.postsDirectory = new File(root, POSTS_DIRECTORY);
     }
 
     public List<Post> tenNewestPosts() {
         final List<Post> posts = allPosts();
         final List<Post> reply = new ArrayList<>();
-        Collections.sort(posts, new Comparator<Post>() {
-            @Override public int compare(Post post, Post post2) {
-                return post.getHeader().getDate().before(post2.getHeader().getDate()) ? 1 : -1;
-            }
-        });
+        Collections.sort(posts, new NewestPostComparator());
         int count = 0;
         for (Post post : posts) {
-            if(post.getHeader().getStage() == publish) {
+            if (post.getHeader().getStage() == publish) {
                 reply.add(post);
                 count++;
-                if(count==10) break;
+                if (count == 10)
+                    break;
             }
         }
         return reply;
@@ -52,7 +49,9 @@ public final class PostService {
                 String fileName = new FileifyTitle(".html").manipulate(tag);
                 tag = new Capitalize().manipulate(tag);
                 Link link = new Link("/tags/" + fileName, tag);
-                if(!reply.contains(link)) { reply.add(link); }
+                if (!reply.contains(link)) {
+                    reply.add(link);
+                }
             }
         }
         return new ArrayList<>(reply);
@@ -67,7 +66,9 @@ public final class PostService {
             String monthYear = formatter.format(date);
             String fileName = new FileifyTitle(".html").manipulate(monthYear);
             Link link = new Link("/archives/" + fileName, monthYear);
-            if(!interim.contains(link)) { interim.add(link); }
+            if (!interim.contains(link)) {
+                interim.add(link);
+            }
         }
         List<Link> reply = new ArrayList<>(interim);
         Collections.sort(reply, new MonthYearComparator());
@@ -76,10 +77,6 @@ public final class PostService {
 
     public List<Post> allPosts() {
         return collectPosts(postsDirectory);
-    }
-
-    public void createPostsDirectory() {
-        postsDirectory.mkdirs();
     }
 
     public String pathRelativeToRoot(File file) {
@@ -91,11 +88,53 @@ public final class PostService {
         String rootPath = FilePaths.canonicalFor(root);
         final File file = post.getFile();
         final String htmlName = markdownAsHtml(file.getName());
-        String reply = FilePaths.canonicalFor(file.getParentFile()).substring(rootPath.length() + 1);
-        return reply+"/"+ htmlName;
+        String reply = FilePaths.canonicalFor(file.getParentFile()).substring(rootPath.length());
+        return reply + "/" + htmlName;
     }
 
+    public URL projectRoot() {
+        try {
+            return root.toURI().toURL();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
+    public String markdownAsHtml(String filePath) {
+        return new CompositeStringManipulator(new Chomp(".md"), new Append(".html")).manipulate(filePath);
+    }
+
+    public List<Post> postsForTag(String tag) {
+        final List<Post> posts = allPosts();
+        final Set<Post> set = new LinkedHashSet<>();
+        for (Post post : posts) {
+            final List<String> tags = post.getHeader().getTags();
+            for (String postTag : tags) {
+                if (postTag.equalsIgnoreCase(tag)) {
+                    set.add(post);
+                }
+            }
+            if (tags.contains(tag)) {
+                set.add(post);
+            }
+        }
+        List<Post> reply = new ArrayList<>(set);
+        Collections.sort(reply, new NewestPostComparator());
+        return reply;
+    }
+
+    public List<Post> postsForArchive(String archiveText) {
+        final List<Post> posts = allPosts();
+        final List<Post> reply = new ArrayList<>();
+        for (Post post : posts) {
+            final Date date = post.getHeader().getDate();
+            if (monthYearFormatter().format(date).equals(archiveText)) {
+                reply.add(post);
+            }
+        }
+        Collections.sort(reply, new NewestPostComparator());
+        return reply;
+    }
 
     private DateFormat monthYearFormatter() {
         return new SimpleDateFormat("MMMMM yyyy");
@@ -118,19 +157,15 @@ public final class PostService {
         return posts;
     }
 
-    public URL projectRoot() {
-        try {
-            return root.toURI().toURL();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+    private static class NewestPostComparator implements Comparator<Post> {
+
+        @Override public int compare(Post post, Post post2) {
+            return post.getHeader().getDate().before(post2.getHeader().getDate()) ? 1 : -1;
         }
     }
 
-    public String markdownAsHtml(String filePath) {
-        return new CompositeStringManipulator(new Chomp(".md"), new Append(".html")).manipulate(filePath);
-    }
-
     private class MonthYearComparator implements Comparator<Link> {
+
         @Override public int compare(Link link1, Link link2) {
             try {
                 Date dateOne = monthYearFormatter().parse(link1.getText());
