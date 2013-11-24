@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.internal.matchers.TypeSafeMatcher;
 import uk.co.itstherules.marklog.actions.UpdateReporter;
+import uk.co.itstherules.marklog.editor.model.PostService;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import java.io.File;
@@ -18,6 +19,7 @@ public final class HtmlPublisherTest {
 
     public static final File TEMP_DIRECTORY = new File(System.getProperty("java.io.tmpdir"));
     public static final File TARGET_DIRECTORY = new File(TEMP_DIRECTORY + "/.marklog/test");
+    private PostService service;
 
     public static Matcher<File> existsWithin(final long millis) {
         return new TypeSafeMatcher<File>() {
@@ -45,13 +47,14 @@ public final class HtmlPublisherTest {
     @Before public void reset() throws Exception {
         FileUtils.deleteDirectory(TARGET_DIRECTORY);
         TARGET_DIRECTORY.mkdirs();
+        service = new PostService(TARGET_DIRECTORY);
     }
 
     @Test public void canPublish() {
         File configFile = new File("publisher/test_resource/test_blog/blog.marklog");
         ProjectConfiguration configuration = new ProjectConfiguration();
         configuration.load(configFile);
-        HtmlPublisher unit = new HtmlPublisher(configuration, TARGET_DIRECTORY, reporter());
+        HtmlPublisher unit = new HtmlPublisher(configuration, TARGET_DIRECTORY, reporter(), service);
         unit.publishUsingTemplate("simple", true);
         assertThat(file("index.html"), existsWithin(1000));
         assertThat(file("sub/sub.html"), existsWithin(1000));
@@ -84,7 +87,7 @@ public final class HtmlPublisherTest {
         File configFile = new File("publisher/test_resource/test_blog/blog.marklog");
         ProjectConfiguration configuration = new ProjectConfiguration();
         configuration.load(configFile);
-        HtmlPublisher unit = new HtmlPublisher(configuration, TARGET_DIRECTORY, reporter());
+        HtmlPublisher unit = new HtmlPublisher(configuration, TARGET_DIRECTORY, reporter(), service);
         unit.publishUsingTemplate("simple", false);
         assertThat(file("index.html"), existsWithin(1000));
         assertThat(file("sub/sub.html"), existsWithin(1000));

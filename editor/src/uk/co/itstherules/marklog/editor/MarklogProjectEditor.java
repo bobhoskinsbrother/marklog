@@ -2,6 +2,7 @@ package uk.co.itstherules.marklog.editor;
 
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.FileSystemTree;
 import uk.co.itstherules.marklog.editor.markdown.TabbedMarkdownEditors;
+import uk.co.itstherules.marklog.editor.model.PostService;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import javax.swing.*;
@@ -13,9 +14,9 @@ public final class MarklogProjectEditor extends JSplitPane {
 
     public MarklogProjectEditor(MarklogApp app, ProjectConfiguration configuration, MarklogController controller) {
         setName("MarklogProjectEditor");
-        File directory = configuration.getDirectory();
-        markdownEditors = new TabbedMarkdownEditors(directory);
-        FileSystemTree fileSystemTree = new FileSystemTree(app, controller, configuration);
+        PostService service = new PostService(configuration.getDirectory());
+        markdownEditors = new TabbedMarkdownEditors(service);
+        FileSystemTree fileSystemTree = new FileSystemTree(app, controller, configuration, service);
         setLeftComponent(fileSystemTree);
         setRightComponent(markdownEditors);
         setResizeWeight(0.25);

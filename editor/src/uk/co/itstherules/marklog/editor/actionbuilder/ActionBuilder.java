@@ -28,4 +28,8 @@ public final class ActionBuilder {
         return new TreeActionBuilder(tree);
     }
 
+    public static DialogActionBuilder when(JDialog item) {
+        return new DialogActionBuilder(item);
+    }
+
 }

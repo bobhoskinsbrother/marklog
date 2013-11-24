@@ -21,7 +21,6 @@ import static uk.co.itstherules.marklog.sync.FtpCode.*;
 public final class FtpClientTest {
 
     private FakeFtpServer fakeFtpServer;
-    private String localFile;
 
     @Before
     public void before() {
@@ -43,7 +42,7 @@ public final class FtpClientTest {
 
     @Test public void canPullFile() throws Exception {
         int port = fakeFtpServer.getServerControlPort();
-        FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
+        FtpClient unit = new FtpClient("0.0.0.0", port,"/tmp/data", "ben", "ben");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         final FtpCode outcome = unit.getFile(output, "file.txt");
         String localString = new String(output.toByteArray());
@@ -53,7 +52,7 @@ public final class FtpClientTest {
 
     @Test public void cannotPullUnknownFile() throws Exception {
         int port = fakeFtpServer.getServerControlPort();
-        FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
+        FtpClient unit = new FtpClient("0.0.0.0", port,"/tmp/data", "ben", "ben");
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         final FtpCode outcome = unit.getFile(output, "file_that_doesnt_exist.txt");
         assertThat(output.toByteArray().length, is(0));
@@ -62,7 +61,7 @@ public final class FtpClientTest {
 
     @Test public void canPutFile() throws Exception {
         int port = fakeFtpServer.getServerControlPort();
-        FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
+        FtpClient unit = new FtpClient("0.0.0.0", port,"/tmp/data", "ben", "ben");
         ByteArrayInputStream input = new ByteArrayInputStream("abcdef 1234567890".getBytes(Charset.forName("utf8")));
         final FtpCode outcome = unit.putFile(input, "remote_file.txt");
         FileSystem fileSystem = fakeFtpServer.getFileSystem();
@@ -72,7 +71,7 @@ public final class FtpClientTest {
 
     @Test public void canDeleteFile() throws Exception {
         int port = fakeFtpServer.getServerControlPort();
-        FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
+        FtpClient unit = new FtpClient("0.0.0.0", port,"/tmp/data", "ben", "ben");
         final FtpCode outcome = unit.deleteFile("file.txt");
         FileSystem fileSystem = fakeFtpServer.getFileSystem();
         assertThat(fileSystem.isFile("/tmp/data/file.txt"), is(false));
@@ -81,7 +80,7 @@ public final class FtpClientTest {
 
     @Test public void canOverwriteFile() throws Exception {
         int port = fakeFtpServer.getServerControlPort();
-        FtpClient unit = new FtpClient("0.0.0.0", port, "ben", "ben");
+        FtpClient unit = new FtpClient("0.0.0.0", port,"/tmp/data", "ben", "ben");
         final String overriddenText = "fred flintstone were ere";
         ByteArrayInputStream input = new ByteArrayInputStream(overriddenText.getBytes(Charset.forName("utf8")));
         FtpCode outcome = unit.putFile(input, "file.txt");

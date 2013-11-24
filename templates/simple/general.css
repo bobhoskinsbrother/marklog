@@ -1,27 +1,27 @@
 @font-face {
     font-family: 'bitter';
-    src: url('fonts/bitter.ttf') format('truetype');
+    src: url('/simple/fonts/bitter.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'sanchez';
-    src: url('fonts/sanchez.ttf') format('truetype');
+    src: url('/simple/fonts/sanchez.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'mavenpro';
-    src: url('fonts/mavenpro.ttf') format('truetype');
+    src: url('/simple/fonts/mavenpro.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'dejavu_mono';
-    src: url('fonts/dejavu_sans_mono.eot'),url('fonts/dejavu_sans_mono.ttf') format('truetype');
+    src: url('/simple/fonts/dejavu_sans_mono.eot'),url('/simple/fonts/dejavu_sans_mono.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -32,23 +32,60 @@ body {
     font-size: 1em;
 }
 
-
-.posts {
+.main_area {
     margin: auto;
     background: #FFFFFF;
-    width: 65%;
-    padding: 20px;
+    width: 75%;
+}
+
+.posts {
+    background: #FFFFFF;
+    float: left;
+    width: 70%;
+}
+
+.nav {
+    background: #FFFFFF;
+    float: right;
+    width: 20%;
+}
+
+.posts, .nav, .search_menu {
     box-shadow:0px 0px 20px 0px #999999;
     border-radius: 5px;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     -o-border-radius: 5px;
     -ms-border-radius: 5px;
+    padding: 20px;
 }
-
 
 .post {
     padding-bottom: 10px;
+}
+
+.search_field {
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.search_menu {
+    background: #FFFFFF;
+    width: 200px;
+    min-height: 250px;
+    max-height: 450px;
+    position: absolute;
+    z-index: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.search_menu_item {
+    padding-bottom: 10px;
+}
+
+.search_menu_item:hover {
+    background: #FDF5E7;
 }
 
 pre {

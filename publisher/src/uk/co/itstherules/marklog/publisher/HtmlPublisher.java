@@ -3,6 +3,7 @@ package uk.co.itstherules.marklog.publisher;
 import org.apache.commons.io.FileUtils;
 import uk.co.itstherules.marklog.actions.UpdateReporter;
 import uk.co.itstherules.marklog.editor.model.Post;
+import uk.co.itstherules.marklog.editor.model.PostService;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 import uk.co.itstherules.marklog.filesystem.FilePaths;
 import uk.co.itstherules.marklog.string.Append;
@@ -13,9 +14,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import static uk.co.itstherules.marklog.editor.model.PostHeader.PostStage.publish;
@@ -25,11 +23,13 @@ public final class HtmlPublisher {
     private final ProjectConfiguration configuration;
     private final File targetDirectory;
     private final UpdateReporter reporter;
+    private final PostService service;
 
-    public HtmlPublisher(ProjectConfiguration configuration, File targetDirectory, UpdateReporter reporter) {
+    public HtmlPublisher(ProjectConfiguration configuration, File targetDirectory, UpdateReporter reporter, PostService service) {
         this.configuration = configuration;
         this.targetDirectory = targetDirectory;
         this.reporter = reporter;
+        this.service = service;
     }
 
     public static void main(String[] args) {
@@ -43,7 +43,8 @@ public final class HtmlPublisher {
         boolean copyOriginals = (args.length == 3 ? Boolean.getBoolean(args[3]) : false);
         ProjectConfiguration configuration = new ProjectConfiguration();
         configuration.load(confFile);
-        HtmlPublisher publisher = new HtmlPublisher(configuration, new File(args[1]), sysOutReporter());
+        PostService service = new PostService(configuration.getDirectory());
+        HtmlPublisher publisher = new HtmlPublisher(configuration, new File(args[1]), sysOutReporter(), service);
         publisher.publishUsingTemplate("simple", copyOriginals);
     }
 
@@ -69,28 +70,28 @@ public final class HtmlPublisher {
         };
     }
 
-    public static String makePosts(String templateName, String title, List<Post> posts) {
-        return new TemplateProvider(templateName).makePosts(title, posts);
+    public String makePosts(String templateName, String title, List<Post> posts) {
+        return new TemplateProvider(templateName, service).makePosts(title, posts);
     }
 
-    public static String makePost(String templateName, Post post) {
-        return new TemplateProvider(templateName).makePost(post);
+    public static String makePost(String templateName, Post post, PostService service) {
+        return new TemplateProvider(templateName, service).makePost(post);
     }
 
     public void publishUsingTemplate(String templateName, boolean copyOriginals) {
         File projectDirectory = configuration.getDirectory();
-        reporter.report("Starting to publish your blog");
 
+        reporter.report("Starting to publish your blog");
         resetTargetDirectory();
 
-        publishTop10Posts(templateName, new File(projectDirectory, "posts"));
+        publishTop10Posts(templateName);
         publishIndividualPosts(templateName, projectDirectory, FilePaths.canonicalFor(projectDirectory), copyOriginals);
-        copyTemplateAssets(projectDirectory);
+        copyTemplateAssets();
 
         reporter.success("Successfully published your blog!");
     }
 
-    private void copyTemplateAssets(File projectDirectory) {
+    private void copyTemplateAssets() {
         reporter.report("Copying template assets");
         final File templates;
         try {
@@ -124,9 +125,9 @@ public final class HtmlPublisher {
         reporter.success("Made target project directory");
     }
 
-    private void publishTop10Posts(String templateName, File postsDirectory) {
+    private void publishTop10Posts(String templateName) {
         reporter.report("Publish top 10 posts from project directory");
-        String postsString = makePosts(templateName, configuration.getName(), top10Posts(postsDirectory));
+        String postsString = makePosts(templateName, configuration.getName(), service.tenNewestPosts());
         writeHtml("index.md", postsString);
         reporter.success("Successfully published top 10 posts");
     }
@@ -181,45 +182,9 @@ public final class HtmlPublisher {
     }
 
 
-
-    private List<Post> top10Posts(File postsDirectory) {
-        final List<Post> posts = collectPosts(postsDirectory);
-        final List<Post> reply = new ArrayList<>();
-        Collections.sort(posts, new Comparator<Post>() {
-            @Override public int compare(Post post, Post post2) {
-                return post.getHeader().getDate().before(post2.getHeader().getDate()) ? 1 : -1;
-            }
-        });
-        int count = 0;
-        for (Post post : posts) {
-            if(post.getHeader().getStage() == publish) {
-                reply.add(post);
-                count++;
-                if(count==10) break;
-            }
-        }
-        return reply;
-    }
-    private List<Post> collectPosts(File directory) {
-        List<Post> posts = new ArrayList<>();
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File sourceFile : files) {
-                if (sourceFile.isDirectory()) {
-                    posts.addAll(collectPosts(sourceFile));
-                } else {
-                    if (sourceFile.getName().endsWith(".md")) {
-                        posts.add(new Post(sourceFile));
-                    }
-                }
-            }
-        }
-        return posts;
-    }
-
     private void writeHtmlFrom(Post post, String templateName, String relativePath) {
         if (post.getHeader().getStage() == publish) {
-            String reply = makePost(templateName, post);
+            String reply = makePost(templateName, post, service);
             writeHtml(relativePath, reply);
         }
     }
@@ -256,7 +221,7 @@ public final class HtmlPublisher {
     }
 
     private String switchMdForHtml(String filePath) {
-        return new CompositeStringManipulator(new Chomp(".md"), new Append(".html")).manipulate(filePath);
+        return service.markdownAsHtml(filePath);
     }
 
     private String relativeFilePath(String canonicalRoot, File file) {

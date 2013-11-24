@@ -17,9 +17,10 @@ public final class ButtonBuilder implements Builder<JButton> {
         item.setName(new VariableName().manipulate(text));
     }
 
-    public ButtonBuilder(Icon icon, String tooltipText) {
+    public ButtonBuilder(Icon icon, String text) {
         item = new JButton(icon);
-        item.setToolTipText(tooltipText);
+        item.setToolTipText(text);
+        item.setName(new VariableName().manipulate(text));
     }
 
     public static ButtonBuilder button(String text) {

@@ -2,6 +2,7 @@ package uk.co.itstherules.marklog.editor.markdown;
 
 import org.xhtmlrenderer.simple.FSScrollPane;
 import uk.co.itstherules.marklog.editor.markdown.html.HtmlPanel;
+import uk.co.itstherules.marklog.editor.model.PostService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,10 +13,10 @@ public final class MarkdownAndHtmlPanel extends JPanel {
     private final HtmlPanel htmlPanel;
     private final JTextArea markdownArea;
 
-    public MarkdownAndHtmlPanel(File projectRoot, File file) {
+    public MarkdownAndHtmlPanel(PostService service, File file) {
         setLayout(new GridBagLayout());
         setPreferredSize(new Dimension(1024, 720));
-        htmlPanel = new HtmlPanel(projectRoot);
+        htmlPanel = new HtmlPanel(service);
         markdownArea = new MarkdownTextAreaBuilder(htmlPanel, file).ok();
         splitPane(htmlScroller(), markdownScroller());
     }

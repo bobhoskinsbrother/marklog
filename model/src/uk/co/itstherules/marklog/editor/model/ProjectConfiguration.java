@@ -10,6 +10,8 @@ public final class ProjectConfiguration {
 
     private static final String PROJECT_NAME = "project.name";
     private static final String PROJECT_FTP_HOST = "project.ftp.host";
+    private static final String PROJECT_FTP_PORT = "project.ftp.port";
+    private static final String PROJECT_FTP_WORKING_DIRECTORY= "project.ftp.working.directory";
     private static final String PROJECT_FTP_USERNAME = "project.ftp.username";
     private static final String PROJECT_FTP_PASSWORD = "project.ftp.password";
     private File directory;
@@ -17,11 +19,15 @@ public final class ProjectConfiguration {
     private String ftpHost;
     private String ftpUsername;
     private String ftpPassword;
+    private int ftpPort;
+    private String ftpWorkingDirectory;
 
     public ProjectConfiguration() {
         directory = new File(System.getProperty("user.dir"));
         setName("New Blog");
         ftpHost = "";
+        ftpWorkingDirectory = "/";
+        ftpPort = 21;
         ftpUsername = "";
         ftpPassword = "";
     }
@@ -36,6 +42,8 @@ public final class ProjectConfiguration {
         name = properties.getProperty(PROJECT_NAME);
         directory = file.getParentFile();
         ftpHost = properties.getProperty(PROJECT_FTP_HOST);
+        ftpPort = Integer.parseInt(properties.getProperty(PROJECT_FTP_PORT));
+        ftpWorkingDirectory = properties.getProperty(PROJECT_FTP_WORKING_DIRECTORY);
         ftpUsername = properties.getProperty(PROJECT_FTP_USERNAME);
         ftpPassword = properties.getProperty(PROJECT_FTP_PASSWORD);
     }
@@ -50,6 +58,8 @@ public final class ProjectConfiguration {
             Properties properties = new Properties();
             properties.setProperty(PROJECT_NAME, name);
             properties.setProperty(PROJECT_FTP_HOST, ftpHost);
+            properties.setProperty(PROJECT_FTP_PORT, String.valueOf(ftpPort));
+            properties.setProperty(PROJECT_FTP_WORKING_DIRECTORY, ftpWorkingDirectory);
             properties.setProperty(PROJECT_FTP_USERNAME, ftpUsername);
             properties.setProperty(PROJECT_FTP_PASSWORD, ftpPassword);
             OutputStream out = new FileOutputStream(file);
@@ -76,13 +86,13 @@ public final class ProjectConfiguration {
     }
 
     public boolean isFtpInformationValid() {
-        final List<String> values = Arrays.asList(ftpHost, ftpPassword, ftpUsername);
+        final List<String> values = Arrays.asList(ftpHost, ftpWorkingDirectory, ftpPassword, ftpUsername);
         for (String value : values) {
             if ("".equals(value)) {
                 return false;
             }
         }
-        return true;
+        return ftpPort > 0 && ftpPort < 49152;
     }
 
     public void setDirectory(File directory) {
@@ -95,6 +105,10 @@ public final class ProjectConfiguration {
 
     public void setFtpHost(String ftpHost) {
         this.ftpHost = ftpHost;
+    }
+
+    public void setFtpWorkingDirectory(String ftpWorkingDirectory) {
+        this.ftpWorkingDirectory = ftpWorkingDirectory;
     }
 
     public void setFtpUsername(String ftpUsername) {
@@ -118,5 +132,17 @@ public final class ProjectConfiguration {
 
     public String getFtpPassword() {
         return ftpPassword;
+    }
+
+    public int getFtpPort() {
+        return ftpPort;
+    }
+
+    public void setFtpPort(int port) {
+        this.ftpPort = port;
+    }
+
+    public String getFtpWorkingDirectory() {
+        return ftpWorkingDirectory;
     }
 }

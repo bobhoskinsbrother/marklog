@@ -11,9 +11,11 @@ public final class FtpClient {
 
     private final FTPClient client;
 
-    public FtpClient(String host, int port, String username, String password) throws IOException {
+    public FtpClient(String host, int port,String workingDirectory, String username, String password) throws IOException {
         client = new FTPClient();
         client.connect(host, port);
+        if("".equals(workingDirectory)) { workingDirectory = "/"; }
+        client.changeWorkingDirectory(workingDirectory);
         client.enterLocalPassiveMode();
         client.login(username, password);
         client.setKeepAlive(true);

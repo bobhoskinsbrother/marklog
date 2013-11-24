@@ -3,6 +3,7 @@ package uk.co.itstherules.marklog.editor;
 import org.apache.commons.io.FileUtils;
 import uk.co.itstherules.marklog.editor.dialogs.EditProjectDialog;
 import uk.co.itstherules.marklog.editor.model.Post;
+import uk.co.itstherules.marklog.editor.model.PostService;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import javax.swing.*;
@@ -108,8 +109,8 @@ public class MarklogController {
         projectEditor.reloadTabIfOpen(file);
     }
 
-    public void openSyncDialog(ProjectConfiguration configuration) {
-        syncDialog(app, configuration).ok();
+    public void openSyncDialog(ProjectConfiguration configuration, PostService service) {
+        syncDialog(app, configuration, service).ok();
     }
 
     public void editProject(File file) {

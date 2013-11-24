@@ -26,7 +26,7 @@ public final class Syncer {
                 try {
                     String canonicalRoot = FilePaths.canonicalFor(source);
                     reporter.report("Attempting to connect to the remote ftp server");
-                    FtpClient client = new FtpClient(c.getFtpHost(), 21, c.getFtpUsername(), c.getFtpPassword());
+                    FtpClient client = new FtpClient(c.getFtpHost(), c.getFtpPort(), c.getFtpWorkingDirectory(), c.getFtpUsername(), c.getFtpPassword());
                     reporter.success("Successfully connected to the remote ftp server");
                     walkDirectory(canonicalRoot, source, client);
                     client.close();

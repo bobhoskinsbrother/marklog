@@ -1,9 +1,12 @@
 package uk.co.itstherules.marklog.editor.viewbuilder;
 
 import net.miginfocom.swing.MigLayout;
+import uk.co.itstherules.marklog.editor.actionbuilder.DialogActionBuilder;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static uk.co.itstherules.marklog.editor.actionbuilder.ActionBuilder.when;
 
 public final class DialogBuilder implements Builder<JDialog> {
 
@@ -61,4 +64,10 @@ public final class DialogBuilder implements Builder<JDialog> {
         item.setLocationRelativeTo(parent);
         return this;
     }
+
+    public DialogBuilder withCloseAction(DialogActionBuilder.ApplyChanged applyChanged) {
+        when(item).windowIsClosing(applyChanged);
+        return this;
+    }
+
 }

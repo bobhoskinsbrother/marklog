@@ -6,6 +6,7 @@ import uk.co.itstherules.marklog.editor.actionbuilder.ButtonActionBuilder;
 import uk.co.itstherules.marklog.editor.actionbuilder.TreeActionBuilder;
 import uk.co.itstherules.marklog.editor.dialogs.RenameFileDialog;
 import uk.co.itstherules.marklog.editor.filesystem.tree.file.model.*;
+import uk.co.itstherules.marklog.editor.model.PostService;
 import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import javax.swing.*;
@@ -29,16 +30,17 @@ public class FileSystemTree extends JPanel {
     private final File root;
     private final ProjectConfiguration configuration;
     private JTree tree;
+    private PostService service;
 
-    public FileSystemTree(MarklogApp app, MarklogController controller, ProjectConfiguration configuration) {
+    public FileSystemTree(MarklogApp app, MarklogController controller, ProjectConfiguration configuration, PostService service) {
         this.configuration = configuration;
+        this.service = service;
         root = configuration.getDirectory();
         setName("fileSystemTree");
         this.app = app;
         this.controller = controller;
         fileSystemModel = new FileSystemModel(root);
         tree = makeTree(fileSystemModel);
-        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         setLayout(new BorderLayout());
         setMinimumSize(new Dimension(200, 400));
         setPreferredSize(new Dimension(200, 400));
@@ -58,9 +60,10 @@ public class FileSystemTree extends JPanel {
         JTree tree = new JTree(model);
         tree.setDragEnabled(true);
         tree.setTransferHandler(new TreeTransferHandler(root));
-        final FileSystemTreeCellRenderer renderer = new FileSystemTreeCellRenderer();
+        FileSystemTreeCellRenderer renderer = new FileSystemTreeCellRenderer();
         tree.setCellRenderer(renderer);
         tree.setEditable(true);
+        tree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tree.setCellEditor(new FileTreeCellEditor(controller, renderer));
         when(tree).hasBeenDoubleClicked(openFile()).hasBeenRightClicked(showPopupMenu()).hasKeyBeenPressed("F2", renameSelectedFile());
         return tree;
@@ -81,7 +84,7 @@ public class FileSystemTree extends JPanel {
     private ButtonActionBuilder.ApplyChanged openSyncDialog() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                controller.openSyncDialog(configuration);
+                controller.openSyncDialog(configuration, service);
             }
         };
     }

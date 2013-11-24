@@ -1,6 +1,7 @@
 package uk.co.itstherules.marklog.editor.markdown;
 
 import net.miginfocom.swing.MigLayout;
+import uk.co.itstherules.marklog.editor.model.PostService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,16 +14,10 @@ import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
 
 public final class TabbedMarkdownEditors extends JTabbedPane {
 
-    private final File projectRoot;
-    private final String projectRootPath;
+    private final PostService service;
 
-    public TabbedMarkdownEditors(File projectRoot) {
-        this.projectRoot = projectRoot;
-        try {
-            this.projectRootPath = projectRoot.getCanonicalPath();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public TabbedMarkdownEditors(PostService service) {
+        this.service = service;
         setPreferredSize(new Dimension(1024, 720));
     }
 
@@ -39,8 +34,8 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
             final int index = indexOfTab(file);
             setSelectedIndex(index);
         } else {
-            final String path = identifier(file);
-            addTab(path, new MarkdownAndHtmlPanel(projectRoot, file));
+            final String path = service.pathRelativeToRoot(file);
+            addTab(path, new MarkdownAndHtmlPanel(service, file));
             JPanel panelForTab = new JPanel(new MigLayout("inset 0 10 0 10, hmax 45px", "[center][right]", "[center][center]"));
             panelForTab.setOpaque(false);
             JLabel tabTitleLabel = new JLabel(path);
@@ -62,19 +57,11 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
         }
     }
 
-    private String identifier(File file) {
-        try {
-            return file.getCanonicalPath().substring(projectRootPath.length() + 1);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     private boolean tabExists(File file) {
         return indexOfTab(file) > -1;
     }
 
-    private int indexOfTab(File file) {return indexOfTab(identifier(file));}
+    private int indexOfTab(File file) {return indexOfTab(service.pathRelativeToRoot(file));}
 
     public void focusOn(File file) {
         final int index = indexOfTab(file);
