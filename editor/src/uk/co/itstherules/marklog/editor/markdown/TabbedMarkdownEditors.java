@@ -2,21 +2,23 @@ package uk.co.itstherules.marklog.editor.markdown;
 
 import net.miginfocom.swing.MigLayout;
 import uk.co.itstherules.marklog.editor.model.PostService;
+import uk.co.itstherules.marklog.editor.model.ProjectConfiguration;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
 
 import static uk.co.itstherules.marklog.editor.viewbuilder.ButtonBuilder.button;
 
 public final class TabbedMarkdownEditors extends JTabbedPane {
 
+    private final ProjectConfiguration configuration;
     private final PostService service;
 
-    public TabbedMarkdownEditors(PostService service) {
+    public TabbedMarkdownEditors(ProjectConfiguration configuration, PostService service) {
+        this.configuration = configuration;
         this.service = service;
         setPreferredSize(new Dimension(1024, 720));
     }
@@ -35,7 +37,7 @@ public final class TabbedMarkdownEditors extends JTabbedPane {
             setSelectedIndex(index);
         } else {
             final String path = service.pathRelativeToRoot(file);
-            addTab(path, new MarkdownAndHtmlPanel(service, file));
+            addTab(path, new MarkdownAndHtmlPanel(configuration, service, file));
             JPanel panelForTab = new JPanel(new MigLayout("inset 0 10 0 10, hmax 45px", "[center][right]", "[center][center]"));
             panelForTab.setOpaque(false);
             JLabel tabTitleLabel = new JLabel(path);

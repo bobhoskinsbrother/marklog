@@ -38,10 +38,14 @@ public final class ResourceServer {
     public URI start() {
         try {
             server.start();
-            return server.getURI();
+            return uri();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public URI uri() {
+        return server.getURI();
     }
 
     public void join() {

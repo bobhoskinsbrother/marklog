@@ -2,15 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b32c4b4d-2e32-4d6c-a299-8235b0192bde" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/simple/_post.ftl" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/simple/post.ftl" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java" afterPath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/HtmlPublisher.java" afterPath="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/HtmlPublisher.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownAndHtmlPanel.java" afterPath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownAndHtmlPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogProjectEditor.java" afterPath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogProjectEditor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/PostService.java" afterPath="$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/PostService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resourceserver/src/uk/co/itstherules/resourceserver/ResourceServer.java" afterPath="$PROJECT_DIR$/resourceserver/src/uk/co/itstherules/resourceserver/ResourceServer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/SyncDialog.java" afterPath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/SyncDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/TabbedMarkdownEditors.java" afterPath="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/TabbedMarkdownEditors.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/TemplateProvider.java" afterPath="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/TemplateProvider.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/simple/general.css" afterPath="$PROJECT_DIR$/templates/simple/general.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/marklog.iws" afterPath="$PROJECT_DIR$/marklog.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/simple/posts.ftl" afterPath="$PROJECT_DIR$/templates/simple/posts.ftl" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/simple/js/search.js" afterPath="$PROJECT_DIR$/templates/simple/js/search.js" />
     </list>
     <ignored path="marklog.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,12 +29,12 @@
     <file path="/FileSystemModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383520377100" ignored="false" />
     <file path="/MarklogPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383949862705" ignored="false" />
     <file path="/DefaultTreeModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383408895690" ignored="false" />
-    <file path="/fragment.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385330811742" ignored="false" />
+    <file path="/fragment.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588060935" ignored="false" />
     <file path="/DefaultMutableTreeNode.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383407934449" ignored="false" />
     <file path="/DefaultFileModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384204493504" ignored="false" />
     <file path="/RightClickTreeMenu.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384199640605" ignored="false" />
-    <file path="/MarklogProjectEditor.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385244206059" ignored="false" />
-    <file path="/TabbedMarkdownEditors.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385244484074" ignored="false" />
+    <file path="/MarklogProjectEditor.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588695045" ignored="false" />
+    <file path="/TabbedMarkdownEditors.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588714459" ignored="false" />
     <file path="/AddNewDirectoryDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383515836056" ignored="false" />
     <file path="/MarklogApp.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384096446164" ignored="false" />
     <file path="/OpeningAProjectWithTheMarkdownAppFunctionalTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383432486063" ignored="false" />
@@ -59,7 +62,7 @@
     <file path="/EditingTextFunctionalTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383515171088" ignored="false" />
     <file path="/CreatingANewDirectoryFunctionalTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383515806729" ignored="false" />
     <file path="/BlankPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383949381155" ignored="false" />
-    <file path="/MarkdownAndHtmlPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385244520009" ignored="false" />
+    <file path="/MarkdownAndHtmlPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588729502" ignored="false" />
     <file path="/Hyphenate.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1383688123525" ignored="false" />
     <file path="/HyphenateTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288234164" ignored="false" />
     <file path="/FileifyTitleTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384288223342" ignored="false" />
@@ -89,8 +92,8 @@
     <file path="/ProjectConfigurationModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384088608736" ignored="false" />
     <file path="/ProjectDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385326997338" ignored="false" />
     <file path="/FtpClient.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385199507372" ignored="false" />
-    <file path="/SyncDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385313102713" ignored="false" />
-    <file path="/posts.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385332632674" ignored="false" />
+    <file path="/SyncDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385335178384" ignored="false" />
+    <file path="/posts.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385591785755" ignored="false" />
     <file path="/PostInformationModel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384111545779" ignored="false" />
     <file path="/PostInformationModelTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384110467640" ignored="false" />
     <file path="/FindHeaderTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384111514743" ignored="false" />
@@ -100,8 +103,8 @@
     <file path="/MarkdownTextAreaBuilder.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384205485904" ignored="false" />
     <file path="/FindHeaderAndMarkdownTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384123703287" ignored="false" />
     <file path="/PostTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384196593685" ignored="false" />
-    <file path="/HtmlPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385301444380" ignored="false" />
-    <file path="/TemplateProvider.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385301073995" ignored="false" />
+    <file path="/HtmlPanel.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588757624" ignored="false" />
+    <file path="/TemplateProvider.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588042345" ignored="false" />
     <file path="/post.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384726821918" ignored="false" />
     <file path="/RenameFileDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384283993095" ignored="false" />
     <file path="/NewDirectoryDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384202211535" ignored="false" />
@@ -124,7 +127,7 @@
     <file path="/Markdown.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384379513423" ignored="false" />
     <file path="/README.md" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384380542544" ignored="false" />
     <file path="/Files.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384461640649" ignored="false" />
-    <file path="/HtmlPublisher.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385330520992" ignored="false" />
+    <file path="/HtmlPublisher.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385588211645" ignored="false" />
     <file path="/HtmlPublisherTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385246766260" ignored="false" />
     <file path="/blog.marklog" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384466579803" ignored="false" />
     <file path="/sub.md" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384467598156" ignored="false" />
@@ -137,7 +140,7 @@
     <file path="/TextPaneBuilder.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384551937599" ignored="false" />
     <file path="/UpdateReporter.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384553175784" ignored="false" />
     <file path="/_post.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1384890551463" ignored="false" />
-    <file path="/general.css" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385333115422" ignored="false" />
+    <file path="/general.css" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385592569630" ignored="false" />
     <file path="/ProjectConfiguration.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385314670348" ignored="false" />
     <file path="/EditingAnExistingProjectFunctionalTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385070293940" ignored="false" />
     <file path="/EditProjectDialog.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385072881222" ignored="false" />
@@ -145,7 +148,7 @@
     <file path="/_tags_links.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385245517970" ignored="false" />
     <file path="/_archives_links.ftl" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385245534543" ignored="false" />
     <file path="/Link.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385213990862" ignored="false" />
-    <file path="/PostService.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385330803957" ignored="false" />
+    <file path="/PostService.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385587214317" ignored="false" />
     <file path="/Capitalize.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385242704217" ignored="false" />
     <file path="/CapitalizeTest.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385242800308" ignored="false" />
     <file path="/UserAgentCallback.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385244753110" ignored="false" />
@@ -153,7 +156,7 @@
     <file path="/JsonPublisher.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385300536288" ignored="false" />
     <file path="/SearchIndexesPublisher.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385248675283" ignored="false" />
     <file path="/search.js" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385315021866" ignored="false" />
-    <file path="/ResourceServer.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385308569450" ignored="false" />
+    <file path="/ResourceServer.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385334033009" ignored="false" />
     <file path="/DialogActionBuilder.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385312656435" ignored="false" />
     <file path="/ActionBuilder.java" changelist="b32c4b4d-2e32-4d6c-a299-8235b0192bde" time="1385312941395" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -178,7 +181,7 @@
   </component>
   <component name="DebuggerManager">
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java" line="9" class="HtmlPanel.java" package="">
+      <breakpoint url="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java" line="10" class="HtmlPanel.java" package="">
         <option name="ENABLED" value="false" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -243,7 +246,7 @@
       <file leaf-file-name="HtmlPublisher.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/HtmlPublisher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="25" selection-start="1262" selection-end="1262" vertical-scroll-proportion="0.0">
+            <state line="36" column="25" selection-start="1382" selection-end="1382" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="method#copyTemplateAssets#0;class#HtmlPublisher#0" expanded="false" />
                 <element signature="method#copyFile#0;class#HtmlPublisher#0" expanded="false" />
@@ -256,10 +259,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MarklogApp.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogApp.java">
+      <file leaf-file-name="general.css" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/simple/general.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="49" selection-start="449" selection-end="449" vertical-scroll-proportion="0.0">
+            <state line="0" column="0" selection-start="0" selection-end="10" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -268,25 +271,18 @@
       <file leaf-file-name="posts.ftl" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/simple/posts.ftl">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="30" selection-start="783" selection-end="783" vertical-scroll-proportion="-12.423077">
-              <folding />
+            <state line="49" column="0" selection-start="1859" selection-end="1859" vertical-scroll-proportion="-5.8846154">
+              <folding>
+                <element signature="tag#div#0;tag#div#1;tag#body#0;tag#html#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="FilePaths.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/filesystem/FilePaths.java">
+      <file leaf-file-name="Post.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/Post.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="25" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TemplateProvider.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/TemplateProvider.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="51" selection-start="1653" selection-end="1653" vertical-scroll-proportion="0.0">
+            <state line="73" column="0" selection-start="2494" selection-end="2494" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -295,34 +291,54 @@
       <file leaf-file-name="search.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/simple/js/search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="122" column="17" selection-start="4052" selection-end="4052" vertical-scroll-proportion="0.0">
+            <state line="65" column="4" selection-start="2017" selection-end="2017" vertical-scroll-proportion="-9.32258">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="posts.json.ftl" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/simple/posts.json.ftl">
+      <file leaf-file-name="HtmlPanel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+            <state line="27" column="72" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Link.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/Link.java">
+      <file leaf-file-name="SyncDialog.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/SyncDialog.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="14" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0">
+            <state line="69" column="29" selection-start="3704" selection-end="3704" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarkdownAndHtmlPanel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownAndHtmlPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="30" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="general.css" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/simple/general.css">
+      <file leaf-file-name="TabbedMarkdownEditors.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/TabbedMarkdownEditors.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="0" selection-start="915" selection-end="915" vertical-scroll-proportion="0.56478405">
+            <state line="39" column="42" selection-start="1318" selection-end="1318" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarklogController.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="112" column="13" selection-start="3390" selection-end="3390" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -346,20 +362,20 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/resourceserver/src/uk/co/itstherules/resourceserver/ResourceServer.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/actionbuilder/DialogActionBuilder.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/actionbuilder/ActionBuilder.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/viewbuilder/DialogBuilder.java" />
-        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/SyncDialog.java" />
-        <option value="$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/ProjectConfiguration.java" />
         <option value="$PROJECT_DIR$/sync/src/uk/co/itstherules/marklog/sync/FtpClient.java" />
         <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/ProjectDialog.java" />
         <option value="$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/TestConnectionTest.java" />
-        <option value="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/HtmlPublisher.java" />
         <option value="$PROJECT_DIR$/templates/simple/js/search.js" />
-        <option value="$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/PostService.java" />
         <option value="$PROJECT_DIR$/templates/simple/_post.ftl" />
+        <option value="$PROJECT_DIR$/resourceserver/src/uk/co/itstherules/resourceserver/ResourceServer.java" />
+        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/SyncDialog.java" />
+        <option value="$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/PostService.java" />
         <option value="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/TemplateProvider.java" />
+        <option value="$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/HtmlPublisher.java" />
+        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogProjectEditor.java" />
+        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/TabbedMarkdownEditors.java" />
+        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownAndHtmlPanel.java" />
+        <option value="$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java" />
         <option value="$PROJECT_DIR$/templates/simple/posts.ftl" />
         <option value="$PROJECT_DIR$/templates/simple/general.css" />
       </list>
@@ -596,6 +612,48 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="co" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="itstherules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="marklog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="editor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="filesystem" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -938,8 +996,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22173193" sideWeight="0.46030042" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.53969955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22173193" sideWeight="0.74463516" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2553648" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1021,88 +1079,67 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/OpeningAndEditingAPostFunctionalTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="0" selection-start="1509" selection-end="1509" vertical-scroll-proportion="1.0858283">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingADirectoryFunctionalTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="0" selection-start="2345" selection-end="2345" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/RenamingAFileFunctionalTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="0" selection-start="3255" selection-end="3255" vertical-scroll-proportion="0.78043914">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/test/uk/co/itstherules/marklog/editor/TestConnectionTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="58" selection-start="1725" selection-end="1725" vertical-scroll-proportion="0.13399778">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="49" selection-start="449" selection-end="449" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/default-java/jre/lib/rt.jar!/java/io/StringWriter.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="11" selection-start="240" selection-end="240" vertical-scroll-proportion="0.15060908">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/Link.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="14" selection-start="157" selection-end="157" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/simple/js/search.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="122" column="17" selection-start="4052" selection-end="4052" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/simple/posts.json.ftl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/src/uk/co/itstherules/marklog/filesystem/FilePaths.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="25" selection-start="380" selection-end="380" vertical-scroll-proportion="0.0">
+        <state line="7" column="11" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/PostService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="0" selection-start="3154" selection-end="3154" vertical-scroll-proportion="-0.6024363">
+        <state line="26" column="33" selection-start="751" selection-end="751" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/TemplateProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="15" selection-start="1918" selection-end="1918" vertical-scroll-proportion="-13.741936">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownTextAreaBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="28" selection-start="679" selection-end="679" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/filesystem/tree/file/FileSystemTree.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="19" selection-start="1428" selection-end="1428" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogProjectEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="48" selection-start="766" selection-end="766" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/TabbedMarkdownEditors.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="42" selection-start="1318" selection-end="1318" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/MarkdownAndHtmlPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="30" selection-start="718" selection-end="718" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/HtmlPublisher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="25" selection-start="1262" selection-end="1262" vertical-scroll-proportion="0.0">
+        <state line="36" column="25" selection-start="1382" selection-end="1382" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="method#copyTemplateAssets#0;class#HtmlPublisher#0" expanded="false" />
             <element signature="method#copyFile#0;class#HtmlPublisher#0" expanded="false" />
@@ -1114,23 +1151,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/publisher/src/uk/co/itstherules/marklog/publisher/TemplateProvider.java">
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/markdown/html/HtmlPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="51" selection-start="1653" selection-end="1653" vertical-scroll-proportion="0.0">
+        <state line="27" column="72" selection-start="1006" selection-end="1006" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/src/uk/co/itstherules/marklog/editor/model/Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="0" selection-start="2494" selection-end="2494" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/MarklogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="112" column="13" selection-start="3390" selection-end="3390" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/editor/src/uk/co/itstherules/marklog/editor/dialogs/SyncDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="29" selection-start="3704" selection-end="3704" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/simple/js/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="65" column="4" selection-start="2017" selection-end="2017" vertical-scroll-proportion="-9.32258">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/simple/posts.ftl">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="30" selection-start="783" selection-end="783" vertical-scroll-proportion="-12.423077">
-          <folding />
+        <state line="49" column="0" selection-start="1859" selection-end="1859" vertical-scroll-proportion="-5.8846154">
+          <folding>
+            <element signature="tag#div#0;tag#div#1;tag#body#0;tag#html#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/simple/general.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="0" selection-start="915" selection-end="915" vertical-scroll-proportion="0.56478405">
+        <state line="0" column="0" selection-start="0" selection-end="10" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

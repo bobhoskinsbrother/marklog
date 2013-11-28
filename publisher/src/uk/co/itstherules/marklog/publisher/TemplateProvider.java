@@ -20,12 +20,14 @@ final class TemplateProvider {
     private final PostService service;
     private final List<Link> tagsLinks;
     private final List<Link> archivesLinks;
+    private final List<Link> headerLinks;
 
     TemplateProvider(String templateDirectory, PostService service) {
         this.templateDirectory = templateDirectory;
         this.service = service;
         tagsLinks = service.tagsLinks();
         archivesLinks = service.archivesLinks();
+        headerLinks = service.headerLinks();
     }
 
     String makeSearchIndexes() {
@@ -37,19 +39,21 @@ final class TemplateProvider {
         return merge(TemplateType.JSON_POSTS, map);
     }
 
-    String makePosts(String title, List<Post> posts) {
+    String makePosts(String blogTitle, String title, List<Post> posts) {
         Map<String, Object> map = new HashMap<>();
         map.put("title", title);
+        map.put("blog_title", blogTitle);
         map.put("convert", new Convert());
         map.put("posts", posts);
+        map.put("header_links", headerLinks);
         map.put("tags_links", tagsLinks);
         map.put("archives_links", archivesLinks);
         map.put("link_resolver", new LinkResolver());
         return merge(TemplateType.POSTS, map);
     }
 
-    String makePost(Post post) {
-        return makePosts(post.getHeader().getTitle(), Arrays.asList(post));
+    String makePost(String blogTitle, Post post) {
+        return makePosts(blogTitle, post.getHeader().getTitle(), Arrays.asList(post));
     }
 
     private String merge(TemplateType type, Map<String, Object> dataModel) {

@@ -30,12 +30,12 @@ public final class HtmlPublisher {
         this.service = service;
     }
 
-    public String makePosts(String templateName, String title, List<Post> posts) {
-        return new TemplateProvider(templateName, service).makePosts(title, posts);
+    public String makePosts(String templateName, String blogTitle, String title, List<Post> posts) {
+        return new TemplateProvider(templateName, service).makePosts(blogTitle, title, posts);
     }
 
-    public static String makePost(String templateName, Post post, PostService service) {
-        return new TemplateProvider(templateName, service).makePost(post);
+    public static String makePost(String templateName, String blogTitle, Post post, PostService service) {
+        return new TemplateProvider(templateName, service).makePost(blogTitle, post);
     }
 
     public void publishUsingTemplate(String templateName, boolean copyOriginals) {
@@ -92,7 +92,7 @@ public final class HtmlPublisher {
         final List<Link> links = service.tagsLinks();
         for (Link link : links) {
             final String tag = link.getText();
-            String postsString = makePosts(templateName, configuration.getName(), service.postsForTag(tag));
+            String postsString = makePosts(templateName, configuration.getName(), configuration.getName(), service.postsForTag(tag));
             File targetFile = new File(targetDirectory, link.getLocation());
             writeFileWithReport(postsString, targetFile);
         }
@@ -104,7 +104,7 @@ public final class HtmlPublisher {
         final List<Link> links = service.archivesLinks();
         for (Link link : links) {
             final String archiveText = link.getText();
-            String postsString = makePosts(templateName, configuration.getName(), service.postsForArchive(archiveText));
+            String postsString = makePosts(templateName, configuration.getName(), configuration.getName(), service.postsForArchive(archiveText));
             File targetFile = new File(targetDirectory, link.getLocation());
             writeFileWithReport(postsString, targetFile);
         }
@@ -113,7 +113,7 @@ public final class HtmlPublisher {
 
     private void publishTop10Posts(String templateName) {
         reporter.report("Publish top 10 posts from project directory");
-        String postsString = makePosts(templateName, configuration.getName(), service.tenNewestPosts());
+        String postsString = makePosts(templateName, configuration.getName(), configuration.getName(), service.tenNewestPosts());
         writeHtml("index.md", postsString);
         reporter.success("Successfully published top 10 posts");
     }
@@ -154,7 +154,7 @@ public final class HtmlPublisher {
                             copyMarkdown(sourceFile, relativePath);
                         }
                         Post post = new Post(sourceFile);
-                        writeHtmlFrom(post, templateName, relativePath);
+                        writeHtmlFrom(post, templateName, configuration.getName(), relativePath);
                     } else if (!sourceFileName.endsWith(".marklog")) {
                         reporter.report("    It's not a markdown file, so we'll copy it");
                         copyFile(sourceFile, relativePath);
@@ -168,9 +168,9 @@ public final class HtmlPublisher {
     }
 
 
-    private void writeHtmlFrom(Post post, String templateName, String relativePath) {
+    private void writeHtmlFrom(Post post, String templateName, String blogTitle, String relativePath) {
         if (post.getHeader().getStage() == publish) {
-            String reply = makePost(templateName, post, service);
+            String reply = makePost(templateName, blogTitle, post, service);
             writeHtml(relativePath, reply);
         }
     }

@@ -67,19 +67,23 @@ public final class SyncDialog implements Builder<JDialog> {
                 .ok();
     }
 
+    public static SyncDialog syncDialog(MarklogApp app, ProjectConfiguration configuration, PostService service) {
+        return new SyncDialog(app, configuration, service);
+    }
+
     private DialogActionBuilder.ApplyChanged closeThis() {
         return new DialogActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                if(resourceServer!=null) {
-                    resourceServer.stop();
-                    resourceServer = null;
-                }
+                killResourceServer();
             }
         };
     }
 
-    public static SyncDialog syncDialog(MarklogApp app, ProjectConfiguration configuration, PostService service) {
-        return new SyncDialog(app, configuration, service);
+    private void killResourceServer() {
+        if(resourceServer!=null) {
+            resourceServer.stop();
+            resourceServer = null;
+        }
     }
 
     private ButtonActionBuilder.ApplyChanged sync() {
@@ -94,10 +98,12 @@ public final class SyncDialog implements Builder<JDialog> {
     private ButtonActionBuilder.ApplyChanged preview() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
-                URI uri = null;
+                URI uri;
                 if(resourceServer == null) {
                     resourceServer = new ResourceServer(targetDirectory);
                     uri = resourceServer.start();
+                } else {
+                    uri = resourceServer.uri();
                 }
                 reporter().report("Previewing the blog at: ", uri.toString());
                 try {
@@ -112,6 +118,7 @@ public final class SyncDialog implements Builder<JDialog> {
     private ButtonActionBuilder.ApplyChanged publish() {
         return new ButtonActionBuilder.ApplyChanged() {
             @Override public void apply() {
+                killResourceServer();
                 HtmlPublisher htmlPublisher = new HtmlPublisher(configuration, targetDirectory, reporter(), service);
                 final SearchIndexesPublisher indexesPublisher = new SearchIndexesPublisher(targetDirectory, reporter(), service);
                 final boolean copyOriginals = copyMarkdownCheckbox.isSelected();

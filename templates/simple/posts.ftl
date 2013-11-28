@@ -8,6 +8,15 @@
     <script type="text/javascript" src="/simple/js/search.js"></script>
 </head>
 <body>
+<div class="blog_header">
+    <div class="blog_header_inner">
+        <span><a href="/">${blog_title!""}</a></span>
+        <span class="blog_header_links">
+            <#list header_links as link><a href="${link.location}">${link.text}</a><#if link_has_next> | </#if></#list>
+        </span>
+    </div>
+</div>
+
 <div class="main_area">
     <div class="posts">
     <#list posts as post>
@@ -17,13 +26,12 @@
             <#if header.title?? && header.title?has_content>
                 <h1><a href="${link_resolver.resolve(post)}">${convert.toHtml(header.title)}</a></h1>
             </#if>
-            <#if header.author?? && header.author?has_content><p class="a_bit_smaller">by ${header.author}, <#if header.date??>${header.date?string("dd MMM yyyy")}</#if></p></#if>
+            <#if header.author?? && header.author?has_content><p class="a_bit_smaller">by ${header.author}<#if header.date??>, ${header.date?string("dd MMM yyyy")}</#if></p></#if>
         </div>
 
         <div class="post">
         ${convert.toHtml(post.markdown)}
         </div>
-
 
         <div class="post_info">
             <#if header.date??><strong>At</strong> ${header.date?string("HH:mm")}<br/></#if>
@@ -36,8 +44,9 @@
         </#if>
     </#list>
     </div>
-<#if (tags_links?? && tags_links?size > 0) || (archives_links?? && archives_links?size > 0)>
+    <#if (tags_links?? && tags_links?size > 0) || (archives_links?? && archives_links?size > 0)>
     <div class="nav">
+
         <input type="search" placeholder="Search" id="posts_search" class="search_field"/>
 
         <#if (tags_links?? && tags_links?size > 0)>
@@ -61,7 +70,9 @@
         </#if>
 
     </div>
+
 </#if>
 </div>
+
 </body>
 </html>

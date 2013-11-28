@@ -40,6 +40,23 @@ public final class PostService {
         return reply;
     }
 
+    public List<Link> headerLinks() {
+        Set<Link> reply = new LinkedHashSet<>();
+        final File[] files = root.listFiles();
+        if (files != null) {
+            for (File file : files) {
+                if(file.isDirectory()) {
+                    final List<String> names = Arrays.asList(file.list());
+                    if(names.contains("index.md")) {
+                        final String name = file.getName();
+                        reply.add(new Link("/"+ name +"/index.html", name));
+                    }
+                }
+            }
+        }
+        return new ArrayList<>(reply);
+    }
+
     public List<Link> tagsLinks() {
         Set<Link> reply = new LinkedHashSet<>();
         final List<Post> posts = allPosts();
