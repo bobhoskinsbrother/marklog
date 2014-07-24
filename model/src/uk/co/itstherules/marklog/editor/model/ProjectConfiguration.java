@@ -14,6 +14,7 @@ public final class ProjectConfiguration {
     private static final String PROJECT_FTP_WORKING_DIRECTORY= "project.ftp.working.directory";
     private static final String PROJECT_FTP_USERNAME = "project.ftp.username";
     private static final String PROJECT_FTP_PASSWORD = "project.ftp.password";
+
     private File directory;
     private String name;
     private String ftpHost;
@@ -42,8 +43,8 @@ public final class ProjectConfiguration {
         name = properties.getProperty(PROJECT_NAME);
         directory = file.getParentFile();
         ftpHost = properties.getProperty(PROJECT_FTP_HOST);
-        ftpPort = Integer.parseInt(properties.getProperty(PROJECT_FTP_PORT));
-        ftpWorkingDirectory = properties.getProperty(PROJECT_FTP_WORKING_DIRECTORY);
+        ftpPort = Integer.parseInt(properties.getProperty(PROJECT_FTP_PORT, "21"));
+        ftpWorkingDirectory = properties.getProperty(PROJECT_FTP_WORKING_DIRECTORY, "");
         ftpUsername = properties.getProperty(PROJECT_FTP_USERNAME);
         ftpPassword = properties.getProperty(PROJECT_FTP_PASSWORD);
     }

@@ -27,6 +27,6 @@ This then will generate html behind the scenes, and push it, via ftp, to your ow
 It's all quite simple really.
 
 
-```
-assertThat(marklog, doesNot(requireAnyCoding());
-```
+
+    assertThat(marklog, doesNot(requireAnyCoding());
+
