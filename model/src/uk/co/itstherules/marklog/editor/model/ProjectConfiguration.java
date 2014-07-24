@@ -98,7 +98,7 @@ public final class ProjectConfiguration {
                 return false;
             }
         }
-        return ftpPort > 0 && ftpPort < 49152;
+        return ftpPort > 0;
     }
 
     public void setDirectory(File directory) {

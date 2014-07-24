@@ -22,6 +22,7 @@ public final class TestConnectionTest {
     private FakeFtpServer fakeFtpServer;
 
     private FrameFixture window;
+    private int port;
 
     @BeforeClass
     public static void setUpOnce() {
@@ -43,6 +44,7 @@ public final class TestConnectionTest {
             Thread.sleep(100);
         }
         this.fakeFtpServer = fakeFtpServer;
+        port = fakeFtpServer.getServerControlPort();
     }
 
     @After
@@ -53,7 +55,6 @@ public final class TestConnectionTest {
     }
 
     @Test public void canTestPositive() throws Exception {
-        int port = fakeFtpServer.getServerControlPort();
 
         window.menuItemWithPath("File", "New Project...").click();
         final DialogFixture dialog = window.dialog("projectDialog");
@@ -63,18 +64,16 @@ public final class TestConnectionTest {
         String wd = "/var/www";
 
         dialog.textBox("ftpHost").setText(ftpHost);
-        dialog.textBox("ftpPort").setText(port+"");
+        dialog.textBox("ftpPort").setText(port +"");
         dialog.textBox("ftpWorkingDirectory").setText(wd);
         dialog.textBox("ftpUserName").setText(ftpUserName);
         dialog.textBox("ftpPassword").setText(ftpPassword);
-        Thread.sleep(250);
+        Thread.sleep(450);
         dialog.button("testConnection").click();
         window.dialog("dialog0").optionPane().requireInformationMessage().requireMessage("Connected successfully to the host with the credentials provided");
     }
 
     @Test public void canTestNegative() throws Exception {
-        int port = fakeFtpServer.getServerControlPort();
-
         window.menuItemWithPath("File", "New Project...").click();
         final DialogFixture dialog = window.dialog("projectDialog");
         final String ftpHost = "localhost";
@@ -87,7 +86,7 @@ public final class TestConnectionTest {
         dialog.textBox("ftpWorkingDirectory").setText(wd);
         dialog.textBox("ftpUserName").setText(ftpUserName);
         dialog.textBox("ftpPassword").setText(ftpPassword);
-        Thread.sleep(250);
+        Thread.sleep(450);
         dialog.button("testConnection").click();
         window.dialog("dialog0").optionPane().requireErrorMessage().requireMessage("Unsuccessful connection: Exception in connecting to FTP Server");
     }
