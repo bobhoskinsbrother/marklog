@@ -14,7 +14,12 @@ public final class ProjectConfiguration {
     private static final String PROJECT_FTP_WORKING_DIRECTORY= "project.ftp.working.directory";
     private static final String PROJECT_FTP_USERNAME = "project.ftp.username";
     private static final String PROJECT_FTP_PASSWORD = "project.ftp.password";
-
+    public static final int DEFAULT_FTP_PORT = 21;
+    public static final String DEFAULT_WORKING_DIRECTORY = "/";
+    public static final String DEFAULT_FTP_HOST = "";
+    public static final String DEFAULT_BLOG_TITLE_NAME = "New Blog Post";
+    public static final String DEFAULT_FTP_USERNAME = "";
+    public static final String DEFAULT_FTP_PASSWORD = "";
     private File directory;
     private String name;
     private String ftpHost;
@@ -25,12 +30,12 @@ public final class ProjectConfiguration {
 
     public ProjectConfiguration() {
         directory = new File(System.getProperty("user.dir"));
-        setName("New Blog");
-        ftpHost = "";
-        ftpWorkingDirectory = "/";
-        ftpPort = 21;
-        ftpUsername = "";
-        ftpPassword = "";
+        setName(DEFAULT_BLOG_TITLE_NAME);
+        ftpHost = DEFAULT_FTP_HOST;
+        ftpWorkingDirectory = DEFAULT_WORKING_DIRECTORY;
+        ftpPort = DEFAULT_FTP_PORT;
+        ftpUsername = DEFAULT_FTP_USERNAME;
+        ftpPassword = DEFAULT_FTP_PASSWORD;
     }
 
     public void load(File file) {
@@ -40,13 +45,13 @@ public final class ProjectConfiguration {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        name = properties.getProperty(PROJECT_NAME);
+        name = properties.getProperty(PROJECT_NAME, DEFAULT_BLOG_TITLE_NAME);
         directory = file.getParentFile();
-        ftpHost = properties.getProperty(PROJECT_FTP_HOST);
-        ftpPort = Integer.parseInt(properties.getProperty(PROJECT_FTP_PORT, "21"));
-        ftpWorkingDirectory = properties.getProperty(PROJECT_FTP_WORKING_DIRECTORY, "");
-        ftpUsername = properties.getProperty(PROJECT_FTP_USERNAME);
-        ftpPassword = properties.getProperty(PROJECT_FTP_PASSWORD);
+        ftpHost = properties.getProperty(PROJECT_FTP_HOST, DEFAULT_FTP_HOST);
+        ftpPort = Integer.parseInt(properties.getProperty(PROJECT_FTP_PORT, String.valueOf(DEFAULT_FTP_PORT)));
+        ftpWorkingDirectory = properties.getProperty(PROJECT_FTP_WORKING_DIRECTORY, DEFAULT_WORKING_DIRECTORY);
+        ftpUsername = properties.getProperty(PROJECT_FTP_USERNAME, DEFAULT_FTP_USERNAME);
+        ftpPassword = properties.getProperty(PROJECT_FTP_PASSWORD, DEFAULT_FTP_PASSWORD);
     }
 
     public void save() {
